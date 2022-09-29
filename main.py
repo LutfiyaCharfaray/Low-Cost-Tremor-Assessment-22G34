@@ -10,6 +10,8 @@ from kivy.graphics import Color
 from kivy.properties import ObjectProperty
 from kivy.uix.popup import Popup
 
+import sqlite3
+
 class LoginWindow(Screen):
     pass
 
@@ -29,14 +31,34 @@ class RegWindow(Screen):
             num_length = 10
 
             if len(self.ptage.text) <= age_length and len(self.ptnum.text) == num_length:
-                #show that input textboxes are being populated
-                print("Name:", self.ptname.text, "Surname:", self.ptsname.text, "Age:", self.ptage.text, "Contact no:", self.ptnum.text)
+                # connect to database and populate rows
+                conn = sqlite3.connect('patientinfo.db')
+                c = conn.cursor()
+                                     
+                c.execute("""INSERT INTO details(Name, Surname, Age, ContactNo) VALUES (:pname, :psname, :page, :pnum)""",
+                {
+                    'pname': self.ids.ptname.text,
+                    'psname': self.ids.ptsname.text,
+                    'page': self.ids.ptage.text,
+                    'pnum': self.ids.ptnum.text
+                })
 
                 # clear text input fields
                 self.ptname.text = ""
                 self.ptsname.text = ""
                 self.ptage.text = ""
                 self.ptnum.text = ""
+                
+                # To check if database is being populated; can comment out later
+                c.execute("SELECT * FROM details") 
+
+                data = c.fetchall()
+
+                for i in data:
+                    print(i)
+
+                conn.commit()
+                conn.close()
 
             else:
                 notif = Popup(title = 'Invalid Form', content = Label(text='Invalid Age or Contact Number.'), 
@@ -54,6 +76,20 @@ kv = Builder.load_file("tremor.kv") # to specify kv file
 
 class TremorAssessmentApp(App): # to build app
     def build(self): 
+        conn = sqlite3.connect('patientinfo.db')
+        c = conn.cursor()
+        # create table in database to store patient details
+        c.execute("""CREATE TABLE if not exists details( 
+                         pt_id INTEGER PRIMARY KEY AUTOINCREMENT,
+                         Name TEXT NOT NULL,
+                         Surname TEXT NOT NULL,
+                         Age INTEGER NOT NULL,
+                         ContactNo CHAR(10) NOT NULL
+        ) """)
+
+        conn.commit() # to commit changes to database
+        conn.close() # close the connection to the database
+
         return kv
 
 if __name__ == "__main__": # to run app
