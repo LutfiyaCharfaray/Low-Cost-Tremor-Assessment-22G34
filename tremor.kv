@@ -1,6 +1,7 @@
 WindowManager: # define screens
     LoginWindow:
     MenuWindow:
+    RegWindow:
 
 <LoginWindow>:
     name: "login"
@@ -65,11 +66,145 @@ WindowManager: # define screens
                 font_size: "30dp"
                 size_hint: 0.3, 0.2
                 pos_hint: {'x': .1, 'y': 0.3}
-                on_release:app.root.current="registration"
+                on_release:
+                    app.root.current="form"
+                    root.manager.transition.direction = "left"
+
             Button:
                 background_color: 0,1,1,1
                 text: "Existing Patient"
                 font_size: "30dp"
                 size_hint: 0.3, 0.2
                 pos_hint: {'x': .6, 'y': .3} 
-                on_release:app.root.current="search"
+                on_release:
+                    app.root.current="search"
+                    root.manager.transition.direction = "left"
+
+<RegWindow>:
+    name: "form"
+
+    ptname: ptname
+    ptsname: ptsname
+    ptage: ptage
+    ptnum: ptnum
+    
+    canvas.before:
+        Rectangle:
+            pos: self.pos
+            size: self.size
+            source: "orangeflowers.jpg"
+
+    FloatLayout:
+
+        Label:
+            text: "Please Enter Patient Details"
+            font_size: 20
+            bold: True
+            color: (1,1,1,1)
+            pos_hint: {'center_x': 0.5, 'y':0.45} 
+
+        BoxLayout:
+            orientation: 'vertical'
+            size: root.width, root.height
+
+            padding: [40,40,40,40]
+            spacing: 40
+
+            GridLayout:
+                cols: 2
+                padding: [20,20,20,20]
+                spacing: 20
+
+                Label:
+                    text: "Name: "
+                    color: (1,1,1,1)
+                    font_size: 20
+                    #bold: True
+                    halign: 'left'
+                    background_color: (0,0,0,0.5)
+                    canvas.before:
+                        Color:
+                            rgba: self.background_color
+                        Rectangle:
+                            size: self.size
+                            pos: self.pos
+
+                TextInput:
+                    id: ptname
+                    multiline: False
+                    hint_text: 'Enter patient name'
+                    padding: [30,30,30,30]
+
+                Label:
+                    text: "Surname: "
+                    color: (1,1,1,1)
+                    font_size: 20
+                    #bold: True
+                    halign: 'left'
+                    background_color: (0,0,0,0.5)
+                    canvas.before:
+                        Color:
+                            rgba: self.background_color
+                        Rectangle:
+                            size: self.size
+                            pos: self.pos
+
+                TextInput:
+                    id: ptsname
+                    multiline: False
+                    hint_text: 'Enter patient surname'
+                    padding: [30,30,30,30]
+
+                Label:
+                    text: "Age: "
+                    color: (1,1,1,1)
+                    font_size: 20
+                    #bold: True
+                    halign: 'left'
+                    background_color: (0,0,0,0.5)
+                    canvas.before:
+                        Color:
+                            rgba: self.background_color
+                        Rectangle:
+                            size: self.size
+                            pos: self.pos
+
+                TextInput:
+                    id: ptage
+                    multiline: False
+                    min_value: 1
+                    max_value: 100
+                    hint_text: 'Enter an age between {} and {}'.format(self.min_value, self.max_value)
+                    padding: [30,30,30,30]
+
+                Label:
+                    text: "Contact Number: "
+                    color: (1,1,1,1)
+                    font_size: 20
+                    #bold: True
+                    halign: 'left'
+                    background_color: (0,0,0,0.5)
+                    canvas.before:
+                        Color:
+                            rgba: self.background_color
+                        Rectangle:
+                            size: self.size
+                            pos: self.pos
+
+                TextInput:
+                    id: ptnum
+                    multiline: False
+                    hint_text: 'Enter a 10 digit phone number'
+                    padding: [30,30,30,30]
+
+            Button:
+                text: "Submit"
+                background_color: (0,1,1,1)
+                color: (1,1,1,1)
+                pos_hint: {'x': 0.6}
+                size_hint: (None, None)
+                width: 200
+                height: 50
+                halign: 'right'
+                on_press: root.submit()
+                # on release navigate to next page
