@@ -52,3 +52,24 @@ WindowManager: # define screens
 
 <MenuWindow>:
     name: "menu"
+    FloatLayout:
+        canvas.before:
+            Rectangle:
+                size: self.size
+                source: "orangeflowers.jpg"
+        FloatLayout: 
+
+            Button:
+                background_color: 0,1,1,1
+                text: "New Patient"
+                font_size: "30dp"
+                size_hint: 0.3, 0.2
+                pos_hint: {'x': .1, 'y': 0.3}
+                on_release:app.root.current="registration"
+            Button:
+                background_color: 0,1,1,1
+                text: "Existing Patient"
+                font_size: "30dp"
+                size_hint: 0.3, 0.2
+                pos_hint: {'x': .6, 'y': .3} 
+                on_release:app.root.current="search"
