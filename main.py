@@ -72,6 +72,12 @@ class RegWindow(Screen):
 class StartScreen(Screen):
     pass
 
+class LineTemplate(Widget):
+    pass
+
+class PracScreen(Screen):
+    pass
+
 class WindowManager(ScreenManager):
     pass
 
