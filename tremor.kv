@@ -1,3 +1,5 @@
+<DrawLine>:  
+
 WindowManager: # define screens
     LoginWindow:
     MenuWindow:
@@ -220,18 +222,20 @@ WindowManager: # define screens
             app.root.current = "prac"
             root.manager.transition.direction = "left"
 
-<LineTemplate>:
+<LineWidget>:
     canvas.before:
         Rectangle:
             size: root.width, root.height 
             pos: self.pos
             source: "linetemp.png"
 
+<DrawLine>:
+
 <PracScreen>:
     name: "prac"
 
     FloatLayout:
-        LineTemplate
+        LineWidget
 
         Label:
             text: "PRACTICE ROUND"
@@ -244,6 +248,8 @@ WindowManager: # define screens
             pos_hint: {"center_x": 0.5, "top": 1.2}
             font_size: 20
             color: (1,1,1,1)
+
+        DrawLine
 
         Button:
             id: 'return'

@@ -12,6 +12,7 @@ from kivy.core.window import Window
 
 import sqlite3
 
+# Screen Classes
 class LoginWindow(Screen):
     pass
 
@@ -72,8 +73,26 @@ class RegWindow(Screen):
 class StartScreen(Screen):
     pass
 
-class LineTemplate(Widget):
+# Widget Classes
+class LineWidget(Widget):
     pass
+
+class DrawLine(Widget):  
+
+    def on_touch_down(self, touch):
+        print(touch)
+        # start timer here
+        with self.canvas:
+            Color(255, 0, 255, 1, mode='rgba')
+            touch.ud['line'] = Line(points=(touch.x, touch.y), width=3)
+
+    def on_touch_move(self, touch):
+        print(touch)
+        touch.ud['line'].points += [touch.x, touch.y]
+
+    def on_touch_up(self, touch):
+        # end timer here
+        print("Released!", touch)
 
 class PracScreen(Screen):
     pass
