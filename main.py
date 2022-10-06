@@ -92,9 +92,12 @@ class DrawLine(Widget):
 
     def on_touch_up(self, touch):
         # end timer here
-        print("Released!", touch)
+        print("Touch Released!", touch)
 
 class PracScreen(Screen):
+    pass
+
+class StaticSpiralScreen(Screen):
     pass
 
 class WindowManager(ScreenManager):

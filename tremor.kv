@@ -252,7 +252,6 @@ WindowManager: # define screens
         DrawLine
 
         Button:
-            id: 'return'
             text: "Return to start"
             font_size: 20
             size_hint: 0.2, 0.1
@@ -261,3 +260,16 @@ WindowManager: # define screens
             on_release:
                 app.root.current = "start"
                 root.manager.transition.direction = "right"
+
+        Button:
+            text: "Next"
+            font_size: 20
+            size_hint: 0.2, 0.1
+            pos_hint: {"right": 1, "bottom": 1}
+            background_color: (0,1,1,0.5)
+            # on_release:
+            #     app.root.current = "static"
+            #     root.manager.transition.direction = "left"
+
+# <StaticSpiralScreen>:
+#     name: "static"
