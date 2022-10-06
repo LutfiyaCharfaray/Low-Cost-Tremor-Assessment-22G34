@@ -2,6 +2,7 @@ WindowManager: # define screens
     LoginWindow:
     MenuWindow:
     RegWindow:
+    StartScreen:
 
 <LoginWindow>:
     name: "login"
@@ -203,4 +204,17 @@ WindowManager: # define screens
                 height: 50
                 halign: 'right'
                 on_press: root.submit()
-                # on release navigate to next page
+                on_release:
+                    app.root.current = "start"
+                    root.manager.transition.direction = "left"
+
+<StartScreen>:
+    name: "start"
+    Button: 
+        text: "Start Assessment"
+        color: (1,1,1,1)
+        background_color: (0,1,1,1)
+        font_size: 40
+        on_release:
+            app.root.current = "prac"
+            root.manager.transition.direction = "left"

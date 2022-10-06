@@ -5,10 +5,10 @@ from kivy.lang import Builder
 from kivy.uix.screenmanager import ScreenManager, Screen
 from kivy.uix.label import Label
 from kivy.uix.widget import Widget
-from kivy.graphics import Rectangle
-from kivy.graphics import Color
+from kivy.graphics import Color, Line, Rectangle
 from kivy.properties import ObjectProperty
 from kivy.uix.popup import Popup
+from kivy.core.window import Window
 
 import sqlite3
 
@@ -68,6 +68,9 @@ class RegWindow(Screen):
         else:
             notif = Popup(title = 'Invalid Form', content = Label(text='Text fields cannot be empty.'), size_hint=(None, None), size=(300,300))
             notif.open()
+
+class StartScreen(Screen):
+    pass
 
 class WindowManager(ScreenManager):
     pass
