@@ -97,6 +97,8 @@ class DrawLine(Widget):
 class PracScreen(Screen):
     pass
 
+class SpiralWidget(Widget):
+    pass
 class StaticSpiralScreen(Screen):
     pass
 

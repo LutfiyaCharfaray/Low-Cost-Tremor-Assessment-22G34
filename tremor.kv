@@ -6,6 +6,7 @@ WindowManager: # define screens
     RegWindow:
     StartScreen:
     PracScreen:
+    StaticSpiralScreen:
 
 <LoginWindow>:
     name: "login"
@@ -267,9 +268,59 @@ WindowManager: # define screens
             size_hint: 0.2, 0.1
             pos_hint: {"right": 1, "bottom": 1}
             background_color: (0,1,1,0.5)
-            # on_release:
-            #     app.root.current = "static"
-            #     root.manager.transition.direction = "left"
+            on_release:
+                app.root.current = "static"
+                root.manager.transition.direction = "left"
 
-# <StaticSpiralScreen>:
-#     name: "static"
+<SpiralWidget>:
+    canvas.before:
+        Rectangle:
+            size: root.width, root.height 
+            pos: self.pos
+            source: "spiraltemp.png"
+
+<StaticSpiralScreen>:
+    name: "static"
+
+    FloatLayout:
+        SpiralWidget
+
+        Label:
+            text: "STATIC SPIRAL"
+            pos_hint: {"center_x": 0.5, "top": 1.45} 
+            font_size: 30
+            color: (0,0,0,1)
+
+        Label:
+            text: "Trace the spiral using your dominant hand."
+            pos_hint: {"center_x": 0.5, "top": 1.39}
+            font_size: 20
+            color: (0,0,0,1)
+
+        Label:
+            text: "Start from the inside of the spiral."
+            pos_hint: {"center_x": 0.5, "top": 1.32}
+            font_size: 20
+            color: (0,0,0,1)
+
+        DrawLine
+
+        Button:
+            text: "Go Back"
+            font_size: 20
+            size_hint: 0.2, 0.1
+            pos_hint: {"left": 1, "bottom": 1}
+            background_color: (0,1,1,0.5)
+            on_release:
+                app.root.current = "prac"
+                root.manager.transition.direction = "right"
+
+        Button:
+            text: "Next"
+            font_size: 20
+            size_hint: 0.2, 0.1
+            pos_hint: {"right": 1, "bottom": 1}
+            background_color: (0,1,1,0.5)
+            # on_release:
+            #     app.root.current = "dynamic"
+            #     root.manager.transition.direction = "left"
