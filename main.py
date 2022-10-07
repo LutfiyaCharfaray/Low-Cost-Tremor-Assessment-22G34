@@ -68,6 +68,58 @@ class RegWindow(Screen):
         else:
             notif = Popup(title = 'Invalid Form', content = Label(text='Text fields cannot be empty.'), size_hint=(None, None), size=(300,300))
             notif.open()
+ 
+
+#Class to allow doctor to enter existing patient name and surname, where the database is queried and the patients 
+#ID is displayed             
+class SearchWindow(Screen): 
+   word_input = ObjectProperty(None)
+   surname_input=ObjectProperty(None)  
+   
+   def show_id(self):
+       
+      conn = sqlite3.connect('patientinfo.db')
+      c = conn.cursor()
+      
+      #Query database to select specific patient with entered name and surname     
+      c.execute("SELECT * from details WHERE Name = (:first) AND Surname = (:second)",
+                 {
+                 'first': self.ids.word_input.text,
+                 'second':self.ids.surname_input.text
+                 })
+      
+      #Create empty strings
+      records = c.fetchall()
+      self.id =''
+      self.name_=''
+      self.surname_=''
+      self.output=''
+      self.contact_=''
+      self.Age_=''
+      
+      #Display patient details on page 
+      for i in records:
+       
+           id=i[0]
+           name_=i[1]
+           surname_=i[2]
+           Age_=i[3]
+           contact_=i[4]
+           output=f'{"Name: " + name_ }\n{"Surname: " + surname_}\n{"Age: " + str(Age_)}\n{"Contact number: " + str(contact_)}\n{"ID: " + str(id)}'
+           
+           self.ids.id_label.text= output
+           
+      #Clear input boxes from text
+      #self.ids.word_input.text=''
+      #self.ids.surname_input.text=''
+      print(Age_)
+       
+      conn.commit() # to commit changes to database
+      conn.close() # to close connection to database   
+      return id   
+  
+class AssStart(Screen): 
+    pass
 
 class WindowManager(ScreenManager):
     pass

@@ -2,6 +2,8 @@ WindowManager: # define screens
     LoginWindow:
     MenuWindow:
     RegWindow:
+    SearchWindow:
+    AssStart:
 
 <LoginWindow>:
     name: "login"
@@ -204,3 +206,70 @@ WindowManager: # define screens
                 halign: 'right'
                 on_press: root.submit()
                 # on release navigate to next page
+
+<SearchWindow>:
+    name: "search"
+    word_input:word_input
+    surname_input:surname_input
+    
+    FloatLayout:
+
+        Label:
+            text: "Please Enter Patient Name and Surname"
+            font_size: 20
+            bold: True
+            color: (1,1,1,1)
+            pos_hint: {'center_x': 0.5, 'y':0.45} 
+        
+        FloatLayout:
+            Label:
+                id : word_label
+                text: "Enter patient name :"
+                pos_hint: {'x': 0.2, 'y' : 0.7}
+                size_hint: (0.2, 0.1)
+                
+            TextInput:
+                id: word_input
+                multiline: False
+                pos_hint: {'x': 0.5 , 'y' : 0.7}
+                size_hint: (0.3, 0.1)
+
+            Label:
+                id : surname_label
+                text: "Enter patient surname :"
+                pos_hint: {'x': 0.2, 'y' : 0.5}
+                size_hint: (0.2, 0.1)
+
+            TextInput:
+                id: surname_input
+                multiline: False
+                pos_hint: {'x': 0.5 , 'y' : 0.5}
+                size_hint: (0.3, 0.1)
+
+            Button:
+                text: "Show patient details"
+                pos_hint: {'x': 0.2 , 'y' : 0.3}
+                size_hint: (0.2, 0.1)
+                on_press: root.show_id()
+            
+            Label:
+                id : id_label
+                text: "Patient ID"
+                hint_text: 'Patient ID'
+                pos_hint: {'x': 0.5, 'y' : 0.3}
+                size_hint: (0.3, 0.1)
+                font_size: 20
+
+            Button:
+                text: "Start Assessment"
+                pos_hint: {'x': 0.6, 'y' : 0.1}
+                size_hint: (0.3, 0.1)
+                font_size: 20
+                on_release:
+                    app.root.current="start"
+
+
+<AssStart>:
+    name: "start"
+    Button:
+        text:"Hello"
