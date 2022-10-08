@@ -299,6 +299,7 @@ WindowManager: # define screens
     name: "prac"
 
     FloatLayout:
+        id: export1
         LineWidget
 
         Label:
@@ -329,6 +330,16 @@ WindowManager: # define screens
         #     on_release:
         #         app.root.current = "undo_prac"
         #         root.manager.transition.direction = "right"
+        
+        Button: 
+            id: 'screenshot'
+            text: "Save Drawing"
+            pos_hint: {"right": 0.8, "bottom": 1}
+            font_size: 20
+            size_hint: 0.2, 0.1
+            color: (1,1,1,1)
+            background_color: (0,1,1,0.5)
+            on_release: root.capture()
 
         Button:
             text: "Next"
@@ -385,6 +396,7 @@ WindowManager: # define screens
     name: "dom_spiral" #dominant hand spiral
 
     FloatLayout:
+        id: export2
         SpiralWidget
 
         Label:
@@ -411,6 +423,16 @@ WindowManager: # define screens
                 app.root.current = "prac"
                 root.manager.transition.direction = "right"
 
+        Button: 
+            id: 'screenshot'
+            text: "Save Drawing"
+            pos_hint: {"right": 0.8, "bottom": 1}
+            font_size: 20
+            size_hint: 0.2, 0.1
+            color: (1,1,1,1)
+            background_color: (0,1,1,0.5)
+            on_release: root.capture()
+
         Button:
             text: "Next"
             font_size: 20
@@ -425,6 +447,7 @@ WindowManager: # define screens
     name: "nondom_spiral" # non-dominant hand spiral 
 
     FloatLayout:
+        id: export3
         SpiralWidget
 
         Label:
@@ -450,6 +473,16 @@ WindowManager: # define screens
             on_release:
                 app.root.current = "prac"
                 root.manager.transition.direction = "right"
+        
+        Button: 
+            id: 'screenshot'
+            text: "Save Drawing"
+            pos_hint: {"right": 0.8, "bottom": 1}
+            font_size: 20
+            size_hint: 0.2, 0.1
+            color: (1,1,1,1)
+            background_color: (0,1,1,0.5)
+            on_release: root.capture()
 
         Button:
             text: "Next"

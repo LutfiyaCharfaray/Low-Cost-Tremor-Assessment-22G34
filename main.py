@@ -144,7 +144,9 @@ class DrawLine(Widget):
         print("Touch Released!", touch)
 
 class PracScreen(Screen):
-    pass
+    def capture(self, *args):
+        prac_img = self.ids.export1.export_to_png("practice round.png")
+        # use prac_img variable to store image in file/database
 
 # class PracUndoScreen(Screen):
 #     pass
@@ -152,10 +154,14 @@ class PracScreen(Screen):
 class SpiralWidget(Widget):
     pass
 class DSpiralScreen(Screen):
-    pass
+    def capture(self, *args):
+        dh_img = self.ids.export2.export_to_png("dominant hand.png")
+        # use dh_img variable to store image in file/database
 
 class NdSpiralScreen(Screen):
-    pass
+    def capture(self, *args):
+        ndh_img = self.ids.export3.export_to_png("non-dominant hand.png")
+        # use ndh_img variable to store image in file/database
 
            
 class WindowManager(ScreenManager):
