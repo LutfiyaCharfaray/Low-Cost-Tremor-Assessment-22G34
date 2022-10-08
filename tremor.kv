@@ -1,11 +1,13 @@
-
 WindowManager: # define screens
     LoginWindow:
     MenuWindow:
     RegWindow:
+    SearchWindow:
     StartScreen:
     PracScreen:
-    SearchWindow:
+    #PracUndoScreen:
+    DSpiralScreen:
+    NdSpiralScreen:
 
 <LoginWindow>:
     name: "login"
@@ -210,67 +212,7 @@ WindowManager: # define screens
                 on_release:
                     app.root.current = "start"
                     root.manager.transition.direction = "left"
-
-<StartScreen>:
-    name: "start"
-    Button: 
-        text: "Start Assessment"
-        color: (1,1,1,1)
-        background_color: (0,1,1,1)
-        font_size: 40
-        on_release:
-            app.root.current = "prac"
-            root.manager.transition.direction = "left"
-
-<LineWidget>:
-    canvas.before:
-        Rectangle:
-            size: root.width, root.height 
-            pos: self.pos
-            source: "linetemp.png"
-
-<DrawLine>:
-
-<PracScreen>:
-    name: "prac"
-
-    FloatLayout:
-        LineWidget
-
-        Label:
-            text: "PRACTICE ROUND"
-            pos_hint: {"center_x": 0.5, "top": 1.3} 
-            font_size: 30
-            color: (1,1,1,1)
-
-        Label:
-            text: "Draw a line within the box without lifting your finger"
-            pos_hint: {"center_x": 0.5, "top": 1.2}
-            font_size: 20
-            color: (1,1,1,1)
-
-        DrawLine
-
-        Button:
-            text: "Return to start"
-            font_size: 20
-            size_hint: 0.2, 0.1
-            pos_hint: {"left": 1, "bottom": 1}
-            background_color: (0,1,1,0.5)
-            on_release:
-                app.root.current = "start"
-                root.manager.transition.direction = "right"
-
-        Button:
-            text: "Next"
-            font_size: 20
-            size_hint: 0.2, 0.1
-            pos_hint: {"right": 1, "bottom": 1}
-            background_color: (0,1,1,0.5)
-            # on_release:
-            #     app.root.current = "static"
-            #     root.manager.transition.direction = "left"
-
+                    
 <SearchWindow>:
     name: "search"
     word_input:word_input
@@ -332,5 +274,189 @@ WindowManager: # define screens
                 on_release:
                     app.root.current="start"
 
-# <StaticSpiralScreen>:
-#     name: "static"
+
+<StartScreen>:
+    name: "start"
+    Button: 
+        text: "Start Assessment"
+        color: (1,1,1,1)
+        background_color: (0,1,1,1)
+        font_size: 40
+        on_release:
+            app.root.current = "prac"
+            root.manager.transition.direction = "left"
+
+<LineWidget>:
+    canvas.before:
+        Rectangle:
+            size: root.width, root.height 
+            pos: self.pos
+            source: "linetemp.png"
+
+<DrawLine>:
+
+<PracScreen>:
+    name: "prac"
+
+    FloatLayout:
+        LineWidget
+
+        Label:
+            text: "Draw a line within the box without lifting your finger"
+            pos_hint: {"center_x": 0.5, "top": 1.3}
+            font_size: 30
+            color: (1,1,1,1)
+
+        DrawLine
+
+        Button:
+            text: "Return to start"
+            font_size: 20
+            size_hint: 0.2, 0.1
+            pos_hint: {"left": 1, "bottom": 1}
+            background_color: (0,1,1,0.5)
+            on_release:
+                app.root.current = "start"
+                root.manager.transition.direction = "right"
+
+        # Button: 
+        #     text: "Undo"
+        #     pos_hint: {"x": 0.2, "bottom": 1}
+        #     font_size: 20
+        #     size_hint: 0.2, 0.1
+        #     color: (1,1,1,1)
+        #     background_color: (0,1,1,0.5)
+        #     on_release:
+        #         app.root.current = "undo_prac"
+        #         root.manager.transition.direction = "right"
+
+        Button:
+            text: "Next"
+            font_size: 20
+            size_hint: 0.2, 0.1
+            pos_hint: {"right": 1, "bottom": 1}
+            background_color: (0,1,1,0.5)
+            on_release:
+                app.root.current = "dom_spiral"
+                root.manager.transition.direction = "left"
+
+# <PracUndoScreen>:
+#     name: "undo_prac"
+    
+#     FloatLayout:
+#         LineWidget
+
+#         Label:
+#             text: "Draw a line within the box without lifting your finger"
+#             pos_hint: {"center_x": 0.5, "top": 1.3}
+#             font_size: 30
+#             color: (1,1,1,1)
+
+#         DrawLine
+
+#         Button:
+#             text: "Return to start"
+#             font_size: 20
+#             size_hint: 0.2, 0.1
+#             pos_hint: {"left": 1, "bottom": 1}
+#             background_color: (0,1,1,0.5)
+#             on_release:
+#                 app.root.current = "start"
+#                 root.manager.transition.direction = "right"
+
+#         Button:
+#             text: "Next"
+#             font_size: 20
+#             size_hint: 0.2, 0.1
+#             pos_hint: {"right": 1, "bottom": 1}
+#             background_color: (0,1,1,0.5)
+#             on_release:
+#                 app.root.current = "dom_spiral"
+#                 root.manager.transition.direction = "left"
+
+<SpiralWidget>:
+    canvas.before:
+        Rectangle:
+            size: root.width, root.height 
+            pos: self.pos
+            source: "spiraltemp.png"
+
+<DSpiralScreen>:
+    name: "dom_spiral" #dominant hand spiral
+
+    FloatLayout:
+        SpiralWidget
+
+        Label:
+            text: "Trace the spiral using your dominant hand."
+            pos_hint: {"center_x": 0.5, "top": 1.45}
+            font_size: 30
+            color: (0,0,0,1)
+
+        Label:
+            text: "Start from the inside of the spiral."
+            pos_hint: {"center_x": 0.5, "top": 1.36}
+            font_size: 30
+            color: (0,0,0,1)
+
+        DrawLine
+
+        Button:
+            text: "Go Back"
+            font_size: 20
+            size_hint: 0.2, 0.1
+            pos_hint: {"left": 1, "bottom": 1}
+            background_color: (0,1,1,0.5)
+            on_release:
+                app.root.current = "prac"
+                root.manager.transition.direction = "right"
+
+        Button:
+            text: "Next"
+            font_size: 20
+            size_hint: 0.2, 0.1
+            pos_hint: {"right": 1, "bottom": 1}
+            background_color: (0,1,1,0.5)
+            on_release:
+                app.root.current = "nondom_spiral"
+                root.manager.transition.direction = "left"
+
+<NdSpiralScreen>:
+    name: "nondom_spiral" # non-dominant hand spiral 
+
+    FloatLayout:
+        SpiralWidget
+
+        Label:
+            text: "Trace the spiral using your non-dominant hand."
+            pos_hint: {"center_x": 0.5, "top": 1.45}
+            font_size: 30
+            color: (0,0,0,1)
+
+        Label:
+            text: "Start from the inside of the spiral."
+            pos_hint: {"center_x": 0.5, "top": 1.36}
+            font_size: 30
+            color: (0,0,0,1)
+
+        DrawLine
+
+        Button:
+            text: "Go Back"
+            font_size: 20
+            size_hint: 0.2, 0.1
+            pos_hint: {"left": 1, "bottom": 1}
+            background_color: (0,1,1,0.5)
+            on_release:
+                app.root.current = "prac"
+                root.manager.transition.direction = "right"
+
+        Button:
+            text: "Next"
+            font_size: 20
+            size_hint: 0.2, 0.1
+            pos_hint: {"right": 1, "bottom": 1}
+            background_color: (0,1,1,0.5)
+            # on_release:
+            #     app.root.current = "results"
+            #     root.manager.transition.direction = "left"

@@ -146,7 +146,15 @@ class DrawLine(Widget):
 class PracScreen(Screen):
     pass
 
-class StaticSpiralScreen(Screen):
+# class PracUndoScreen(Screen):
+#     pass
+
+class SpiralWidget(Widget):
+    pass
+class DSpiralScreen(Screen):
+    pass
+
+class NdSpiralScreen(Screen):
     pass
 
            
