@@ -274,7 +274,6 @@ WindowManager: # define screens
                 on_release:
                     app.root.current="start"
 
-
 <StartScreen>:
     name: "start"
     Button: 
@@ -301,10 +300,32 @@ WindowManager: # define screens
     FloatLayout:
         id: export1
         LineWidget
+        
+        BoxLayout:
+            orientation: "horizontal"
+            size: root.width, root.height
+            padding: [60,60,60,60]
+            spacing: 20
+
+            Label:
+                text: "Enter Patient ID Provided by the App: "
+                pos_hint: {"x": 0.8, "y": 0.9}
+                size_hint: (None, None)
+                width: 200
+                font_size: 15
+                color:(1,1,1,1)
+
+            TextInput:
+                id: Id_
+                multiline: False
+                pos_hint: {"x":0.9, "y": 0.85}
+                size_hint: (None, None)
+                width: 90
+                height: 50
 
         Label:
             text: "Draw a line within the box without lifting your finger"
-            pos_hint: {"center_x": 0.5, "top": 1.3}
+            pos_hint: {"center_x": 0.5, "top": 1.1}
             font_size: 30
             color: (1,1,1,1)
 

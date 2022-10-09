@@ -9,6 +9,8 @@ from kivy.graphics import Color, Line, Rectangle
 from kivy.properties import ObjectProperty
 from kivy.uix.popup import Popup
 from kivy.core.window import Window
+from kivy.uix.textinput import TextInput
+from kivy.uix.button import Button
 
 import sqlite3
 
@@ -51,12 +53,12 @@ class RegWindow(Screen):
                 self.ptnum.text = ""
                 
                 # To check if database is being populated; can comment out later
-                c.execute("SELECT * FROM details") 
+                # c.execute("SELECT * FROM details") 
 
-                data = c.fetchall()
+                # data = c.fetchall()
 
-                for i in data:
-                    print(i)
+                # for i in data:
+                #     print(i)
 
                 conn.commit()
                 conn.close()
@@ -113,11 +115,11 @@ class SearchWindow(Screen):
       #Clear input boxes from text
       #self.ids.word_input.text=''
       #self.ids.surname_input.text=''
-      print(Age_)
+      #print(Age_)
        
       conn.commit() # to commit changes to database
       conn.close() # to close connection to database   
-      return id  
+      return id 
 
 class StartScreen(Screen):
     pass
@@ -143,9 +145,14 @@ class DrawLine(Widget):
         # end timer here
         print("Touch Released!", touch)
 
+class TextPopup(Popup):
+    pass
+
 class PracScreen(Screen):
-    def capture(self, *args):
-        prac_img = self.ids.export1.export_to_png("practice round.png")
+    Id_ = ObjectProperty(None)
+
+    def capture(self, *largs): 
+        prac_img = self.ids.export1.export_to_png(f"patient {self.ids.Id_.text} practice round.png") 
         # use prac_img variable to store image in file/database
 
 # class PracUndoScreen(Screen):
@@ -155,15 +162,16 @@ class SpiralWidget(Widget):
     pass
 class DSpiralScreen(Screen):
     def capture(self, *args):
-        dh_img = self.ids.export2.export_to_png("dominant hand.png")
+        idnum = self.manager.get_screen("prac").ids.Id_.text
+        dh_img = self.ids.export2.export_to_png(f"patient {idnum} dominant hand.png")
         # use dh_img variable to store image in file/database
 
 class NdSpiralScreen(Screen):
     def capture(self, *args):
-        ndh_img = self.ids.export3.export_to_png("non-dominant hand.png")
+        idnum = self.manager.get_screen("prac").ids.Id_.text
+        ndh_img = self.ids.export3.export_to_png(f"patient {idnum} non-dominant hand.png")
         # use ndh_img variable to store image in file/database
 
-           
 class WindowManager(ScreenManager):
     pass
 
