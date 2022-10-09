@@ -149,10 +149,10 @@ class TextPopup(Popup):
     pass
 
 class PracScreen(Screen):
-    Id_ = ObjectProperty(None)
-
     def capture(self, *largs): 
-        prac_img = self.ids.export1.export_to_png(f"patient {self.ids.Id_.text} practice round.png") 
+        namee = self.manager.get_screen("search").ids.word_input.text
+        sur = self.manager.get_screen("search").ids.surname_input.text
+        prac_img = self.ids.export1.export_to_png(f"{namee} {sur} practice round.png")
         # use prac_img variable to store image in file/database
 
 # class PracUndoScreen(Screen):
@@ -162,14 +162,16 @@ class SpiralWidget(Widget):
     pass
 class DSpiralScreen(Screen):
     def capture(self, *args):
-        idnum = self.manager.get_screen("prac").ids.Id_.text
-        dh_img = self.ids.export2.export_to_png(f"patient {idnum} dominant hand.png")
+        namee = self.manager.get_screen("search").ids.word_input.text
+        sur = self.manager.get_screen("search").ids.surname_input.text
+        dh_img = self.ids.export2.export_to_png(f"{namee} {sur} dominant hand.png")
         # use dh_img variable to store image in file/database
 
 class NdSpiralScreen(Screen):
     def capture(self, *args):
-        idnum = self.manager.get_screen("prac").ids.Id_.text
-        ndh_img = self.ids.export3.export_to_png(f"patient {idnum} non-dominant hand.png")
+        namee = self.manager.get_screen("search").ids.word_input.text
+        sur = self.manager.get_screen("search").ids.surname_input.text
+        ndh_img = self.ids.export3.export_to_png(f"{namee} {sur} non-dominant hand.png")
         # use ndh_img variable to store image in file/database
 
 class WindowManager(ScreenManager):

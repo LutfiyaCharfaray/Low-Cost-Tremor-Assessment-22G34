@@ -210,7 +210,7 @@ WindowManager: # define screens
                 halign: 'right'
                 on_press: root.submit()
                 on_release:
-                    app.root.current = "start"
+                    app.root.current = "search"
                     root.manager.transition.direction = "left"
                     
 <SearchWindow>:
@@ -273,6 +273,7 @@ WindowManager: # define screens
                 font_size: 20
                 on_release:
                     app.root.current="start"
+                    root.manager.transition.direction = "left"
 
 <StartScreen>:
     name: "start"
@@ -300,32 +301,10 @@ WindowManager: # define screens
     FloatLayout:
         id: export1
         LineWidget
-        
-        BoxLayout:
-            orientation: "horizontal"
-            size: root.width, root.height
-            padding: [60,60,60,60]
-            spacing: 20
-
-            Label:
-                text: "Enter Patient ID Provided by the App: "
-                pos_hint: {"x": 0.8, "y": 0.9}
-                size_hint: (None, None)
-                width: 200
-                font_size: 15
-                color:(1,1,1,1)
-
-            TextInput:
-                id: Id_
-                multiline: False
-                pos_hint: {"x":0.9, "y": 0.85}
-                size_hint: (None, None)
-                width: 90
-                height: 50
 
         Label:
             text: "Draw a line within the box without lifting your finger"
-            pos_hint: {"center_x": 0.5, "top": 1.1}
+            pos_hint: {"center_x": 0.5, "top": 1.3}
             font_size: 30
             color: (1,1,1,1)
 
@@ -439,7 +418,7 @@ WindowManager: # define screens
             font_size: 20
             size_hint: 0.2, 0.1
             pos_hint: {"left": 1, "bottom": 1}
-            background_color: (0,1,1,0.5)
+            background_color: (0,1,1,1) #0,1,1,0.5
             on_release:
                 app.root.current = "prac"
                 root.manager.transition.direction = "right"
@@ -451,7 +430,7 @@ WindowManager: # define screens
             font_size: 20
             size_hint: 0.2, 0.1
             color: (1,1,1,1)
-            background_color: (0,1,1,0.5)
+            background_color: (0,1,1,1)
             on_release: root.capture()
 
         Button:
@@ -459,7 +438,7 @@ WindowManager: # define screens
             font_size: 20
             size_hint: 0.2, 0.1
             pos_hint: {"right": 1, "bottom": 1}
-            background_color: (0,1,1,0.5)
+            background_color: (0,1,1,1)
             on_release:
                 app.root.current = "nondom_spiral"
                 root.manager.transition.direction = "left"
@@ -490,7 +469,7 @@ WindowManager: # define screens
             font_size: 20
             size_hint: 0.2, 0.1
             pos_hint: {"left": 1, "bottom": 1}
-            background_color: (0,1,1,0.5)
+            background_color: (0,1,1,1)
             on_release:
                 app.root.current = "prac"
                 root.manager.transition.direction = "right"
@@ -502,7 +481,7 @@ WindowManager: # define screens
             font_size: 20
             size_hint: 0.2, 0.1
             color: (1,1,1,1)
-            background_color: (0,1,1,0.5)
+            background_color: (0,1,1,1)
             on_release: root.capture()
 
         Button:
@@ -510,7 +489,7 @@ WindowManager: # define screens
             font_size: 20
             size_hint: 0.2, 0.1
             pos_hint: {"right": 1, "bottom": 1}
-            background_color: (0,1,1,0.5)
+            background_color: (0,1,1,1)
             # on_release:
             #     app.root.current = "results"
             #     root.manager.transition.direction = "left"
