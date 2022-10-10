@@ -8,6 +8,8 @@ WindowManager: # define screens
     #PracUndoScreen:
     DSpiralScreen:
     NdSpiralScreen:
+    TickBox:
+    TickBox2:
 
 <LoginWindow>:
     name: "login"
@@ -284,6 +286,8 @@ WindowManager: # define screens
         font_size: 40
         on_release:
             app.root.current = "prac"
+            #app.root.current = "tick"
+
             root.manager.transition.direction = "left"
 
 <LineWidget>:
@@ -348,7 +352,8 @@ WindowManager: # define screens
             pos_hint: {"right": 1, "bottom": 1}
             background_color: (0,1,1,0.5)
             on_release:
-                app.root.current = "dom_spiral"
+                #app.root.current = "dom_spiral"
+                app.root.current = "tick"
                 root.manager.transition.direction = "left"
 
 # <PracUndoScreen>:
@@ -440,7 +445,8 @@ WindowManager: # define screens
             pos_hint: {"right": 1, "bottom": 1}
             background_color: (0,1,1,1)
             on_release:
-                app.root.current = "nondom_spiral"
+                app.root.current = "tick2"
+                #app.root.current = "nondom_spiral"
                 root.manager.transition.direction = "left"
 
 <NdSpiralScreen>:
@@ -493,3 +499,25 @@ WindowManager: # define screens
             # on_release:
             #     app.root.current = "results"
             #     root.manager.transition.direction = "left"
+
+<TickBox>:
+    name: "tick"
+    FloatLayout:
+        Button:
+            text: "Hello"
+            on_release:
+                app.root.current = "dom_spiral"
+
+<TickBox2>:
+    name: "tick2"
+    FloatLayout:
+        Label:
+            text: "Dominant Hand"
+            font_size: 20
+            bold: True
+            color: (1,1,1,1)
+            pos_hint: {'center_x': 0.5, 'y':0.45}
+        Button:
+            text: "Hello"
+            on_release:
+                app.root.current = "nondom_spiral"

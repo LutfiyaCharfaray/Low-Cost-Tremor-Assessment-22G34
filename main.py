@@ -124,6 +124,13 @@ class SearchWindow(Screen):
 class StartScreen(Screen):
     pass
 
+class TickBox(Screen):
+    pass
+
+class TickBox2(Screen):
+    pass
+
+
 # Widget Classes
 class LineWidget(Widget):
     pass
@@ -173,6 +180,7 @@ class NdSpiralScreen(Screen):
         sur = self.manager.get_screen("search").ids.surname_input.text
         ndh_img = self.ids.export3.export_to_png(f"{namee} {sur} non-dominant hand.png")
         # use ndh_img variable to store image in file/database
+        
 
 class WindowManager(ScreenManager):
     pass
