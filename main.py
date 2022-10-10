@@ -125,7 +125,8 @@ class StartScreen(Screen):
     pass
 
 class TickBox(Screen):
-    pass
+    def checkbox_click(self,instance, value):
+        pass
 
 class TickBox2(Screen):
     pass
