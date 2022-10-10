@@ -7,7 +7,7 @@ Investigation Project 2022.
 Low Cost Tremor Assessment App
 
 ## Collaborators
-Lutfiya Charfaray
-Maria Botha
+-Lutfiya Charfaray
+-Maria Botha
 
 # END OF README
