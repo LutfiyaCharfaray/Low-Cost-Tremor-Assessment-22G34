@@ -1,4 +1,5 @@
 # import classes, functions and modules
+from turtle import color
 import kivy
 from kivy.app import App 
 from kivy.lang import Builder
@@ -131,13 +132,20 @@ class LineWidget(Widget):
 class DrawLine(Widget):  
 
     def on_touch_down(self, touch):
+        super(DrawLine, self).on_touch_down(touch)
         print(touch)
         # start timer here
+        if not self.collide_point(*touch.pos):
+            return
+
         with self.canvas:
             Color(255, 0, 255, 1, mode='rgba')
             touch.ud['line'] = Line(points=(touch.x, touch.y), width=3)
 
     def on_touch_move(self, touch):
+        if not self.collide_point(*touch.pos):
+            return
+
         print(touch)
         touch.ud['line'].points += [touch.x, touch.y]
 
@@ -149,15 +157,22 @@ class TextPopup(Popup):
     pass
 
 class PracScreen(Screen):
+    
     def capture(self, *largs): 
         namee = self.manager.get_screen("search").ids.word_input.text
         sur = self.manager.get_screen("search").ids.surname_input.text
         prac_img = self.ids.export1.export_to_png(f"{namee} {sur} practice round.png")
         # use prac_img variable to store image in file/database
 
-# class PracUndoScreen(Screen):
-#     pass
+    # def Undo(self):
+    #     parent = Widget()
+    #     self.drawer = DrawLine()
+    #     undobtn = Button(self.ids.clear)
+    #     undobtn.bind(on_release=self.drawer.canvas.clear())
+    #     parent.add_widget(DrawLine())
+    #     parent.add_widget(undobtn)
 
+    #     return parent
 class SpiralWidget(Widget):
     pass
 class DSpiralScreen(Screen):
