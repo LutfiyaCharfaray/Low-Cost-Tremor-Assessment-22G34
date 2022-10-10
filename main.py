@@ -9,6 +9,8 @@ from kivy.graphics import Color, Line, Rectangle
 from kivy.properties import ObjectProperty
 from kivy.uix.popup import Popup
 from kivy.core.window import Window
+from kivy.uix.textinput import TextInput
+from kivy.uix.button import Button
 
 import sqlite3
 
@@ -51,12 +53,12 @@ class RegWindow(Screen):
                 self.ptnum.text = ""
                 
                 # To check if database is being populated; can comment out later
-                c.execute("SELECT * FROM details") 
+                # c.execute("SELECT * FROM details") 
 
-                data = c.fetchall()
+                # data = c.fetchall()
 
-                for i in data:
-                    print(i)
+                # for i in data:
+                #     print(i)
 
                 conn.commit()
                 conn.close()
@@ -113,11 +115,11 @@ class SearchWindow(Screen):
       #Clear input boxes from text
       #self.ids.word_input.text=''
       #self.ids.surname_input.text=''
-      print(Age_)
+      #print(Age_)
        
       conn.commit() # to commit changes to database
       conn.close() # to close connection to database   
-      return id  
+      return id 
 
 class StartScreen(Screen):
     pass
@@ -143,8 +145,15 @@ class DrawLine(Widget):
         # end timer here
         print("Touch Released!", touch)
 
-class PracScreen(Screen):
+class TextPopup(Popup):
     pass
+
+class PracScreen(Screen):
+    def capture(self, *largs): 
+        namee = self.manager.get_screen("search").ids.word_input.text
+        sur = self.manager.get_screen("search").ids.surname_input.text
+        prac_img = self.ids.export1.export_to_png(f"{namee} {sur} practice round.png")
+        # use prac_img variable to store image in file/database
 
 # class PracUndoScreen(Screen):
 #     pass
@@ -152,12 +161,19 @@ class PracScreen(Screen):
 class SpiralWidget(Widget):
     pass
 class DSpiralScreen(Screen):
-    pass
+    def capture(self, *args):
+        namee = self.manager.get_screen("search").ids.word_input.text
+        sur = self.manager.get_screen("search").ids.surname_input.text
+        dh_img = self.ids.export2.export_to_png(f"{namee} {sur} dominant hand.png")
+        # use dh_img variable to store image in file/database
 
 class NdSpiralScreen(Screen):
-    pass
+    def capture(self, *args):
+        namee = self.manager.get_screen("search").ids.word_input.text
+        sur = self.manager.get_screen("search").ids.surname_input.text
+        ndh_img = self.ids.export3.export_to_png(f"{namee} {sur} non-dominant hand.png")
+        # use ndh_img variable to store image in file/database
 
-           
 class WindowManager(ScreenManager):
     pass
 
