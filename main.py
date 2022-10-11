@@ -1,12 +1,11 @@
 # import classes, functions and modules
-from turtle import color
 import kivy
 from kivy.app import App 
 from kivy.lang import Builder
 from kivy.uix.screenmanager import ScreenManager, Screen
 from kivy.uix.label import Label
 from kivy.uix.widget import Widget
-from kivy.graphics import Color, Line, Rectangle
+from kivy.graphics import Color, Line
 from kivy.properties import ObjectProperty
 from kivy.uix.popup import Popup
 from kivy.core.window import Window
@@ -132,26 +131,32 @@ class LineWidget(Widget):
 class DrawLine(Widget):  
 
     def on_touch_down(self, touch):
-        super(DrawLine, self).on_touch_down(touch)
-        print(touch)
-        # start timer here
-        if not self.collide_point(*touch.pos):
+        if Widget.on_touch_down(self, touch):
             return
 
         with self.canvas:
             Color(255, 0, 255, 1, mode='rgba')
             touch.ud['line'] = Line(points=(touch.x, touch.y), width=3)
+        
+        # start timer here
+        print(touch)
 
     def on_touch_move(self, touch):
-        if not self.collide_point(*touch.pos):
-            return
-
-        print(touch)
-        touch.ud['line'].points += [touch.x, touch.y]
-
+        if 'line' in touch.ud:
+            touch.ud['line'].points += [touch.x, touch.y]
+            print(touch)
+        
     def on_touch_up(self, touch):
         # end timer here
         print("Touch Released!", touch)
+
+    def reset_canvas(self):
+        keep = self.children[:]
+        self.clear_widgets()
+        self.canvas.clear()
+
+        for widget in keep:
+            self.add_widget(widget)
 
 class TextPopup(Popup):
     pass
