@@ -129,7 +129,8 @@ class TickBox(Screen):
         pass
 
 class TickBox2(Screen):
-    pass
+    def checkbox2_click(self,instamce,value):
+       pass
 
 
 # Widget Classes
