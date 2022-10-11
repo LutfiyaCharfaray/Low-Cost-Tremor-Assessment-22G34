@@ -5,7 +5,6 @@ WindowManager: # define screens
     SearchWindow:
     StartScreen:
     PracScreen:
-    #PracUndoScreen:
     DSpiralScreen:
     NdSpiralScreen:
     TickBox:
@@ -294,18 +293,38 @@ WindowManager: # define screens
 <LineWidget>:
     canvas.before:
         Rectangle:
-            size: root.width, root.height 
+            size: self.size #size: root.width, root.height 
             pos: self.pos
             source: "linetemp.png"
 
 <DrawLine>:
+    Button:
+        id: 'return'
+
+    Button: 
+        id: 'screenshot'
+
+    Button: 
+        id: 'clearbutton'
+        text: "Clear"
+        right: root.right
+        top: root.top
+        font_size: 20
+        width: 80
+        height:40
+        color: (1,1,1,1)
+        background_color: (0,1,1,1)
+        on_release: root.reset_canvas()
+
+    Button:
+        id: 'next'
 
 <PracScreen>:
     name: "prac"
 
     FloatLayout:
         id: export1
-        LineWidget
+        LineWidget:
 
         Label:
             text: "Draw a line within the box without lifting your finger"
@@ -313,28 +332,18 @@ WindowManager: # define screens
             font_size: 30
             color: (1,1,1,1)
 
-        DrawLine
+        DrawLine:
 
         Button:
+            id: 'return'
             text: "Return to start"
             font_size: 20
             size_hint: 0.2, 0.1
-            pos_hint: {"left": 1, "bottom": 1}
-            background_color: (0,1,1,0.5)
+            pos_hint: {"right": 0.6, "bottom": 1}
+            background_color: (0,1,1,1)
             on_release:
                 app.root.current = "start"
                 root.manager.transition.direction = "right"
-
-        # Button: 
-        #     text: "Undo"
-        #     pos_hint: {"x": 0.2, "bottom": 1}
-        #     font_size: 20
-        #     size_hint: 0.2, 0.1
-        #     color: (1,1,1,1)
-        #     background_color: (0,1,1,0.5)
-        #     on_release:
-        #         app.root.current = "undo_prac"
-        #         root.manager.transition.direction = "right"
         
         Button: 
             id: 'screenshot'
@@ -343,58 +352,25 @@ WindowManager: # define screens
             font_size: 20
             size_hint: 0.2, 0.1
             color: (1,1,1,1)
-            background_color: (0,1,1,0.5)
+            background_color: (0,1,1,1)
             on_release: root.capture()
 
         Button:
+            id: 'next'
             text: "Next"
             font_size: 20
             size_hint: 0.2, 0.1
             pos_hint: {"right": 1, "bottom": 1}
-            background_color: (0,1,1,0.5)
+            background_color: (0,1,1,1)
             on_release:
                 #app.root.current = "dom_spiral"
                 app.root.current = "tick"
                 root.manager.transition.direction = "left"
 
-# <PracUndoScreen>:
-#     name: "undo_prac"
-    
-#     FloatLayout:
-#         LineWidget
-
-#         Label:
-#             text: "Draw a line within the box without lifting your finger"
-#             pos_hint: {"center_x": 0.5, "top": 1.3}
-#             font_size: 30
-#             color: (1,1,1,1)
-
-#         DrawLine
-
-#         Button:
-#             text: "Return to start"
-#             font_size: 20
-#             size_hint: 0.2, 0.1
-#             pos_hint: {"left": 1, "bottom": 1}
-#             background_color: (0,1,1,0.5)
-#             on_release:
-#                 app.root.current = "start"
-#                 root.manager.transition.direction = "right"
-
-#         Button:
-#             text: "Next"
-#             font_size: 20
-#             size_hint: 0.2, 0.1
-#             pos_hint: {"right": 1, "bottom": 1}
-#             background_color: (0,1,1,0.5)
-#             on_release:
-#                 app.root.current = "dom_spiral"
-#                 root.manager.transition.direction = "left"
-
 <SpiralWidget>:
     canvas.before:
         Rectangle:
-            size: root.width, root.height 
+            size: self.size #root.width, root.height 
             pos: self.pos
             source: "spiraltemp.png"
 
@@ -403,7 +379,7 @@ WindowManager: # define screens
 
     FloatLayout:
         id: export2
-        SpiralWidget
+        SpiralWidget:
 
         Label:
             text: "Trace the spiral using your dominant hand."
@@ -417,13 +393,14 @@ WindowManager: # define screens
             font_size: 30
             color: (0,0,0,1)
 
-        DrawLine
+        DrawLine:
 
         Button:
+            id: 'return'
             text: "Go Back"
             font_size: 20
             size_hint: 0.2, 0.1
-            pos_hint: {"left": 1, "bottom": 1}
+            pos_hint: {"right": 0.6, "bottom": 1}
             background_color: (0,1,1,1) #0,1,1,0.5
             on_release:
                 app.root.current = "prac"
@@ -440,6 +417,7 @@ WindowManager: # define screens
             on_release: root.capture()
 
         Button:
+            id: 'next'
             text: "Next"
             font_size: 20
             size_hint: 0.2, 0.1
@@ -455,7 +433,7 @@ WindowManager: # define screens
 
     FloatLayout:
         id: export3
-        SpiralWidget
+        SpiralWidget:
 
         Label:
             text: "Trace the spiral using your non-dominant hand."
@@ -469,13 +447,14 @@ WindowManager: # define screens
             font_size: 30
             color: (0,0,0,1)
 
-        DrawLine
+        DrawLine:
 
         Button:
+            id: 'return'
             text: "Go Back"
             font_size: 20
             size_hint: 0.2, 0.1
-            pos_hint: {"left": 1, "bottom": 1}
+            pos_hint: {"right": 0.6, "bottom": 1}
             background_color: (0,1,1,1)
             on_release:
                 app.root.current = "prac"
@@ -492,6 +471,7 @@ WindowManager: # define screens
             on_release: root.capture()
 
         Button:
+            id: 'next'
             text: "Next"
             font_size: 20
             size_hint: 0.2, 0.1

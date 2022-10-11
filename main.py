@@ -5,7 +5,7 @@ from kivy.lang import Builder
 from kivy.uix.screenmanager import ScreenManager, Screen
 from kivy.uix.label import Label
 from kivy.uix.widget import Widget
-from kivy.graphics import Color, Line, Rectangle
+from kivy.graphics import Color, Line
 from kivy.properties import ObjectProperty
 from kivy.uix.popup import Popup
 from kivy.core.window import Window
@@ -140,33 +140,53 @@ class LineWidget(Widget):
 class DrawLine(Widget):  
 
     def on_touch_down(self, touch):
-        print(touch)
-        # start timer here
+        if Widget.on_touch_down(self, touch):
+            return
+
         with self.canvas:
             Color(255, 0, 255, 1, mode='rgba')
             touch.ud['line'] = Line(points=(touch.x, touch.y), width=3)
+        
+        # start timer here
+        print(touch)
 
     def on_touch_move(self, touch):
-        print(touch)
-        touch.ud['line'].points += [touch.x, touch.y]
-
+        if 'line' in touch.ud:
+            touch.ud['line'].points += [touch.x, touch.y]
+            print(touch)
+        
     def on_touch_up(self, touch):
         # end timer here
         print("Touch Released!", touch)
+
+    def reset_canvas(self):
+        keep = self.children[:]
+        self.clear_widgets()
+        self.canvas.clear()
+
+        for widget in keep:
+            self.add_widget(widget)
 
 class TextPopup(Popup):
     pass
 
 class PracScreen(Screen):
+    
     def capture(self, *largs): 
         namee = self.manager.get_screen("search").ids.word_input.text
         sur = self.manager.get_screen("search").ids.surname_input.text
         prac_img = self.ids.export1.export_to_png(f"{namee} {sur} practice round.png")
         # use prac_img variable to store image in file/database
 
-# class PracUndoScreen(Screen):
-#     pass
+    # def Undo(self):
+    #     parent = Widget()
+    #     self.drawer = DrawLine()
+    #     undobtn = Button(self.ids.clear)
+    #     undobtn.bind(on_release=self.drawer.canvas.clear())
+    #     parent.add_widget(DrawLine())
+    #     parent.add_widget(undobtn)
 
+    #     return parent
 class SpiralWidget(Widget):
     pass
 class DSpiralScreen(Screen):
