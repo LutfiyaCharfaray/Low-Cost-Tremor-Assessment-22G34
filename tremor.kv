@@ -286,8 +286,6 @@ WindowManager: # define screens
         font_size: 40
         on_release:
             app.root.current = "prac"
-            #app.root.current = "tick"
-
             root.manager.transition.direction = "left"
 
 <LineWidget>:
@@ -298,12 +296,6 @@ WindowManager: # define screens
             source: "linetemp.png"
 
 <DrawLine>:
-    Button:
-        id: 'return'
-
-    Button: 
-        id: 'screenshot'
-
     Button: 
         id: 'clearbutton'
         text: "Clear"
@@ -335,35 +327,14 @@ WindowManager: # define screens
         DrawLine:
 
         Button:
-            id: 'return'
-            text: "Return to start"
-            font_size: 20
-            size_hint: 0.2, 0.1
-            pos_hint: {"right": 0.6, "bottom": 1}
-            background_color: (0,1,1,1)
-            on_release:
-                app.root.current = "start"
-                root.manager.transition.direction = "right"
-        
-        Button: 
-            id: 'screenshot'
-            text: "Save Drawing"
-            pos_hint: {"right": 0.8, "bottom": 1}
-            font_size: 20
-            size_hint: 0.2, 0.1
-            color: (1,1,1,1)
-            background_color: (0,1,1,1)
-            on_release: root.capture()
-
-        Button:
             id: 'next'
             text: "Next"
             font_size: 20
             size_hint: 0.2, 0.1
             pos_hint: {"right": 1, "bottom": 1}
             background_color: (0,1,1,1)
+            on_press: root.capture()
             on_release:
-                #app.root.current = "dom_spiral"
                 app.root.current = "tick"
                 root.manager.transition.direction = "left"
 
@@ -396,36 +367,15 @@ WindowManager: # define screens
         DrawLine:
 
         Button:
-            id: 'return'
-            text: "Go Back"
-            font_size: 20
-            size_hint: 0.2, 0.1
-            pos_hint: {"right": 0.6, "bottom": 1}
-            background_color: (0,1,1,1) #0,1,1,0.5
-            on_release:
-                app.root.current = "prac"
-                root.manager.transition.direction = "right"
-
-        Button: 
-            id: 'screenshot'
-            text: "Save Drawing"
-            pos_hint: {"right": 0.8, "bottom": 1}
-            font_size: 20
-            size_hint: 0.2, 0.1
-            color: (1,1,1,1)
-            background_color: (0,1,1,1)
-            on_release: root.capture()
-
-        Button:
             id: 'next'
             text: "Next"
             font_size: 20
             size_hint: 0.2, 0.1
             pos_hint: {"right": 1, "bottom": 1}
             background_color: (0,1,1,1)
+            on_press: root.capture()
             on_release:
                 app.root.current = "tick2"
-                #app.root.current = "nondom_spiral"
                 root.manager.transition.direction = "left"
 
 <NdSpiralScreen>:
@@ -450,33 +400,13 @@ WindowManager: # define screens
         DrawLine:
 
         Button:
-            id: 'return'
-            text: "Go Back"
-            font_size: 20
-            size_hint: 0.2, 0.1
-            pos_hint: {"right": 0.6, "bottom": 1}
-            background_color: (0,1,1,1)
-            on_release:
-                app.root.current = "prac"
-                root.manager.transition.direction = "right"
-        
-        Button: 
-            id: 'screenshot'
-            text: "Save Drawing"
-            pos_hint: {"right": 0.8, "bottom": 1}
-            font_size: 20
-            size_hint: 0.2, 0.1
-            color: (1,1,1,1)
-            background_color: (0,1,1,1)
-            on_release: root.capture()
-
-        Button:
             id: 'next'
             text: "Next"
             font_size: 20
             size_hint: 0.2, 0.1
             pos_hint: {"right": 1, "bottom": 1}
             background_color: (0,1,1,1)
+            on_press: root.capture()
             # on_release:
             #     app.root.current = "results"
             #     root.manager.transition.direction = "left"
@@ -593,3 +523,4 @@ WindowManager: # define screens
             background_color: (0,1,1,1)
             on_release:
                 app.root.current = "nondom_spiral"
+                root.manager.transition.direction = "left"
