@@ -17,31 +17,31 @@ WindowManager: # define screens
         Rectangle:
             pos: self.pos
             size: self.size
-            source: "orangeflowers.jpg"
+            source: "blue.jpeg" 
 
     BoxLayout:
         orientation: "vertical"
         size: root.width, root.height
 
         padding: 50
-        spacing: 50
+        spacing: 40
 
         Label: 
             text: "Login with Password"
             bold: True
-            pos_hint: {'center_x': 0.5, 'y':0.8}
+            pos_hint: {'center_x': 0.5} 
             size_hint: (None, None)
             width: 400
-            color: (1,1,1,1) #(0,0,0,1)
+            color: (0,0,0,1) 
             font_size: 32
 
         TextInput:
             id: pw
             multiline: False
             hint_text: 'Please Enter Password:'
-            pos_hint: {'center_x': 0.5, 'center_y':0.3}
+            pos_hint: {'center_x': 0.5} 
             size_hint: (None, None)
-            width: 400
+            width: 500
             height: 80
             password: True
             padding: [30,30,20,20]
@@ -52,8 +52,8 @@ WindowManager: # define screens
             size_hint: (None, None)
             width: 200
             height: 50
-            background_color: (0,1,1,1) #(0,150,141,1)
-            color: (1,1,1,1) #(0,0,0,1)
+            background_color: (0,1,1,1) 
+            color: (1,1,1,1) 
             on_release: 
                 app.root.current = "menu" if pw.text == "tremordr" else "login"
                 root.manager.transition.direction = "left"
@@ -64,7 +64,8 @@ WindowManager: # define screens
         canvas.before:
             Rectangle:
                 size: self.size
-                source: "orangeflowers.jpg"
+                pos: self.pos
+                source: "blue.jpeg"
         FloatLayout: 
 
             Button:
@@ -99,7 +100,7 @@ WindowManager: # define screens
         Rectangle:
             pos: self.pos
             size: self.size
-            source: "orangeflowers.jpg"
+            source: "blue.jpeg"
 
     FloatLayout:
 
@@ -107,7 +108,7 @@ WindowManager: # define screens
             text: "Please Enter Patient Details"
             font_size: 20
             bold: True
-            color: (1,1,1,1)
+            color: (0,0,0,1) 
             pos_hint: {'center_x': 0.5, 'y':0.45} 
 
         BoxLayout:
@@ -124,54 +125,33 @@ WindowManager: # define screens
 
                 Label:
                     text: "Name: "
-                    color: (1,1,1,1)
+                    color: (0,0,0,1) 
                     font_size: 20
                     halign: 'left'
-                    background_color: (0,0,0,0.5)
-                    canvas.before:
-                        Color:
-                            rgba: self.background_color
-                        Rectangle:
-                            size: self.size
-                            pos: self.pos
 
                 TextInput:
                     id: ptname
                     multiline: False
                     hint_text: 'Enter patient name'
-                    padding: [30,30,30,30]
+                    padding: 20 
 
                 Label:
                     text: "Surname: "
-                    color: (1,1,1,1)
+                    color: (0,0,0,1) 
                     font_size: 20
                     halign: 'left'
-                    background_color: (0,0,0,0.5)
-                    canvas.before:
-                        Color:
-                            rgba: self.background_color
-                        Rectangle:
-                            size: self.size
-                            pos: self.pos
-
+                    
                 TextInput:
                     id: ptsname
                     multiline: False
                     hint_text: 'Enter patient surname'
-                    padding: [30,30,30,30]
+                    padding: 20 
 
                 Label:
                     text: "Age: "
-                    color: (1,1,1,1)
+                    color: (0,0,0,1) 
                     font_size: 20
                     halign: 'left'
-                    background_color: (0,0,0,0.5)
-                    canvas.before:
-                        Color:
-                            rgba: self.background_color
-                        Rectangle:
-                            size: self.size
-                            pos: self.pos
 
                 TextInput:
                     id: ptage
@@ -179,26 +159,19 @@ WindowManager: # define screens
                     min_value: 1
                     max_value: 100
                     hint_text: 'Enter an age between {} and {}'.format(self.min_value, self.max_value)
-                    padding: [30,30,30,30]
+                    padding: 20
 
                 Label:
                     text: "Contact Number: "
-                    color: (1,1,1,1)
+                    color: (0,0,0,1) 
                     font_size: 20
                     halign: 'left'
-                    background_color: (0,0,0,0.5)
-                    canvas.before:
-                        Color:
-                            rgba: self.background_color
-                        Rectangle:
-                            size: self.size
-                            pos: self.pos
 
                 TextInput:
                     id: ptnum
                     multiline: False
                     hint_text: 'Enter a 10 digit phone number'
-                    padding: [30,30,30,30]
+                    padding: 20 
 
             Button:
                 text: "Submit"
@@ -208,11 +181,23 @@ WindowManager: # define screens
                 size_hint: (None, None)
                 width: 200
                 height: 50
-                halign: 'right'
                 on_press: root.submit()
                 on_release:
                     app.root.current = "search"
                     root.manager.transition.direction = "left"
+
+            Button:
+                text: "Return to menu"
+                pos_hint: {'left': 1, 'bottom' : 1} 
+                size_hint: (None, None)
+                width: 200
+                height: 50
+                font_size: 20
+                background_color: (0,1,1,1)
+                color: (1,1,1,1) 
+                on_release:
+                    app.root.current="menu"
+                    root.manager.transition.direction = "right"
                     
 <SearchWindow>:
     name: "search"
@@ -269,13 +254,23 @@ WindowManager: # define screens
 
             Button:
                 text: "Start Assessment"
-                pos_hint: {'x': 0.6, 'y' : 0.1}
+                pos_hint: {'x': 0.6, 'y' : 0.05}
                 size_hint: (0.3, 0.1)
                 font_size: 20
                 background_color: (0,1,1,1)
                 on_release:
                     app.root.current="start"
                     root.manager.transition.direction = "left"
+
+            Button:
+                text: "Return to menu"
+                pos_hint: {'x': 0.1, 'y' : 0.05}
+                size_hint: (0.3, 0.1)
+                font_size: 20
+                background_color: (0,1,1,1)
+                on_release:
+                    app.root.current="menu"
+                    root.manager.transition.direction = "right"
 
 <StartScreen>:
     name: "start"

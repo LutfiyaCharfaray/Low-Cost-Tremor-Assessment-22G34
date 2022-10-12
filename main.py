@@ -147,13 +147,9 @@ class DrawLine(Widget):
             Color(255, 0, 255, 1, mode='rgba')
             touch.ud['line'] = Line(points=(touch.x, touch.y), width=3)
         
-        x_start = touch.x #get coordinates
-        y_start = touch.y
-        print("Touch Start:", "X = ", x_start, "Y = ",  y_start)
-
-        # if 'pressure' in touch.profile:
-        #     z_start = touch.pressure
-        #     print("Start Pressure: ", z_start)
+        x_co = touch.x #get coordinates
+        y_co = touch.y
+        print("Touch Start:", "X = ", x_co, "Y = ",  y_co)
 
     def on_touch_move(self, touch):
         if 'line' in touch.ud:
@@ -161,15 +157,11 @@ class DrawLine(Widget):
             x_co = touch.x 
             y_co = touch.y
             print("X  = ", x_co, "Y = ", y_co)
-
-        # if 'pressure' in touch.profile:
-        #     z_co = touch.pressure
-        #     print("Pressure: ", z_co)
         
     def on_touch_up(self, touch):
-        x_end = touch.x 
-        y_end = touch.y
-        print("Touch End: ", "X = ", x_end, "Y = ", y_end)
+        x_co = touch.x 
+        y_co = touch.y
+        print("Touch End: ", "X = ", x_co, "Y = ", y_co)
 
     def reset_canvas(self):
         keep = self.children[:]
@@ -190,15 +182,6 @@ class PracScreen(Screen):
         prac_img = self.ids.export1.export_to_png(f"{namee} {sur} practice round.png")
         # use prac_img variable to store image in file/database
 
-    # def Undo(self):
-    #     parent = Widget()
-    #     self.drawer = DrawLine()
-    #     undobtn = Button(self.ids.clear)
-    #     undobtn.bind(on_release=self.drawer.canvas.clear())
-    #     parent.add_widget(DrawLine())
-    #     parent.add_widget(undobtn)
-
-    #     return parent
 class SpiralWidget(Widget):
     pass
 class DSpiralScreen(Screen):
