@@ -52,7 +52,7 @@ class RegWindow(Screen):
                 self.ptage.text = ""
                 self.ptnum.text = ""
                 
-                # To check if database is being populated; can comment out later
+                # To check if database is being populated
                 # c.execute("SELECT * FROM details") 
 
                 # data = c.fetchall()
@@ -178,15 +178,6 @@ class PracScreen(Screen):
         prac_img = self.ids.export1.export_to_png(f"{namee} {sur} practice round.png")
         # use prac_img variable to store image in file/database
 
-    # def Undo(self):
-    #     parent = Widget()
-    #     self.drawer = DrawLine()
-    #     undobtn = Button(self.ids.clear)
-    #     undobtn.bind(on_release=self.drawer.canvas.clear())
-    #     parent.add_widget(DrawLine())
-    #     parent.add_widget(undobtn)
-
-    #     return parent
 class SpiralWidget(Widget):
     pass
 class DSpiralScreen(Screen):
@@ -201,8 +192,7 @@ class NdSpiralScreen(Screen):
         namee = self.manager.get_screen("search").ids.word_input.text
         sur = self.manager.get_screen("search").ids.surname_input.text
         ndh_img = self.ids.export3.export_to_png(f"{namee} {sur} non-dominant hand.png")
-        # use ndh_img variable to store image in file/database
-        
+        # use ndh_img variable to store image in file/database    
 
 class WindowManager(ScreenManager):
     pass
