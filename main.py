@@ -147,17 +147,29 @@ class DrawLine(Widget):
             Color(255, 0, 255, 1, mode='rgba')
             touch.ud['line'] = Line(points=(touch.x, touch.y), width=3)
         
-        # start timer here
-        print(touch)
+        x_start = touch.x #get coordinates
+        y_start = touch.y
+        print("Touch Start:", "X = ", x_start, "Y = ",  y_start)
+
+        # if 'pressure' in touch.profile:
+        #     z_start = touch.pressure
+        #     print("Start Pressure: ", z_start)
 
     def on_touch_move(self, touch):
         if 'line' in touch.ud:
             touch.ud['line'].points += [touch.x, touch.y]
-            print(touch)
+            x_co = touch.x 
+            y_co = touch.y
+            print("X  = ", x_co, "Y = ", y_co)
+
+        # if 'pressure' in touch.profile:
+        #     z_co = touch.pressure
+        #     print("Pressure: ", z_co)
         
     def on_touch_up(self, touch):
-        # end timer here
-        print("Touch Released!", touch)
+        x_end = touch.x 
+        y_end = touch.y
+        print("Touch End: ", "X = ", x_end, "Y = ", y_end)
 
     def reset_canvas(self):
         keep = self.children[:]
