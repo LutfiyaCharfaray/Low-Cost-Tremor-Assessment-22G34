@@ -186,6 +186,8 @@ class DSpiralScreen(Screen):
         sur = self.manager.get_screen("search").ids.surname_input.text
         dh_img = self.ids.export2.export_to_png(f"{namee} {sur} dominant hand.png")
         # use dh_img variable to store image in file/database
+        
+        
 
 class NdSpiralScreen(Screen):
     def capture(self, *args):
