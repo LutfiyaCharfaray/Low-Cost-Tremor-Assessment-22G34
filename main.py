@@ -11,6 +11,7 @@ from kivy.uix.popup import Popup
 from kivy.core.window import Window
 from kivy.uix.textinput import TextInput
 from kivy.uix.button import Button
+from kivy.clock import Clock
 
 import sqlite3
 
@@ -186,6 +187,23 @@ class DSpiralScreen(Screen):
         sur = self.manager.get_screen("search").ids.surname_input.text
         dh_img = self.ids.export2.export_to_png(f"{namee} {sur} dominant hand.png")
         # use dh_img variable to store image in file/database
+        
+        #Timer code:    
+    def __init__(self, **kwargs):
+       super().__init__(**kwargs)
+       self.count = 0
+       self.finalCount=0
+       
+    def update_label(self,*args):
+       self.count = self.count +1
+       #self.ids.lb.text= str(self.count)
+       
+    def stop(self):
+       Clock.unschedule(self.update_label)
+       self.finalCount=self.count
+       print(self.finalCount)
+       self.count=0
+       #self.ids.lb.text= str(self.count)
         
         
 
