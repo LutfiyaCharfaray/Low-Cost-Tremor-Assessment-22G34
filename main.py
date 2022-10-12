@@ -11,6 +11,7 @@ from kivy.uix.popup import Popup
 from kivy.core.window import Window
 from kivy.uix.textinput import TextInput
 from kivy.uix.button import Button
+from kivy.clock import Clock
 
 import sqlite3
 
@@ -186,13 +187,51 @@ class DSpiralScreen(Screen):
         sur = self.manager.get_screen("search").ids.surname_input.text
         dh_img = self.ids.export2.export_to_png(f"{namee} {sur} dominant hand.png")
         # use dh_img variable to store image in file/database
+        
+    #Timer code:    
+    def __init__(self, **kwargs):
+       super().__init__(**kwargs)
+       self.count = 0
+       self.finalCount=0
+       
+    def update_label(self,*args):
+       self.count = self.count +1
+       
+    def stop(self):
+       Clock.unschedule(self.update_label)
+       self.finalCount=self.count
+       print(self.finalCount)  #To check the time
+       self.count=0  #Resets the time
+       
+    def start(self):
+       Clock.schedule_interval(self.update_label,1)
+        
+        
 
 class NdSpiralScreen(Screen):
     def capture(self, *args):
         namee = self.manager.get_screen("search").ids.word_input.text
         sur = self.manager.get_screen("search").ids.surname_input.text
         ndh_img = self.ids.export3.export_to_png(f"{namee} {sur} non-dominant hand.png")
-        # use ndh_img variable to store image in file/database    
+        # use ndh_img variable to store image in file/database  
+        
+    #Timer code    
+    def __init__(self, **kwargs):
+       super().__init__(**kwargs)
+       self.count = 0
+       self.finalCount=0
+       
+    def update_label(self,*args):
+       self.count = self.count +1
+         
+    def stop(self):
+       Clock.unschedule(self.update_label)
+       self.finalCount=self.count
+       print(self.finalCount)  #Just to check the time
+       self.count=0  #Reset counter
+       
+    def start(self): #Start counter
+       Clock.schedule_interval(self.update_label,1)  
 
 class WindowManager(ScreenManager):
     pass

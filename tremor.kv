@@ -377,6 +377,30 @@ WindowManager: # define screens
             on_release:
                 app.root.current = "tick2"
                 root.manager.transition.direction = "left"
+            
+        Label:
+            id : lb
+            text: ''
+            color: 0,0,0,1
+            font_size:30
+            pos_hint: {'x': 0.1 , 'y' : 0.8}
+            size_hint: (0.2, 0.1)
+
+        Button:
+            text: "Stop"
+            font_size: 20
+            pos_hint: {'x': 0 , 'y' : 0}
+            size_hint: (0.2, 0.1)
+            background_color: (1,0,0,1)
+            on_press: root.stop()
+
+        Button:
+            text: "Start"
+            font_size: 20
+            pos_hint: {'x': 0 , 'y' : 0.1}
+            size_hint: (0.2, 0.1)
+            background_color: (0,1,0,1)
+            on_press: root.start()
 
 <NdSpiralScreen>:
     name: "nondom_spiral" # non-dominant hand spiral 
@@ -410,6 +434,30 @@ WindowManager: # define screens
             # on_release:
             #     app.root.current = "results"
             #     root.manager.transition.direction = "left"
+
+        Label:
+            id : lb
+            text: ''
+            color: 0,0,0,1
+            font_size:30
+            pos_hint: {'x': 0.1 , 'y' : 0.8}
+            size_hint: (0.2, 0.1)
+
+        Button:
+            text: "Stop"
+            font_size: 20
+            pos_hint: {'x': 0 , 'y' : 0}
+            size_hint: (0.2, 0.1)
+            background_color: (1,0,0,1)
+            on_press: root.stop()
+
+        Button:
+            text: "Start"
+            font_size: 20
+            pos_hint: {'x': 0 , 'y' : 0.1}
+            size_hint: (0.2, 0.1)
+            background_color: (0,1,0,1)
+            on_press: root.start()
 
 <TickBox>:
     name: "tick"
