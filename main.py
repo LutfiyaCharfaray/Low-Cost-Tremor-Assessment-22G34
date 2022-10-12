@@ -72,7 +72,6 @@ class RegWindow(Screen):
             notif = Popup(title = 'Invalid Form', content = Label(text='Text fields cannot be empty.'), size_hint=(None, None), size=(300,300))
             notif.open()
             
-            
 #Class to allow doctor to enter existing patient name and surname, where the database is queried and the patients 
 #ID is displayed             
 class SearchWindow(Screen): 

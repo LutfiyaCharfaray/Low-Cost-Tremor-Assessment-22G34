@@ -109,14 +109,14 @@ WindowManager: # define screens
             font_size: 20
             bold: True
             color: (0,0,0,1) 
-            pos_hint: {'center_x': 0.5, 'y':0.45} 
+            pos_hint: {'right': 0.7, 'y':0.45} 
 
         BoxLayout:
             orientation: 'vertical'
             size: root.width, root.height
 
-            padding: [40,40,40,40]
-            spacing: 40
+            padding: 20
+            spacing: 20 
 
             GridLayout:
                 cols: 2
@@ -182,8 +182,17 @@ WindowManager: # define screens
                 width: 200
                 height: 50
                 on_press: root.submit()
+
+            Button:
+                text: "Next"
+                background_color: (0,1,1,1)
+                color: (1,1,1,1)
+                pos_hint: {'x': 0.6}
+                size_hint: (None, None)
+                width: 200
+                height: 50
                 on_release:
-                    app.root.current = "search"
+                    app.root.current = "search" 
                     root.manager.transition.direction = "left"
 
             Button:
