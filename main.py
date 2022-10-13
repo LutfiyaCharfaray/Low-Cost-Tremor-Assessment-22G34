@@ -73,7 +73,6 @@ class RegWindow(Screen):
             notif = Popup(title = 'Invalid Form', content = Label(text='Text fields cannot be empty.'), size_hint=(None, None), size=(300,300))
             notif.open()
             
-            
 #Class to allow doctor to enter existing patient name and surname, where the database is queried and the patients 
 #ID is displayed             
 class SearchWindow(Screen): 
@@ -148,17 +147,21 @@ class DrawLine(Widget):
             Color(255, 0, 255, 1, mode='rgba')
             touch.ud['line'] = Line(points=(touch.x, touch.y), width=3)
         
-        # start timer here
-        print(touch)
+        x_co = touch.x #get coordinates
+        y_co = touch.y
+        print("Touch Start:", "X = ", x_co, "Y = ",  y_co)
 
     def on_touch_move(self, touch):
         if 'line' in touch.ud:
             touch.ud['line'].points += [touch.x, touch.y]
-            print(touch)
+            x_co = touch.x 
+            y_co = touch.y
+            print("X  = ", x_co, "Y = ", y_co)
         
     def on_touch_up(self, touch):
-        # end timer here
-        print("Touch Released!", touch)
+        x_co = touch.x 
+        y_co = touch.y
+        print("Touch End: ", "X = ", x_co, "Y = ", y_co)
 
     def reset_canvas(self):
         keep = self.children[:]
