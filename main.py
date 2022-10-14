@@ -132,7 +132,6 @@ class TickBox2(Screen):
     def checkbox2_click(self,instamce,value):
        pass
 
-
 # Widget Classes
 class LineWidget(Widget):
     pass
@@ -209,8 +208,6 @@ class DSpiralScreen(Screen):
     def start(self):
        Clock.schedule_interval(self.update_label,1)
         
-        
-
 class NdSpiralScreen(Screen):
     def capture(self, *args):
         namee = self.manager.get_screen("search").ids.word_input.text
