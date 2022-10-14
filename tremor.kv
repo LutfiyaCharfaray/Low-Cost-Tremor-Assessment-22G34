@@ -6,7 +6,9 @@ WindowManager: # define screens
     StartScreen:
     PracScreen:
     DSpiralScreen:
+    VRScreen1:
     NdSpiralScreen:
+    VRScreen2:
     TickBox:
     TickBox2:
 
@@ -342,127 +344,6 @@ WindowManager: # define screens
                 app.root.current = "tick"
                 root.manager.transition.direction = "left"
 
-<SpiralWidget>:
-    canvas.before:
-        Rectangle:
-            size: self.size #root.width, root.height 
-            pos: self.pos
-            source: "spiraltemp.png"
-
-<DSpiralScreen>:
-    name: "dom_spiral" #dominant hand spiral
-
-    FloatLayout:
-        id: export2
-        SpiralWidget:
-
-        Label:
-            text: "Trace the spiral using your dominant hand."
-            pos_hint: {"center_x": 0.5, "top": 1.45}
-            font_size: 30
-            color: (0,0,0,1)
-
-        Label:
-            text: "Start from the inside of the spiral."
-            pos_hint: {"center_x": 0.5, "top": 1.36}
-            font_size: 30
-            color: (0,0,0,1)
-
-        DrawLine:
-
-        Button:
-            id: 'next'
-            text: "Next"
-            font_size: 20
-            size_hint: 0.2, 0.1
-            pos_hint: {"right": 1, "bottom": 1}
-            background_color: (0,1,1,1)
-            on_press: root.capture()
-            on_release:
-                app.root.current = "tick2"
-                root.manager.transition.direction = "left"
-            
-        Label:
-            id : lb
-            text: ''
-            color: 0,0,0,1
-            font_size:30
-            pos_hint: {'x': 0.1 , 'y' : 0.8}
-            size_hint: (0.2, 0.1)
-
-        Button:
-            text: "Stop"
-            font_size: 20
-            pos_hint: {'x': 0 , 'y' : 0}
-            size_hint: (0.2, 0.1)
-            background_color: (1,0,0,1)
-            on_press: root.stop()
-
-        Button:
-            text: "Start"
-            font_size: 20
-            pos_hint: {'x': 0 , 'y' : 0.1}
-            size_hint: (0.2, 0.1)
-            background_color: (0,1,0,1)
-            on_press: root.start()
-
-<NdSpiralScreen>:
-    name: "nondom_spiral" # non-dominant hand spiral 
-
-    FloatLayout:
-        id: export3
-        SpiralWidget:
-
-        Label:
-            text: "Trace the spiral using your non-dominant hand."
-            pos_hint: {"center_x": 0.5, "top": 1.45}
-            font_size: 30
-            color: (0,0,0,1)
-
-        Label:
-            text: "Start from the inside of the spiral."
-            pos_hint: {"center_x": 0.5, "top": 1.36}
-            font_size: 30
-            color: (0,0,0,1)
-
-        DrawLine:
-
-        Button:
-            id: 'next'
-            text: "Next"
-            font_size: 20
-            size_hint: 0.2, 0.1
-            pos_hint: {"right": 1, "bottom": 1}
-            background_color: (0,1,1,1)
-            on_press: root.capture()
-            # on_release:
-            #     app.root.current = "results"
-            #     root.manager.transition.direction = "left"
-
-        Label:
-            id : lb
-            text: ''
-            color: 0,0,0,1
-            font_size:30
-            pos_hint: {'x': 0.1 , 'y' : 0.8}
-            size_hint: (0.2, 0.1)
-
-        Button:
-            text: "Stop"
-            font_size: 20
-            pos_hint: {'x': 0 , 'y' : 0}
-            size_hint: (0.2, 0.1)
-            background_color: (1,0,0,1)
-            on_press: root.stop()
-
-        Button:
-            text: "Start"
-            font_size: 20
-            pos_hint: {'x': 0 , 'y' : 0.1}
-            size_hint: (0.2, 0.1)
-            background_color: (0,1,0,1)
-            on_press: root.start()
-
 <TickBox>:
     name: "tick"
     canvas.before:
@@ -521,6 +402,103 @@ WindowManager: # define screens
                 app.root.current = "dom_spiral"
                 root.manager.transition.direction = "left"
 
+<SpiralWidget>:
+    canvas.before:
+        Rectangle:
+            size: self.size #root.width, root.height 
+            pos: self.pos
+            source: "spiraltemp.png"
+
+<DSpiralScreen>:
+    name: "dom_spiral" #dominant hand spiral
+
+    FloatLayout:
+        id: export2
+        SpiralWidget:
+
+        Label:
+            text: "Trace the spiral using your dominant hand."
+            pos_hint: {"center_x": 0.5, "top": 1.45}
+            font_size: 30
+            color: (0,0,0,1)
+
+        Label:
+            text: "Start from the inside of the spiral."
+            pos_hint: {"center_x": 0.5, "top": 1.36}
+            font_size: 30
+            color: (0,0,0,1)
+
+        DrawLine:
+
+        Button:
+            id: 'next'
+            text: "Next"
+            font_size: 20
+            size_hint: 0.2, 0.1
+            pos_hint: {"right": 1, "bottom": 1}
+            background_color: (0,1,1,1)
+            on_press: root.capture()
+            on_release:
+                app.root.current = "rating1"
+                root.manager.transition.direction = "left"
+            
+        Label:
+            id : lb
+            text: ''
+            color: 0,0,0,1
+            font_size:30
+            pos_hint: {'x': 0.1 , 'y' : 0.8}
+            size_hint: (0.2, 0.1)
+
+        Button:
+            text: "Stop"
+            font_size: 20
+            pos_hint: {'x': 0 , 'y' : 0}
+            size_hint: (0.2, 0.1)
+            background_color: (1,0,0,1)
+            on_press: root.stop()
+
+        Button:
+            text: "Start"
+            font_size: 20
+            pos_hint: {'x': 0 , 'y' : 0.1}
+            size_hint: (0.2, 0.1)
+            background_color: (0,1,0,1)
+            on_press: root.start()
+
+<VRScreen1>:
+    name: "rating1"
+    slider_: slider_
+
+    BoxLayout:
+        orientation: "vertical"
+        size: root.width, root.height  
+
+        Label:
+            text: "Rate the Tremor from 0-10 (minor to severe) \n- dominant hand"
+            font_size: 34
+
+        Label:
+            text: str(int(slider_.value))
+            font_size: 30
+
+        Slider:
+            id: slider_
+            min: 0
+            max: 10
+            step: 1
+            orientation: "horizontal"
+           
+        Button:
+            text: "Next"
+            font_size: 20
+            size_hint: 0.2, 0.4
+            pos_hint: {"right": 1, "bottom": 1}
+            background_color: (0,1,1,0.5)
+            on_release:
+                app.root.current = "tick2"
+                root.manager.transition.direction = "left"
+
 <TickBox2>:
     name: "tick2"
     canvas.before:
@@ -575,4 +553,94 @@ WindowManager: # define screens
             background_color: (0,1,1,1)
             on_release:
                 app.root.current = "nondom_spiral"
+                root.manager.transition.direction = "left"
+
+<NdSpiralScreen>:
+    name: "nondom_spiral" # non-dominant hand spiral 
+
+    FloatLayout:
+        id: export3
+        SpiralWidget:
+
+        Label:
+            text: "Trace the spiral using your non-dominant hand."
+            pos_hint: {"center_x": 0.5, "top": 1.45}
+            font_size: 30
+            color: (0,0,0,1)
+
+        Label:
+            text: "Start from the inside of the spiral."
+            pos_hint: {"center_x": 0.5, "top": 1.36}
+            font_size: 30
+            color: (0,0,0,1)
+
+        DrawLine:
+
+        Button:
+            id: 'next'
+            text: "Next"
+            font_size: 20
+            size_hint: 0.2, 0.1
+            pos_hint: {"right": 1, "bottom": 1}
+            background_color: (0,1,1,1)
+            on_press: root.capture()
+            on_release:
+                app.root.current = "rating2"
+                root.manager.transition.direction = "left"
+
+        Label:
+            id : lb
+            text: ''
+            color: 0,0,0,1
+            font_size:30
+            pos_hint: {'x': 0.1 , 'y' : 0.8}
+            size_hint: (0.2, 0.1)
+
+        Button:
+            text: "Stop"
+            font_size: 20
+            pos_hint: {'x': 0 , 'y' : 0}
+            size_hint: (0.2, 0.1)
+            background_color: (1,0,0,1)
+            on_press: root.stop()
+
+        Button:
+            text: "Start"
+            font_size: 20
+            pos_hint: {'x': 0 , 'y' : 0.1}
+            size_hint: (0.2, 0.1)
+            background_color: (0,1,0,1)
+            on_press: root.start()
+
+<VRScreen2>:
+    name: "rating2"
+    slide: slide
+
+    BoxLayout:
+        orientation: "vertical"
+        size: root.width, root.height  
+
+        Label:
+            text: "Rate the Tremor from 0-10 (minor to severe) \n- nondominant hand"
+            font_size: 34
+
+        Label:
+            text: str(int(slide.value))
+            font_size: 30
+
+        Slider:
+            id: slide
+            min: 0
+            max: 10
+            step: 1
+            orientation: "horizontal"
+           
+        Button:
+            text: "Next"
+            font_size: 20
+            size_hint: 0.2, 0.4
+            pos_hint: {"right": 1, "bottom": 1}
+            background_color: (0,1,1,0.5)
+            on_release:
+                app.root.current = "rating2"
                 root.manager.transition.direction = "left"
