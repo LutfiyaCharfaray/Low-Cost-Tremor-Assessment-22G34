@@ -242,8 +242,11 @@ class VRScreen2(Screen):
 class ResultScreen1(Screen):
     vrs1 = NumericProperty()
     vrs2 = NumericProperty()
-    #namee = self.manager.get_screen("search").ids.word_input.text
-    #sur = self.manager.get_screen("search").ids.surname_input.text
+    
+    def capture(self, *args):
+        name_ = App.get_running_app().root.get_screen("search").ids['word_input'].text
+        sur_ = App.get_running_app().root.get_screen("search").ids['surname_input'].text
+        results1 = self.ids.export4.export_to_png(f"{name_} {sur_} results part1.png")
 
 class WindowManager(ScreenManager):
     pass
