@@ -6,7 +6,7 @@ from kivy.uix.screenmanager import ScreenManager, Screen
 from kivy.uix.label import Label
 from kivy.uix.widget import Widget
 from kivy.graphics import Color, Line
-from kivy.properties import ObjectProperty
+from kivy.properties import ObjectProperty, NumericProperty
 from kivy.uix.popup import Popup
 from kivy.core.window import Window
 from kivy.uix.textinput import TextInput
@@ -209,11 +209,7 @@ class DSpiralScreen(Screen):
        Clock.schedule_interval(self.update_label,1)
 
 class VRScreen1(Screen): #Visual Rating Screen 1
-    slider_ = ObjectProperty(None)
-
-    def on_touch_up(self, touch):
-        rating1 = self.slider_.value
-        return rating1
+    pass
 
 class NdSpiralScreen(Screen):
     def capture(self, *args):
@@ -241,11 +237,13 @@ class NdSpiralScreen(Screen):
        Clock.schedule_interval(self.update_label,1)  
 
 class VRScreen2(Screen):
-    slide = ObjectProperty(None)
+    pass
 
-    def on_touch_up(self, touch):
-        rating2 = self.slide.value
-        return rating2
+class ResultScreen1(Screen):
+    vrs1 = NumericProperty()
+    vrs2 = NumericProperty()
+    #namee = self.manager.get_screen("search").ids.word_input.text
+    #sur = self.manager.get_screen("search").ids.surname_input.text
 
 class WindowManager(ScreenManager):
     pass

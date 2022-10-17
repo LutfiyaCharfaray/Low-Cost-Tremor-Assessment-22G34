@@ -7,10 +7,22 @@ WindowManager: # define screens
     PracScreen:
     DSpiralScreen:
     VRScreen1:
+        id: slider1
+        name: 'rating1'
+        manager: 'screen_manager'
     NdSpiralScreen:
     VRScreen2:
+        id: slider2
+        name: 'rating2'
+        manager: 'screen_manager'
     TickBox:
     TickBox2:
+    ResultScreen1:
+        id: result1
+        name: 'results_1'
+        manager: 'screen_manager'
+        vrs1: slider1.vrs1
+        vrs2: slider2.vrs2
 
 <LoginWindow>:
     name: "login"
@@ -468,7 +480,8 @@ WindowManager: # define screens
 
 <VRScreen1>:
     name: "rating1"
-    slider_: slider_
+    #slider_: slider_
+    vrs1: slider_.value
 
     BoxLayout:
         orientation: "vertical"
@@ -497,7 +510,7 @@ WindowManager: # define screens
             background_color: (0,1,1,0.5)
             on_release:
                 app.root.current = "tick2"
-                root.manager.transition.direction = "left"
+               # root.manager.transition.direction = "left"
 
 <TickBox2>:
     name: "tick2"
@@ -614,7 +627,8 @@ WindowManager: # define screens
 
 <VRScreen2>:
     name: "rating2"
-    slide: slide
+    #slide: slide
+    vrs2: slide.value
 
     BoxLayout:
         orientation: "vertical"
@@ -642,5 +656,39 @@ WindowManager: # define screens
             pos_hint: {"right": 1, "bottom": 1}
             background_color: (0,1,1,0.5)
             on_release:
-                app.root.current = "rating2"
-                root.manager.transition.direction = "left"
+                app.root.current = "results_1"
+                #root.manager.transition.direction = "left"
+
+<ResultScreen1>:
+    vrs1: 0
+    vrs2: 0
+
+    canvas.before:
+        Rectangle:
+            pos: self.pos
+            size: self.size
+            source: "blue.jpeg"
+    
+    BoxLayout:
+        orientation: "vertical"
+        size: root.width, root.height
+
+        Label: 
+            text: "Results" # for {} {}".format(root.p_name, root.p_sur)
+            font_size: 34
+            underline: True
+            bold: True
+            color: (0,0,0,1)
+            pos_hint: {'center_x': 0.5, 'y': 0.8}
+
+        Label: 
+            text: "Dominant Hand Tremor Visual Rating: {}".format(root.vrs1)
+            font_size: 30
+            color: (0,0,0,1)
+            pos_hint: {'center_x': 0.5, 'y': 0.7}
+
+        Label: 
+            text: "Non-Dominant Hand Tremor Visual Rating: {}".format(root.vrs2)
+            font_size: 30
+            color: (0,0,0,1)
+            pos_hint: {'center_x': 0.5, 'y': 0.7}
