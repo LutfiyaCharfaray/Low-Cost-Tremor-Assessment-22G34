@@ -6,7 +6,7 @@ from kivy.uix.screenmanager import ScreenManager, Screen
 from kivy.uix.label import Label
 from kivy.uix.widget import Widget
 from kivy.graphics import Color, Line
-from kivy.properties import ObjectProperty
+from kivy.properties import ObjectProperty, NumericProperty
 from kivy.uix.popup import Popup
 from kivy.core.window import Window
 from kivy.uix.textinput import TextInput
@@ -207,7 +207,10 @@ class DSpiralScreen(Screen):
        
     def start(self):
        Clock.schedule_interval(self.update_label,1)
-        
+
+class VRScreen1(Screen): #Visual Rating Screen 1
+    pass
+
 class NdSpiralScreen(Screen):
     def capture(self, *args):
         namee = self.manager.get_screen("search").ids.word_input.text
@@ -232,6 +235,18 @@ class NdSpiralScreen(Screen):
        
     def start(self): #Start counter
        Clock.schedule_interval(self.update_label,1)  
+
+class VRScreen2(Screen):
+    pass
+
+class ResultScreen1(Screen):
+    vrs1 = NumericProperty()
+    vrs2 = NumericProperty()
+    
+    def capture(self, *args):
+        name_ = App.get_running_app().root.get_screen("search").ids['word_input'].text
+        sur_ = App.get_running_app().root.get_screen("search").ids['surname_input'].text
+        results1 = self.ids.export4.export_to_png(f"{name_} {sur_} results part1.png")
 
 class WindowManager(ScreenManager):
     pass
