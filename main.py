@@ -14,6 +14,8 @@ from kivy.uix.button import Button
 from kivy.clock import Clock
 
 import sqlite3
+import sp
+import cv2
 
 # Screen Classes
 class LoginWindow(Screen):
@@ -247,6 +249,32 @@ class ResultScreen1(Screen):
         name_ = App.get_running_app().root.get_screen("search").ids['word_input'].text
         sur_ = App.get_running_app().root.get_screen("search").ids['surname_input'].text
         results1 = self.ids.export4.export_to_png(f"{name_} {sur_} results part1.png")
+
+    def simIndex(self): 
+        original = cv2.imread("spiraltemp.png") #load images "normal case.png" = 0.9 
+
+        name_ = App.get_running_app().root.get_screen("search").ids['word_input'].text
+        sur_ = App.get_running_app().root.get_screen("search").ids['surname_input'].text
+        compare_dh = cv2.imread(f"{name_} {sur_} dominant hand.png")
+        compare_nh = cv2.imread(f"{name_} {sur_} non-dominant hand.png")
+
+        # resize image by specifying width and height
+        resized_dh = cv2.resize(compare_dh, (original.shape[1], original.shape[0]))
+        resized_nh = cv2.resize(compare_nh, (original.shape[1], original.shape[0]))
+    
+        #print(f"Resized Dimensions : {resized.shape}")
+        cv2.imwrite(f"{name_} {sur_} dh_resized_image.jpg", resized_dh)
+        cv2.imwrite(f"{name_} {sur_} nh_resized_image.jpg", resized_nh)
+
+        ssim_dh = sp.get_sim(original, resized_dh) #perform ssim
+        ssim_nh = sp.get_sim(original, resized_nh) 
+        sim_dh = float(round(ssim_dh, 2)) # round off to 2 decimal places
+        sim_nh = float(round(ssim_nh, 2))
+
+        #send to kv to create label
+        self.ids.sim_label.text = str(sim_dh)
+        self.ids.sim_label2.text = str(sim_nh)
+        return sim_dh, sim_nh
 
 class WindowManager(ScreenManager):
     pass
