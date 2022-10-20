@@ -669,70 +669,68 @@ WindowManager: # define screens
                 size: self.size
                 source: "blue.jpeg"
 
-        GridLayout:
-            cols: 1 
+        FloatLayout:
             Label: 
                 text: "Results" # Part 1
-                font_size: 34
+                font_size: 30
                 underline: True
                 bold: True
                 color: (0,0,0,1)
-                pos_hint: {'center_x': 0.5, 'y': 0.9}     
+                pos_hint: {'center_x': 0.5, 'y': 0.4}     
 
             Label: 
                 text: "Dominant Hand Tremor Visual Rating: {}".format(root.vrs1)
                 font_size: 20
                 color: (0,0,0,1)
-                pos_hint: {'left': 0.8, 'y': 0.8} 
+                pos_hint: {'center_x': 0.27, 'y': 0.3} 
 
             Label: 
                 text: "Non-Dominant Hand Tremor Visual Rating: {}".format(root.vrs2)
                 font_size: 20
                 color: (0,0,0,1)
-                pos_hint: {'left': 0.8, 'y': 0.7} # 'center_x': 0.5
+                pos_hint: {'center_x': 0.3, 'y': 0.2} # 'center_x': 0.5
                 
-            GridLayout:
-                cols: 2
-                Label: 
-                    text: "Similarity Index (dominant hand) = " 
-                    font_size: 20
-                    color: (0,0,0,1)
-                    pos_hint: {'center_x': 0.8,'y': 0.6}
+    
+            Label: 
+                text: "Similarity Index (dominant hand) = " 
+                font_size: 20
+                color: (0,0,0,1)
+                pos_hint: {'center_x': 0.25,'y': 0.1}
                     
-                Label:
-                    id: sim_label
-                    text: "(not similar: -1, similar: 1)"
-                    font_size: 20
-                    pos_hint: {'right': 0.8,'y': 0.6}
-                    color: (0,0,0,1)
+            Label:
+                id: sim_label
+                text: "(not similar: -1, similar: 1)"
+                font_size: 20
+                pos_hint: {'center_x': 0.7,'y': 0.1}
+                color: (0,0,0,1)
 
-                Label: 
-                    text: "Similarity Index (non-dominant hand) = " 
-                    font_size: 20
-                    color: (0,0,0,1)
-                    pos_hint: {'center_x': 0.8,'y': 0.5} 
+            Label: 
+                text: "Similarity Index (non-dominant hand) = " 
+                font_size: 20
+                color: (0,0,0,1)
+                pos_hint: {'center_x': 0.27,"y": 0} 
                     
-                Label:
-                    id: sim_label2
-                    text: "(not similar: -1, similar: 1)"
-                    font_size: 20
-                    pos_hint: {'right': 0.8,'y': 0.5}
-                    color: (0,0,0,1)
+            Label:
+                id: sim_label2
+                text: "(not similar: -1, similar: 1)"
+                font_size: 20
+                pos_hint: {'center_x': 0.7,"y": 0}
+                color: (0,0,0,1)
 
-                Button:
-                    id: ssim_dh
-                    text: "Similarity" 
-                    font_size: 20
-                    size_hint: 0.2, 0.3
-                    pos_hint: {"center_x": 0.5, "y": 0.4} 
-                    background_color: (0,1,1,0.5)
-                    on_press: root.simIndex()
+            Button:
+                id: ssim_dh
+                text: "Similarity" 
+                font_size: 20
+                size_hint: 0.3, 0.1
+                pos_hint: {"center_x": 0.3, "y": 0.35} 
+                background_color: (0,1,1,0.5)
+                on_press: root.simIndex()
 
             Button:
                 id: save
                 text: "Save and proceed"
                 font_size: 20
-                size_hint: 0.2, 0.2
+                size_hint: 0.3, 0.1
                 pos_hint: {"right": 1, "bottom": 1}
                 background_color: (0,1,1,1)
                 on_press: root.capture()
