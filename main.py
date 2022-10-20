@@ -252,7 +252,7 @@ class ResultScreen1(Screen):
         results1 = self.ids.export4.export_to_png(f"{name_} {sur_} results part1.png")
 
     def simIndex(self): 
-        original = cv2.imread("spiraltemp.png") #load images "normal case.png" = 0.9 
+        original = cv2.imread("normal case.png") #load images "normal case.png" = 0.9 "spiraltemp.png"
 
         name_ = App.get_running_app().root.get_screen("search").ids['word_input'].text
         sur_ = App.get_running_app().root.get_screen("search").ids['surname_input'].text
