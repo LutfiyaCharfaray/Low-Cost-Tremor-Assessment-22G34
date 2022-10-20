@@ -294,6 +294,15 @@ class TremorAssessmentApp(App): # to build app
                          ContactNo CHAR(10) NOT NULL
         ) """)
 
+        # # create table in database to store patient results # results2 BLOB NOT NULL
+        # c.execute("""CREATE TABLE if not exists results( 
+        #                  FOREIGN KEY (pt_id) REFERENCES details(pt_id),
+        #                  prac BLOB NOT NULL,
+        #                  dh_spiral BLOB NOT NULL,
+        #                  nh_spiral BLOB NOT NULL,
+        #                  results1 BLOB NOT NULL            
+        # ) """)
+
         conn.commit() # to commit changes to database
         conn.close() # close the connection to the database
 
