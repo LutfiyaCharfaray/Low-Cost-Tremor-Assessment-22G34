@@ -16,6 +16,7 @@ from kivy.clock import Clock
 import sqlite3
 import sp
 import cv2
+import os, shutil
 
 # Screen Classes
 class LoginWindow(Screen):
@@ -251,7 +252,7 @@ class ResultScreen1(Screen):
         results1 = self.ids.export4.export_to_png(f"{name_} {sur_} results part1.png")
 
     def simIndex(self): 
-        original = cv2.imread("spiraltemp.png") #load images "normal case.png" = 0.9 
+        original = cv2.imread("normal case.png") #load images "normal case.png" = 0.9 "spiraltemp.png"
 
         name_ = App.get_running_app().root.get_screen("search").ids['word_input'].text
         sur_ = App.get_running_app().root.get_screen("search").ids['surname_input'].text
@@ -275,6 +276,22 @@ class ResultScreen1(Screen):
         self.ids.sim_label.text = str(sim_dh)
         self.ids.sim_label2.text = str(sim_nh)
         return sim_dh, sim_nh
+
+class SaveScreen(Screen):
+    def change_dir(self):
+        # save images in directory
+        if not os.path.exists("Kivy Tutorials/Patient_drawings_results"):
+            os.makedirs("Kivy Tutorials/Patient_drawings_results")
+
+        name_ = App.get_running_app().root.get_screen("search").ids['word_input'].text
+        sur_ = App.get_running_app().root.get_screen("search").ids['surname_input'].text
+
+        images = [f"{name_} {sur_} practice round.png", f"{name_} {sur_} dominant hand.png", f"{name_} {sur_} non-dominant hand.png",
+                f"{name_} {sur_} dh_resized_image.jpg", f"{name_} {sur_} nh_resized_image.jpg", f"{name_} {sur_} results part1.png"]
+
+        # iterate on all files to move them to destination folder
+        for i in images:
+            shutil.move(i, 'Patient_drawings_results')
 
 class WindowManager(ScreenManager):
     pass
