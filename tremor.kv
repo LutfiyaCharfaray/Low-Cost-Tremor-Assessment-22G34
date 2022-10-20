@@ -357,6 +357,7 @@ WindowManager: # define screens
             on_release:
                 app.root.current = "tick"
                 root.manager.transition.direction = "left"
+                #root.reset_canvas()
 
 <TickBox>:
     name: "tick"
@@ -455,6 +456,7 @@ WindowManager: # define screens
             on_release:
                 app.root.current = "rating1"
                 root.manager.transition.direction = "left"
+                #root.reset_canvas()
             
         Label:
             id : lb
@@ -601,6 +603,7 @@ WindowManager: # define screens
             on_release:
                 app.root.current = "rating2"
                 root.manager.transition.direction = "left"
+                #root.reset_canvas()
 
         Label:
             id : lb
