@@ -16,6 +16,7 @@ from kivy.clock import Clock
 import sqlite3
 import sp
 import cv2
+import os, shutil
 
 # Screen Classes
 class LoginWindow(Screen):
@@ -276,6 +277,22 @@ class ResultScreen1(Screen):
         self.ids.sim_label2.text = str(sim_nh)
         return sim_dh, sim_nh
 
+class SaveScreen(Screen):
+    def change_dir(self):
+        # save images in directory
+        if not os.path.exists("Kivy Tutorials/Patient_drawings_results"):
+            os.makedirs("Kivy Tutorials/Patient_drawings_results")
+
+        name_ = App.get_running_app().root.get_screen("search").ids['word_input'].text
+        sur_ = App.get_running_app().root.get_screen("search").ids['surname_input'].text
+
+        images = [f"{name_} {sur_} practice round.png", f"{name_} {sur_} dominant hand.png", f"{name_} {sur_} non-dominant hand.png",
+                f"{name_} {sur_} dh_resized_image.jpg", f"{name_} {sur_} nh_resized_image.jpg", f"{name_} {sur_} results part1.png"]
+
+        # iterate on all files to move them to destination folder
+        for i in images:
+            shutil.move(i, 'Patient_drawings_results')
+
 class WindowManager(ScreenManager):
     pass
 
@@ -293,15 +310,6 @@ class TremorAssessmentApp(App): # to build app
                          Age INTEGER NOT NULL,
                          ContactNo CHAR(10) NOT NULL
         ) """)
-
-        # # create table in database to store patient results # results2 BLOB NOT NULL
-        # c.execute("""CREATE TABLE if not exists results( 
-        #                  FOREIGN KEY (pt_id) REFERENCES details(pt_id),
-        #                  prac BLOB NOT NULL,
-        #                  dh_spiral BLOB NOT NULL,
-        #                  nh_spiral BLOB NOT NULL,
-        #                  results1 BLOB NOT NULL            
-        # ) """)
 
         conn.commit() # to commit changes to database
         conn.close() # close the connection to the database
