@@ -264,18 +264,21 @@ class ResultScreen1(Screen):
         resized_nh = cv2.resize(compare_nh, (original.shape[1], original.shape[0]))
     
         #print(f"Resized Dimensions : {resized.shape}")
-        cv2.imwrite(f"{name_} {sur_} dh_resized_image.jpg", resized_dh)
-        cv2.imwrite(f"{name_} {sur_} nh_resized_image.jpg", resized_nh)
+        cv2.imwrite(f"{name_} {sur_} dh_resized_image.png", resized_dh)
+        cv2.imwrite(f"{name_} {sur_} nh_resized_image.png", resized_nh)
 
         ssim_dh = sp.get_sim(original, resized_dh) #perform ssim
         ssim_nh = sp.get_sim(original, resized_nh) 
-        sim_dh = float(round(ssim_dh, 2)) # round off to 2 decimal places
-        sim_nh = float(round(ssim_nh, 2))
+        
+        ti_dh = 1 - ssim_dh # tremor index
+        ti_nh = 1 - ssim_nh
+        ti_dh = float(round(ti_dh, 2)) #round off to 2 decimal places
+        ti_nh = float(round(ti_nh, 2))
 
         #send to kv to create label
-        self.ids.sim_label.text = str(sim_dh)
-        self.ids.sim_label2.text = str(sim_nh)
-        return sim_dh, sim_nh
+        self.ids.sim_label.text = str(ti_dh)
+        self.ids.sim_label2.text = str(ti_nh)
+        return ti_dh, ti_nh
 
 class SaveScreen(Screen):
     def change_dir(self):
@@ -287,7 +290,7 @@ class SaveScreen(Screen):
         sur_ = App.get_running_app().root.get_screen("search").ids['surname_input'].text
 
         images = [f"{name_} {sur_} practice round.png", f"{name_} {sur_} dominant hand.png", f"{name_} {sur_} non-dominant hand.png",
-                f"{name_} {sur_} dh_resized_image.jpg", f"{name_} {sur_} nh_resized_image.jpg", f"{name_} {sur_} results part1.png"]
+                f"{name_} {sur_} dh_resized_image.png", f"{name_} {sur_} nh_resized_image.png", f"{name_} {sur_} results part1.png"]
 
         # iterate on all files to move them to destination folder
         for i in images:

@@ -495,7 +495,7 @@ WindowManager: # define screens
             font_size: 34
 
         Label:
-            text: str(round(slider_.value,1))
+            text: str(round(slider_.value, 2))
             font_size: 30
 
         Slider:
@@ -641,7 +641,7 @@ WindowManager: # define screens
             font_size: 34
 
         Label:
-            text: str(round(slide.value,1))
+            text: str(round(slide.value, 2))
             font_size: 30
 
         Slider:
@@ -695,27 +695,27 @@ WindowManager: # define screens
                 
     
             Label: 
-                text: "Similarity Index (dominant hand) = " 
+                text: "Tremor Index (dominant hand) = " 
                 font_size: 20
                 color: (0,0,0,1)
                 pos_hint: {'center_x': 0.25,'y': 0.1}
                     
             Label:
                 id: sim_label
-                text: "(not similar: -1, similar: 1)"
+                text: "(normal: 0 - abnormal: 1)"
                 font_size: 20
                 pos_hint: {'center_x': 0.7,'y': 0.1}
                 color: (0,0,0,1)
 
             Label: 
-                text: "Similarity Index (non-dominant hand) = " 
+                text: "Tremor Index (non-dominant hand) = " 
                 font_size: 20
                 color: (0,0,0,1)
                 pos_hint: {'center_x': 0.27,"y": 0} 
                     
             Label:
                 id: sim_label2
-                text: "(not similar: -1, similar: 1)"
+                text: "(normal: 0 - abnormal: 1)"
                 font_size: 20
                 pos_hint: {'center_x': 0.7,"y": 0}
                 color: (0,0,0,1)
