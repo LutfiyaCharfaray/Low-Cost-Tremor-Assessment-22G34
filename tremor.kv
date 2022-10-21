@@ -438,7 +438,7 @@ WindowManager: # define screens
             color: (0,0,0,1)
 
         Label:
-            text: "Start from the inside of the spiral."
+            text: "Start from the outside of the spiral."
             pos_hint: {"center_x": 0.5, "top": 1.36}
             font_size: 30
             color: (0,0,0,1)
@@ -495,7 +495,7 @@ WindowManager: # define screens
             font_size: 34
 
         Label:
-            text: str(round(float(slider_.value),1))
+            text: str(round(slider_.value,1))
             font_size: 30
 
         Slider:
@@ -513,7 +513,6 @@ WindowManager: # define screens
             background_color: (0,1,1,0.5)
             on_release:
                 app.root.current = "tick2"
-               # root.manager.transition.direction = "left"
 
 <TickBox2>:
     name: "tick2"
@@ -585,7 +584,7 @@ WindowManager: # define screens
             color: (0,0,0,1)
 
         Label:
-            text: "Start from the inside of the spiral."
+            text: "Start from the outside of the spiral."
             pos_hint: {"center_x": 0.5, "top": 1.36}
             font_size: 30
             color: (0,0,0,1)
@@ -642,7 +641,7 @@ WindowManager: # define screens
             font_size: 34
 
         Label:
-            text: str(round(float(slide.value),1))
+            text: str(round(slide.value,1))
             font_size: 30
 
         Slider:
