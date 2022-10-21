@@ -491,18 +491,18 @@ WindowManager: # define screens
         size: root.width, root.height  
 
         Label:
-            text: "Rate the Tremor from 0-10 (minor to severe) \n- dominant hand"
+            text: "Rate the Tremor from 0-1 (minor to severe) \n- dominant hand"
             font_size: 34
 
         Label:
-            text: str(int(slider_.value))
+            text: str(round(float(slider_.value),1))
             font_size: 30
 
         Slider:
             id: slider_
             min: 0
-            max: 10
-            step: 1
+            max: 1
+            step: 0.1
             orientation: "horizontal"
            
         Button:
@@ -638,18 +638,18 @@ WindowManager: # define screens
         size: root.width, root.height  
 
         Label:
-            text: "Rate the Tremor from 0-10 (minor to severe) \n- nondominant hand"
+            text: "Rate the Tremor from 0-1 (minor to severe) \n- nondominant hand"
             font_size: 34
 
         Label:
-            text: str(int(slide.value))
+            text: str(round(float(slide.value),1))
             font_size: 30
 
         Slider:
             id: slide
             min: 0
-            max: 10
-            step: 1
+            max: 1
+            step: 0.1
             orientation: "horizontal"
            
         Button:
@@ -660,7 +660,6 @@ WindowManager: # define screens
             background_color: (0,1,1,0.5)
             on_release:
                 app.root.current = "results_1"
-                #root.manager.transition.direction = "left"
 
 <ResultScreen1>:
     vrs1: 0
