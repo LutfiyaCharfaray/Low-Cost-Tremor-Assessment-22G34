@@ -280,8 +280,8 @@ class ResultScreen1(Screen):
 class SaveScreen(Screen):
     def change_dir(self):
         # save images in directory
-        if not os.path.exists("Kivy Tutorials/Patient_drawings_results"):
-            os.makedirs("Kivy Tutorials/Patient_drawings_results")
+        if not os.path.exists("Patient Results/Patient_drawings_results"):
+            os.makedirs("Patient Results/Patient_drawings_results")
 
         name_ = App.get_running_app().root.get_screen("search").ids['word_input'].text
         sur_ = App.get_running_app().root.get_screen("search").ids['surname_input'].text
@@ -291,7 +291,7 @@ class SaveScreen(Screen):
 
         # iterate on all files to move them to destination folder
         for i in images:
-            shutil.move(i, 'Patient_drawings_results')
+            shutil.move(i, 'Patient Results/Patient_drawings_results')
 
 class WindowManager(ScreenManager):
     pass
