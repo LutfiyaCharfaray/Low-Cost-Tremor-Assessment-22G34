@@ -128,12 +128,18 @@ class StartScreen(Screen):
     pass
 
 class TickBox(Screen):
-    def checkbox_click(self,instance, value):
-        pass
+    def checkbox_click1(self,instance, value,side):
+     side=""
+     if value==True:
+         side="Left"
+     print(side)
+     
+    def checkbox_click2(self,instance, value,side):
+     side=""
+     if value==True:
+         side="Right"
+     print(side)    
 
-class TickBox2(Screen):
-    def checkbox2_click(self,instamce,value):
-       pass
 
 # Widget Classes
 class LineWidget(Widget):
