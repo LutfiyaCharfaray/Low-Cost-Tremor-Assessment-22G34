@@ -673,7 +673,7 @@ WindowManager: # define screens
                 size: self.size
                 source: "blue.jpeg"
 
-        FloatLayout:
+        BoxLayout:
             Label: 
                 text: "Results" # Part 1
                 font_size: 30
@@ -681,7 +681,6 @@ WindowManager: # define screens
                 bold: True
                 color: (0,0,0,1)
                 pos_hint: {'center_x': 0.5, 'y': 0.4}     
-
             Label: 
                 text: "Dominant Hand Tremor Visual Rating: {}".format(root.vrs1)
                 font_size: 20
@@ -721,6 +720,12 @@ WindowManager: # define screens
                 pos_hint: {'center_x': 0.7,"y": 0}
                 color: (0,0,0,1)
 
+            Label:
+                id: checkbox_label
+                text:"Dominant hand side:"
+                font_size: 20
+                pos_hint: {'center_x': 0.7,"y": 0.2}
+                color: (0,0,0,1)
             Button:
                 id: ssim_dh
                 text: "Similarity" 
@@ -740,8 +745,9 @@ WindowManager: # define screens
                 on_press: root.capture()
                 on_release:
                     app.root.current = "end"
-                    sim_label.text = "(not similar: -1, similar: 1)"
-                    sim_label2.text = "(not similar: -1, similar: 1)"
+                    sim_label.text= "(not similar: -1, similar: 1)"
+                    sim_label2.text="(not similar: -1, similar: 1)"                    
+            
 
 <SaveScreen>:
     name: "end"

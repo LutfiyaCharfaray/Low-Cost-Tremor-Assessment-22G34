@@ -129,16 +129,16 @@ class StartScreen(Screen):
 
 class TickBox(Screen):
     def checkbox_click1(self,instance, value,side):
-     side=""
+     self.side=""
      if value==True:
-         side="Left"
-     print(side)
+         self.side="Left"
+     print(self.side)
      
     def checkbox_click2(self,instance, value,side):
-     side=""
+     self.side=""
      if value==True:
-         side="Right"
-     print(side)    
+         self.side="Right"
+     print(self.side)    
 
 
 # Widget Classes
@@ -256,7 +256,13 @@ class ResultScreen1(Screen):
         name_ = App.get_running_app().root.get_screen("search").ids['word_input'].text
         sur_ = App.get_running_app().root.get_screen("search").ids['surname_input'].text
         results1 = self.ids.export4.export_to_png(f"{name_} {sur_} results part1.png")
-
+        
+        screen_manager=App.get_running_app().root
+        window_one = screen_manager.get_screen("tick")
+        side2= window_one.side
+        print(side2)
+        self.ids.checkbox_label.text=f'{"Dominant hand side: " + side2}'
+        
     def simIndex(self): 
         original = cv2.imread("normal case.png") #load images "normal case.png" = 0.9 "spiraltemp.png"
 
