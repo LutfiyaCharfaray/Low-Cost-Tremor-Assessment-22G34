@@ -182,7 +182,6 @@ class PracScreen(Screen):
         namee = self.manager.get_screen("search").ids.word_input.text
         sur = self.manager.get_screen("search").ids.surname_input.text
         prac_img = self.ids.export1.export_to_png(f"{namee} {sur} practice round.png")
-        # use prac_img variable to store image in file/database
 
 class SpiralWidget(Widget):
     pass

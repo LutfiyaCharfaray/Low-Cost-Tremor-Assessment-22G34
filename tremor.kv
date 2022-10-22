@@ -327,10 +327,7 @@ WindowManager: # define screens
         color: (1,1,1,1)
         background_color: (0,1,1,1)
         on_release: root.reset_canvas()
-
-    Button:
-        id: 'next'
-
+        
 <PracScreen>:
     name: "prac"
 
@@ -357,7 +354,6 @@ WindowManager: # define screens
             on_release:
                 app.root.current = "tick"
                 root.manager.transition.direction = "left"
-                #root.reset_canvas()
 
 <TickBox>:
     name: "tick"
@@ -456,7 +452,6 @@ WindowManager: # define screens
             on_release:
                 app.root.current = "rating1"
                 root.manager.transition.direction = "left"
-                #root.reset_canvas()
             
         Label:
             id : lb
@@ -702,7 +697,7 @@ WindowManager: # define screens
                     
             Label:
                 id: sim_label
-                text: "(normal: 0 - abnormal: 1)"
+                text: "(no tremor:0 - severe tremor:1)"
                 font_size: 20
                 pos_hint: {'center_x': 0.7,'y': 0.1}
                 color: (0,0,0,1)
@@ -715,14 +710,14 @@ WindowManager: # define screens
                     
             Label:
                 id: sim_label2
-                text: "(normal: 0 - abnormal: 1)"
+                text: "(no tremor:0 - severe tremor:1)"
                 font_size: 20
                 pos_hint: {'center_x': 0.7,"y": 0}
                 color: (0,0,0,1)
 
             Button:
                 id: ssim_dh
-                text: "Similarity" 
+                text: "Tremor Index" 
                 font_size: 20
                 size_hint: 0.3, 0.1
                 pos_hint: {"center_x": 0.3, "y": 0.35} 
