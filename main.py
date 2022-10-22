@@ -129,16 +129,16 @@ class StartScreen(Screen):
 
 class TickBox(Screen):
     def checkbox_click1(self,instance, value,side):
-     self.side=""
+     self.sidee=""
      if value==True:
-         self.side="Left"
-     print(self.side)
+         self.sidee="Left"
+     print(self.sidee)
      
     def checkbox_click2(self,instance, value,side):
-     self.side=""
+     self.sidee=""
      if value==True:
-         self.side="Right"
-     print(self.side)    
+         self.sidee="Right"
+     print(self.sidee)    
 
 
 # Widget Classes
@@ -257,11 +257,11 @@ class ResultScreen1(Screen):
         sur_ = App.get_running_app().root.get_screen("search").ids['surname_input'].text
         results1 = self.ids.export4.export_to_png(f"{name_} {sur_} results part1.png")
         
-        screen_manager=App.get_running_app().root
-        window_one = screen_manager.get_screen("tick")
-        side2= window_one.side
-        print(side2)
-        self.ids.checkbox_label.text=f'{"Dominant hand side: " + side2}'
+        # screen_manager=App.get_running_app().root
+        # window_one = screen_manager.get_screen("tick")
+        # side2= window_one.side
+        # print(side2)
+        # self.ids.checkbox_label.text=f'{"Dominant hand side: " + side2}'
         
     def simIndex(self): 
         original = cv2.imread("normal case.png") #load images "normal case.png" = 0.9 "spiraltemp.png"
@@ -288,6 +288,24 @@ class ResultScreen1(Screen):
         self.ids.sim_label.text = str(sim_dh)
         self.ids.sim_label2.text = str(sim_nh)
         return sim_dh, sim_nh
+    
+class ResultScreen2(Screen):
+ def side_show(self):
+    screen_manager=App.get_running_app().root
+    window_one = screen_manager.get_screen("tick")
+    side2= window_one.sidee
+    self.ids.side_label.text=side2
+    self.non=""
+    if side2=="Left":
+        self.non="Right"
+        self.ids.non_side_label.text=self.non
+    else:
+        self.non="Left"
+        self.ids.non_side_label.text=self.non
+        
+        
+              
+        
 
 class SaveScreen(Screen):
     def change_dir(self):
