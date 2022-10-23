@@ -710,8 +710,8 @@ WindowManager: # define screens
                     on_press: root.capture()
                     on_release:
                         app.root.current = "results2"
-                        sim_label.text= " (not similar: -1, similar: 1) "
-                        sim_label2.text=" (not similar: -1, similar: 1) "     
+                        # sim_label.text= " (not similar: -1, similar: 1) "
+                        # sim_label2.text=" (not similar: -1, similar: 1) "     
 
 <ResultScreen2>:
     name: "results2"
@@ -765,10 +765,42 @@ WindowManager: # define screens
                     id: dom_hand_button
                     text: "Sides" 
                     font_size: 20
-                    size_hint: 0.7, 0.2
+                    size_hint: 0.7, 0.35
                     pos_hint: {"x":0.15, "y": 1}
                     background_color: (0,1,1,0.5)
                     on_press: root.side_show()
+                GridLayout:
+                    cols:2
+                    Label:
+                        text:"Completion time -Dominant hand: "
+                        font_size: 20
+                        color: (0,0,0,1)
+                       
+                    Label:
+                        id:time_results1
+                        text:"Time in seconds"
+                        font_size: 20
+                        color: (0,0,0,1)
+                GridLayout:
+                    cols:2
+                    Label:
+                        text:"Completion time -Non-dominant hand: "
+                        font_size: 20
+                        color: (0,0,0,1)
+                       
+                    Label:
+                        id:time_results2
+                        text:"Time in seconds"
+                        font_size: 20
+                        color: (0,0,0,1)
+                Button:
+                    text:"Time"
+                    font_size: 20
+                    background_color: (0,1,1,0.5)
+                    pos_hint: {"x":0.15, "y": 1}
+                    size_hint: 0.7, 0.35
+                    
+
                 Button:
                     id: save2
                     text: "Save and proceed"

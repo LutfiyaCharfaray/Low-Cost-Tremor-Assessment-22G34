@@ -257,12 +257,6 @@ class ResultScreen1(Screen):
         sur_ = App.get_running_app().root.get_screen("search").ids['surname_input'].text
         results1 = self.ids.export4.export_to_png(f"{name_} {sur_} results part1.png")
         
-        # screen_manager=App.get_running_app().root
-        # window_one = screen_manager.get_screen("tick")
-        # side2= window_one.side
-        # print(side2)
-        # self.ids.checkbox_label.text=f'{"Dominant hand side: " + side2}'
-        
     def simIndex(self): 
         original = cv2.imread("normal case.png") #load images "normal case.png" = 0.9 "spiraltemp.png"
 
@@ -297,20 +291,19 @@ class ResultScreen2(Screen):
         results1 = self.ids.export5.export_to_png(f"{name_} {sur_} results part2.png")
         
  def side_show(self):
+    #retrieve checkbox information from the TickBox screen 
     screen_manager=App.get_running_app().root
     window_one = screen_manager.get_screen("tick")
     side2= window_one.sidee
     self.ids.side_label.text=side2
     self.non=""
+    #if statement that sets the hand side to left/right
     if side2=="Left":
         self.non="Right"
         self.ids.non_side_label.text=self.non
     else:
         self.non="Left"
         self.ids.non_side_label.text=self.non
-        
-        
-              
         
 
 class SaveScreen(Screen):
