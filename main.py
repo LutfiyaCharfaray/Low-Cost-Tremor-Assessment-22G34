@@ -305,7 +305,17 @@ class ResultScreen2(Screen):
         self.non="Left"
         self.ids.non_side_label.text=self.non
         
-
+ def time_result(self):
+    screen_manager=App.get_running_app().root
+    window_one = screen_manager.get_screen("dom_spiral")
+    time3= window_one.finalCount
+    self.ids.time_results1.text=f'{str(time3) + "s" }'
+    
+    screen_manager=App.get_running_app().root
+    window_one = screen_manager.get_screen("nondom_spiral")
+    time4= window_one.finalCount
+    self.ids.time_results2.text=f'{str(time4) + "s" }'
+    
 class SaveScreen(Screen):
     def change_dir(self):
         # save images in directory
