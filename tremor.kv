@@ -716,6 +716,7 @@ WindowManager: # define screens
 <ResultScreen2>:
     name: "results2"
     FloatLayout:
+        id: export5
         canvas.before:
             Rectangle:
                 pos: self.pos
@@ -775,7 +776,7 @@ WindowManager: # define screens
                     size_hint: 0.3, 0.5
                     pos_hint: {"x":0.7, "y": 0.5}
                     background_color: (0,1,1,1)
-                    #on_press: root.capture()
+                    on_press: root.capture()
                     on_release:
                         app.root.current = "end"
           
