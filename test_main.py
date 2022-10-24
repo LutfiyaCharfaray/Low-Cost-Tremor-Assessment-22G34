@@ -1,10 +1,11 @@
 import unittest
 from kivy.tests.common import GraphicUnitTest, UnitTestTouch
-import os, sys, time
+import os, sys
 import os.path as op
 from functools import partial
 from kivy.clock import Clock
 from kivy.lang import Builder
+from unittest.mock import patch
 
 main_path = op.dirname(op.dirname(op.abspath(__file__)))
 sys.path.append(main_path)
@@ -12,16 +13,13 @@ sys.path.append(main_path)
 import main, sp, cv2
 
 class ButtonTestCase(GraphicUnitTest):
-    # Test case obtained from Kivy documents
+    # Test case obtained from Kivy documentation
     def test_render(self):
         from kivy.uix.button import Button
 
-        # with GraphicUnitTest.render() you basically do this:
-        # runTouchApp(Button()) + some setup before
         button = Button()
         self.render(button)
 
-        # get your Window instance safely
         from kivy.base import EventLoop
         EventLoop.ensure_window()
         window = EventLoop.window
@@ -76,6 +74,7 @@ class LabelTestCase(GraphicUnitTest): # generic label testing
 class DrawLineTestCase(GraphicUnitTest):
 
     def test_line(self):
+        # This test was also derived from the kivy documentation but it was altered to suit the application
         from kivy.uix.widget import Widget
         from kivy.graphics import Line, Color
         r = self.render
@@ -86,7 +85,7 @@ class DrawLineTestCase(GraphicUnitTest):
         # put some graphics instruction on it
         with wid.canvas:
             Color(255, 0, 255, 1, mode='rgba')
-            self.e = Line(pos=(100, 100), width=3)
+            self.e = Line(points=(20,30,400,500,60), pos=(100, 100), width=3)
 
         # render, and capture it directly
         r(wid)
