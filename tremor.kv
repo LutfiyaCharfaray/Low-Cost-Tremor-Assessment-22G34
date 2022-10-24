@@ -703,7 +703,8 @@ WindowManager: # define screens
                     on_press: root.capture()
                     on_release:
                         app.root.current = "results2"
-                        sim_label2.text=" (not similar: -1, similar: 1) "     
+                        sim_label1.text= "(no tremor:0 - severe tremor:1)"   
+                        sim_label2.text= "(no tremor:0 - severe tremor:1)"   
 
 <ResultScreen2>:
     name: "results2"
