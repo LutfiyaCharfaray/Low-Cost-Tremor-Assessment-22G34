@@ -126,12 +126,18 @@ class StartScreen(Screen):
     pass
 
 class TickBox(Screen):
-    def checkbox_click(self,instance, value):
-        pass
+    def checkbox_click1(self,instance, value,side):
+     self.sidee=""
+     if value==True:
+         self.sidee="Left"
+     print(self.sidee)
+     
+    def checkbox_click2(self,instance, value,side):
+     self.sidee=""
+     if value==True:
+         self.sidee="Right"
+     print(self.sidee)    
 
-class TickBox2(Screen):
-    def checkbox2_click(self,instamce,value):
-       pass
 
 # Widget Classes
 class LineWidget(Widget):
@@ -274,6 +280,26 @@ class ResultScreen1(Screen):
         self.ids.sim_label.text = str(ti_dh)
         self.ids.sim_label2.text = str(ti_nh)
         return ti_dh, ti_nh
+    
+class ResultScreen2(Screen):
+    
+ def capture(self, *args):
+        name_ = App.get_running_app().root.get_screen("search").ids['word_input'].text
+        sur_ = App.get_running_app().root.get_screen("search").ids['surname_input'].text
+        results1 = self.ids.export5.export_to_png(f"{name_} {sur_} results part2.png")
+        
+ def side_show(self):
+    screen_manager=App.get_running_app().root
+    window_one = screen_manager.get_screen("tick")
+    side2= window_one.sidee
+    self.ids.side_label.text=side2
+    self.non=""
+    if side2=="Left":
+        self.non="Right"
+        self.ids.non_side_label.text=self.non
+    else:
+        self.non="Left"
+        self.ids.non_side_label.text=self.non
 
 class SaveScreen(Screen):
     def change_dir(self):
