@@ -42,7 +42,6 @@ WindowManager: # define screens
         spacing: 40
 
         Label:
-            id: loginlbl 
             text: "Login with Password"
             bold: True
             pos_hint: {'center_x': 0.5} 
@@ -63,7 +62,6 @@ WindowManager: # define screens
             padding: [30,30,20,20]
 
         Button:
-            id: loginbtn
             text: "Submit"
             pos_hint: {'center_x': 0.5}
             size_hint: (None, None)
@@ -232,12 +230,17 @@ WindowManager: # define screens
     surname_input:surname_input
     
     FloatLayout:
+        canvas.before:
+            Rectangle:
+                size: self.size
+                pos: self.pos
+                source: "blue.jpeg"
 
         Label:
             text: "Please Enter Patient Name and Surname"
             font_size: 20
             bold: True
-            color: (1,1,1,1)
+            color: (0,0,0,1) 
             pos_hint: {'center_x': 0.5, 'y':0.45} 
         
         FloatLayout:
@@ -246,6 +249,7 @@ WindowManager: # define screens
                 text: "Enter patient name :"
                 pos_hint: {'x': 0.2, 'y' : 0.7}
                 size_hint: (0.2, 0.1)
+                color: (0,0,0,1)
                 
             TextInput:
                 id: word_input
@@ -258,6 +262,7 @@ WindowManager: # define screens
                 text: "Enter patient surname :"
                 pos_hint: {'x': 0.2, 'y' : 0.5}
                 size_hint: (0.2, 0.1)
+                color: (0,0,0,1)
 
             TextInput:
                 id: surname_input
@@ -278,9 +283,10 @@ WindowManager: # define screens
                 pos_hint: {'x': 0.5, 'y' : 0.3}
                 size_hint: (0.3, 0.1)
                 font_size: 20
+                color: (0,0,0,1)
 
             Button:
-                text: "Start Assessment"
+                text: "Go to Assessment" 
                 pos_hint: {'x': 0.6, 'y' : 0.05}
                 size_hint: (0.3, 0.1)
                 font_size: 20

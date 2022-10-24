@@ -14,9 +14,7 @@ from kivy.uix.button import Button
 from kivy.clock import Clock
 
 import sqlite3
-import sp
-import cv2
-import os, shutil
+import sp, cv2, os, shutil
 
 # Screen Classes
 class LoginWindow(Screen):
@@ -181,7 +179,7 @@ class PracScreen(Screen):
     def capture(self, *largs): 
         namee = self.manager.get_screen("search").ids.word_input.text
         sur = self.manager.get_screen("search").ids.surname_input.text
-        prac_img = self.ids.export1.export_to_png(f"{namee} {sur} practice round.png")
+        self.ids.export1.export_to_png(f"{namee} {sur} practice round.png")
 
 class SpiralWidget(Widget):
     pass
@@ -189,8 +187,7 @@ class DSpiralScreen(Screen):
     def capture(self, *args):
         namee = self.manager.get_screen("search").ids.word_input.text
         sur = self.manager.get_screen("search").ids.surname_input.text
-        dh_img = self.ids.export2.export_to_png(f"{namee} {sur} dominant hand.png")
-        # use dh_img variable to store image in file/database
+        self.ids.export2.export_to_png(f"{namee} {sur} dominant hand.png")
         
     #Timer code:    
     def __init__(self, **kwargs):
@@ -217,8 +214,7 @@ class NdSpiralScreen(Screen):
     def capture(self, *args):
         namee = self.manager.get_screen("search").ids.word_input.text
         sur = self.manager.get_screen("search").ids.surname_input.text
-        ndh_img = self.ids.export3.export_to_png(f"{namee} {sur} non-dominant hand.png")
-        # use ndh_img variable to store image in file/database  
+        self.ids.export3.export_to_png(f"{namee} {sur} non-dominant hand.png") 
         
     #Timer code    
     def __init__(self, **kwargs):
@@ -248,7 +244,7 @@ class ResultScreen1(Screen):
     def capture(self, *args):
         name_ = App.get_running_app().root.get_screen("search").ids['word_input'].text
         sur_ = App.get_running_app().root.get_screen("search").ids['surname_input'].text
-        results1 = self.ids.export4.export_to_png(f"{name_} {sur_} results part1.png")
+        self.ids.export4.export_to_png(f"{name_} {sur_} results part1.png")
 
     def simIndex(self): 
         original = cv2.imread("normal case.png") #load images "normal case.png" = 0.9 "spiraltemp.png"

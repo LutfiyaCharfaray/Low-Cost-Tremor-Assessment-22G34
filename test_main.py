@@ -4,14 +4,14 @@ import os, sys, time
 import os.path as op
 from functools import partial
 from kivy.clock import Clock
+from kivy.lang import Builder
 
 main_path = op.dirname(op.dirname(op.abspath(__file__)))
 sys.path.append(main_path)
 
-from main import TremorAssessmentApp
-import sp, cv2
+import main, sp, cv2
 
-class FirstTestCase(GraphicUnitTest):
+class ButtonTestCase(GraphicUnitTest):
     # Test case obtained from Kivy documents
     def test_render(self):
         from kivy.uix.button import Button
@@ -41,6 +41,37 @@ class FirstTestCase(GraphicUnitTest):
         touch.touch_down()
         touch.touch_up()
         self.assertTrue(button.test_released)
+
+class LabelTestCase(GraphicUnitTest): # generic label testing
+    def test_lbl(self):
+        from kivy.uix.label import Label
+
+        label_ = Label(text = "Assessment Page", color=(1,1,1,1), font_size=30, pos_hint={'center_x':0.5, 'y': 0.8})
+        text_ = "Assessment Page"
+        self.assertEqual(text_, label_.text)
+
+    def test_lbl2(self):
+        from kivy.uix.label import Label
+
+        label_ = Label(text = "Assessment Page", color=(1,1,1,1), font_size=30, pos_hint={'center_x':0.5, 'y': 0.8})
+        text_ = "Results Page"
+        self.assertNotEqual(text_, label_.text)
+
+    def test_lblPosition(self):
+        from kivy.uix.label import Label
+        from kivy.graphics import Color
+
+        label_ = Label(text = "Assessment Page", color=(1,1,1,1), font_size=30, pos_hint={'center_x':0.5, 'y': 0.8})
+        pos = {'center_x':0.5, 'y': 0.8}
+        self.assertEqual(pos, label_.pos_hint)
+
+    def test_lblPosition2(self):
+        from kivy.uix.label import Label
+        from kivy.graphics import Color
+
+        label_ = Label(text = "Assessment Page", color=(1,1,1,1), font_size=30, pos_hint={'center_x':0.5, 'y': 0.8})
+        pos = {'center_x':0.8, 'y': 0.3}
+        self.assertNotEqual(pos, label_.pos_hint)
 
 class DrawLineTestCase(GraphicUnitTest):
 
