@@ -651,7 +651,7 @@ WindowManager: # define screens
                     cols:2
                     size_hint: 1, 0.3
                     Label: 
-                        text: "Similarity Index (dominant hand) = " 
+                        text: "Tremor Index (dominant hand) = " 
                         font_size: 20
                         color: (0,0,0,1)
                         size_hint: 1, 0.3
@@ -666,7 +666,7 @@ WindowManager: # define screens
                     cols:2
                     size_hint: 1, 0.2
                     Label: 
-                        text: "Similarity Index (non-dominant hand) = " 
+                        text: "Tremor Index (non-dominant hand) = " 
                         font_size: 20
                         color: (0,0,0,1)
                         size_hint: 1, 0.3
@@ -695,8 +695,8 @@ WindowManager: # define screens
                     on_press: root.capture()
                     on_release:
                         app.root.current = "results2"
-                        # sim_label.text= " (not similar: -1, similar: 1) "
-                        # sim_label2.text=" (not similar: -1, similar: 1) "     
+                        sim_label.text= " (not similar: -1, similar: 1) "
+                        sim_label2.text=" (not similar: -1, similar: 1) "     
 
 <ResultScreen2>:
     name: "results2"
