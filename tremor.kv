@@ -728,11 +728,19 @@ WindowManager: # define screens
                 orientation: "vertical"
                 Label:
                     text: "Results" # Part 2
-                    size_hint: 1,0.2
+                    size_hint: 1,0.3
                     font_size: 25
                     underline: True
                     bold: True
                     color: (0,0,0,1)
+                Button:
+                    id: dom_hand_button
+                    text: "Sides" 
+                    font_size: 20
+                    size_hint: 0.6, 0.5
+                    pos_hint: {"x":0.2, "y": 0}
+                    background_color: (0,1,1,0.5)
+                    on_press: root.side_show()
                 GridLayout:
                     cols:2
                     Label: 
@@ -761,14 +769,15 @@ WindowManager: # define screens
                         pos_hint: {"x":0.5, "y": 1}
                         size_hint: 1,0.3
                         color: (0,0,0,1)
+                
                 Button:
-                    id: dom_hand_button
-                    text: "Sides" 
+                    text:"Time"
                     font_size: 20
-                    size_hint: 0.7, 0.35
-                    pos_hint: {"x":0.15, "y": 1}
                     background_color: (0,1,1,0.5)
-                    on_press: root.side_show()
+                    pos_hint: {"x":0.2, "y": 1}
+                    size_hint: 0.6, 0.5
+                    on_press: root.time_result();
+        
                 GridLayout:
                     cols:2
                     Label:
@@ -781,6 +790,7 @@ WindowManager: # define screens
                         text:"Time in seconds"
                         font_size: 20
                         color: (0,0,0,1)
+
                 GridLayout:
                     cols:2
                     Label:
@@ -793,16 +803,41 @@ WindowManager: # define screens
                         text:"Time in seconds"
                         font_size: 20
                         color: (0,0,0,1)
+
                 Button:
-                    text:"Time"
+                    text:"Time %"
                     font_size: 20
                     background_color: (0,1,1,0.5)
-                    pos_hint: {"x":0.15, "y": 1}
-                    size_hint: 0.7, 0.35
-                    on_press: root.time_result(); 
-                              
-                    
+                    pos_hint: {"x":0.2, "y": 1}
+                    size_hint: 0.6, 0.5
+                    #on_press: root.time_result();
+            
+                GridLayout:
+                    cols:2
+                    Label:
+                        text:"Time % -Dominant hand:"
+                        font_size: 20
+                        color: (0,0,0,1)
+                       
+                    Label:
+                        id:time_percentage_results
+                        text:"Percentage time"
+                        font_size: 20
+                        color: (0,0,0,1)
 
+                GridLayout:
+                    cols:2
+                    Label:
+                        text:"Time % -Non-dominant hand:"
+                        font_size: 20
+                        color: (0,0,0,1)
+                       
+                    Label:
+                        id:time_percentage_results2
+                        text:"Percentage time"
+                        font_size: 20
+                        color: (0,0,0,1)
+                  
                 Button:
                     id: save2
                     text: "Save and proceed"
