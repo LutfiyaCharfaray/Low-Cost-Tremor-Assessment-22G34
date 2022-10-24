@@ -608,23 +608,6 @@ WindowManager: # define screens
                 app.root.current = "results_1"
                 #root.manager.transition.direction = "left"
 
-# <ResultScreen2>:
-#     name: "results2"
-#     FloatLayout:
-#         canvas.before:
-#             Rectangle:
-#                 pos: self.pos
-#                 size: self.size
-#                 source: "blue.jpeg"
-#         BoxLayout:
-#             Label:
-#                 text:"whattupp" 
-#             Button:
-#                 text:"Press"
-#                 on_release:
-#                     app.root.current = "end"
-
-            
 
 <ResultScreen1>:
     vrs1: 0
@@ -647,6 +630,8 @@ WindowManager: # define screens
                 underline: True
                 bold: True
                 color: (0,0,0,1)
+
+        #To show visual ratings for dominant and non-dominant hand drawings
             BoxLayout:
                 orientation: "vertical"        
                 Label: 
@@ -654,14 +639,14 @@ WindowManager: # define screens
                     font_size: 20
                     color: (0,0,0,1)
                     size_hint: 1, 0.3
-                    #pos_hint: {'center_x': 0.27, 'y': 0.3} 
-
+                  
                 Label: 
                     text: "Non-Dominant Hand Tremor Visual Rating: {}".format(root.vrs2)
                     font_size: 20
                     color: (0,0,0,1)
                     size_hint: 1, 0.2
-                    #pos_hint: {'center_x': 0.3, 'y': 0.2} # 'center_x': 0.5
+
+        #To show similarity index for dominant and non-dominant drawings      
                 GridLayout:
                     cols:2
                     size_hint: 1, 0.3
@@ -670,13 +655,13 @@ WindowManager: # define screens
                         font_size: 20
                         color: (0,0,0,1)
                         size_hint: 1, 0.3
-                        #size_hint: 0.5,1
                     Label:
                         id: sim_label
                         text: "(not similar: -1, similar: 1)"
                         font_size: 20
                         color: (0,0,0,1)
                         size_hint: 1, 0.3
+
                 GridLayout:
                     cols:2
                     size_hint: 1, 0.2
@@ -699,7 +684,7 @@ WindowManager: # define screens
                     pos_hint: {"x":0.4, "y": 1}
                     background_color: (0,1,1,0.5)
                     on_press: root.simIndex()
-                    #size_hint: 1, 0.2
+
                 Button:
                     id: save
                     text: "Save and proceed"
@@ -733,6 +718,8 @@ WindowManager: # define screens
                     underline: True
                     bold: True
                     color: (0,0,0,1)
+
+        #To show which hand is dominant and non-dominant
                 Button:
                     id: dom_hand_button
                     text: "Sides" 
@@ -760,7 +747,6 @@ WindowManager: # define screens
                         text: "Non-dominant hand side: "
                         font_size: 20
                         color: (0,0,0,1)
-                        #size_hint: 0.8, 1
                         size_hint: 1,0.3
                     Label:
                         id: non_side_label
@@ -769,7 +755,7 @@ WindowManager: # define screens
                         pos_hint: {"x":0.5, "y": 1}
                         size_hint: 1,0.3
                         color: (0,0,0,1)
-                
+        #To show the time it takes to complete drawings       
                 Button:
                     text:"Time"
                     font_size: 20
@@ -804,13 +790,14 @@ WindowManager: # define screens
                         font_size: 20
                         color: (0,0,0,1)
 
+        #To show 5 time taken compared to a normal drawing
                 Button:
                     text:"Time %"
                     font_size: 20
                     background_color: (0,1,1,0.5)
                     pos_hint: {"x":0.2, "y": 1}
                     size_hint: 0.6, 0.5
-                    #on_press: root.time_result();
+                    on_press: root.time_percentage();
             
                 GridLayout:
                     cols:2
