@@ -41,7 +41,8 @@ WindowManager: # define screens
         padding: 50
         spacing: 40
 
-        Label: 
+        Label:
+            id: loginlbl 
             text: "Login with Password"
             bold: True
             pos_hint: {'center_x': 0.5} 
@@ -62,6 +63,7 @@ WindowManager: # define screens
             padding: [30,30,20,20]
 
         Button:
+            id: loginbtn
             text: "Submit"
             pos_hint: {'center_x': 0.5}
             size_hint: (None, None)
@@ -490,7 +492,7 @@ WindowManager: # define screens
             font_size: 34
 
         Label:
-            text: str(round(slider_.value, 2))
+            text: str(round(float(slider_.value), 2))
             font_size: 30
 
         Slider:
@@ -636,7 +638,7 @@ WindowManager: # define screens
             font_size: 34
 
         Label:
-            text: str(round(slide.value, 2))
+            text: str(round(float(slide.value), 2))
             font_size: 30
 
         Slider:
