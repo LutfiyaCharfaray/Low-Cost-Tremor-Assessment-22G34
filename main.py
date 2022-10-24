@@ -14,9 +14,7 @@ from kivy.uix.button import Button
 from kivy.clock import Clock
 
 import sqlite3
-import sp
-import cv2
-import os, shutil
+import sp, cv2, os, shutil
 
 # Screen Classes
 class LoginWindow(Screen):
@@ -187,8 +185,7 @@ class PracScreen(Screen):
     def capture(self, *largs): 
         namee = self.manager.get_screen("search").ids.word_input.text
         sur = self.manager.get_screen("search").ids.surname_input.text
-        prac_img = self.ids.export1.export_to_png(f"{namee} {sur} practice round.png")
-        # use prac_img variable to store image in file/database
+        self.ids.export1.export_to_png(f"{namee} {sur} practice round.png")
 
 class SpiralWidget(Widget):
     pass
@@ -196,8 +193,7 @@ class DSpiralScreen(Screen):
     def capture(self, *args):
         namee = self.manager.get_screen("search").ids.word_input.text
         sur = self.manager.get_screen("search").ids.surname_input.text
-        dh_img = self.ids.export2.export_to_png(f"{namee} {sur} dominant hand.png")
-        # use dh_img variable to store image in file/database
+        self.ids.export2.export_to_png(f"{namee} {sur} dominant hand.png")
         
     #Timer code:    
     def __init__(self, **kwargs):
@@ -224,8 +220,7 @@ class NdSpiralScreen(Screen):
     def capture(self, *args):
         namee = self.manager.get_screen("search").ids.word_input.text
         sur = self.manager.get_screen("search").ids.surname_input.text
-        ndh_img = self.ids.export3.export_to_png(f"{namee} {sur} non-dominant hand.png")
-        # use ndh_img variable to store image in file/database  
+        self.ids.export3.export_to_png(f"{namee} {sur} non-dominant hand.png") 
         
     #Timer code    
     def __init__(self, **kwargs):
@@ -255,14 +250,8 @@ class ResultScreen1(Screen):
     def capture(self, *args):
         name_ = App.get_running_app().root.get_screen("search").ids['word_input'].text
         sur_ = App.get_running_app().root.get_screen("search").ids['surname_input'].text
-        results1 = self.ids.export4.export_to_png(f"{name_} {sur_} results part1.png")
-        
-        # screen_manager=App.get_running_app().root
-        # window_one = screen_manager.get_screen("tick")
-        # side2= window_one.side
-        # print(side2)
-        # self.ids.checkbox_label.text=f'{"Dominant hand side: " + side2}'
-        
+        self.ids.export4.export_to_png(f"{name_} {sur_} results part1.png")
+
     def simIndex(self): 
         original = cv2.imread("normal case.png") #load images "normal case.png" = 0.9 "spiraltemp.png"
 
@@ -276,18 +265,21 @@ class ResultScreen1(Screen):
         resized_nh = cv2.resize(compare_nh, (original.shape[1], original.shape[0]))
     
         #print(f"Resized Dimensions : {resized.shape}")
-        cv2.imwrite(f"{name_} {sur_} dh_resized_image.jpg", resized_dh)
-        cv2.imwrite(f"{name_} {sur_} nh_resized_image.jpg", resized_nh)
+        cv2.imwrite(f"{name_} {sur_} dh_resized_image.png", resized_dh)
+        cv2.imwrite(f"{name_} {sur_} nh_resized_image.png", resized_nh)
 
         ssim_dh = sp.get_sim(original, resized_dh) #perform ssim
         ssim_nh = sp.get_sim(original, resized_nh) 
-        sim_dh = float(round(ssim_dh, 2)) # round off to 2 decimal places
-        sim_nh = float(round(ssim_nh, 2))
+        
+        ti_dh = 1 - ssim_dh # tremor index
+        ti_nh = 1 - ssim_nh
+        ti_dh = float(round(ti_dh, 2)) #round off to 2 decimal places
+        ti_nh = float(round(ti_nh, 2))
 
         #send to kv to create label
-        self.ids.sim_label.text = str(sim_dh)
-        self.ids.sim_label2.text = str(sim_nh)
-        return sim_dh, sim_nh
+        self.ids.sim_label.text = str(ti_dh)
+        self.ids.sim_label2.text = str(ti_nh)
+        return ti_dh, ti_nh
     
 class ResultScreen2(Screen):
     
@@ -308,26 +300,22 @@ class ResultScreen2(Screen):
     else:
         self.non="Left"
         self.ids.non_side_label.text=self.non
-        
-        
-              
-        
 
 class SaveScreen(Screen):
     def change_dir(self):
         # save images in directory
-        if not os.path.exists("Kivy Tutorials/Patient_drawings_results"):
-            os.makedirs("Kivy Tutorials/Patient_drawings_results")
+        if not os.path.exists("Patient Results/Patient_drawings_results"):
+            os.makedirs("Patient Results/Patient_drawings_results")
 
         name_ = App.get_running_app().root.get_screen("search").ids['word_input'].text
         sur_ = App.get_running_app().root.get_screen("search").ids['surname_input'].text
 
         images = [f"{name_} {sur_} practice round.png", f"{name_} {sur_} dominant hand.png", f"{name_} {sur_} non-dominant hand.png",
-                f"{name_} {sur_} dh_resized_image.jpg", f"{name_} {sur_} nh_resized_image.jpg", f"{name_} {sur_} results part1.png"]
+                f"{name_} {sur_} dh_resized_image.png", f"{name_} {sur_} nh_resized_image.png", f"{name_} {sur_} results part1.png"]
 
         # iterate on all files to move them to destination folder
         for i in images:
-            shutil.move(i, 'Patient_drawings_results')
+            shutil.move(i, 'Patient Results/Patient_drawings_results')
 
 class WindowManager(ScreenManager):
     pass
