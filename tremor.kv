@@ -42,7 +42,7 @@ WindowManager: # define screens
         padding: 50
         spacing: 40
 
-        Label: 
+        Label:
             text: "Login with Password"
             bold: True
             pos_hint: {'center_x': 0.5} 
@@ -231,12 +231,17 @@ WindowManager: # define screens
     surname_input:surname_input
     
     FloatLayout:
+        canvas.before:
+            Rectangle:
+                size: self.size
+                pos: self.pos
+                source: "blue.jpeg"
 
         Label:
             text: "Please Enter Patient Name and Surname"
             font_size: 20
             bold: True
-            color: (1,1,1,1)
+            color: (0,0,0,1) 
             pos_hint: {'center_x': 0.5, 'y':0.45} 
         
         FloatLayout:
@@ -245,6 +250,7 @@ WindowManager: # define screens
                 text: "Enter patient name :"
                 pos_hint: {'x': 0.2, 'y' : 0.7}
                 size_hint: (0.2, 0.1)
+                color: (0,0,0,1)
                 
             TextInput:
                 id: word_input
@@ -257,6 +263,7 @@ WindowManager: # define screens
                 text: "Enter patient surname :"
                 pos_hint: {'x': 0.2, 'y' : 0.5}
                 size_hint: (0.2, 0.1)
+                color: (0,0,0,1)
 
             TextInput:
                 id: surname_input
@@ -277,9 +284,10 @@ WindowManager: # define screens
                 pos_hint: {'x': 0.5, 'y' : 0.3}
                 size_hint: (0.3, 0.1)
                 font_size: 20
+                color: (0,0,0,1)
 
             Button:
-                text: "Start Assessment"
+                text: "Go to Assessment" 
                 pos_hint: {'x': 0.6, 'y' : 0.05}
                 size_hint: (0.3, 0.1)
                 font_size: 20
@@ -328,10 +336,7 @@ WindowManager: # define screens
         color: (1,1,1,1)
         background_color: (0,1,1,1)
         on_release: root.reset_canvas()
-
-    Button:
-        id: 'next'
-
+        
 <PracScreen>:
     name: "prac"
 
@@ -358,7 +363,6 @@ WindowManager: # define screens
             on_release:
                 app.root.current = "tick"
                 root.manager.transition.direction = "left"
-                #root.reset_canvas()
 
 <TickBox>:
     name: "tick"
@@ -438,7 +442,7 @@ WindowManager: # define screens
             color: (0,0,0,1)
 
         Label:
-            text: "Start from the inside of the spiral."
+            text: "Start from the outside of the spiral."
             pos_hint: {"center_x": 0.5, "top": 1.36}
             font_size: 30
             color: (0,0,0,1)
@@ -456,7 +460,6 @@ WindowManager: # define screens
             on_release:
                 app.root.current = "rating1"
                 root.manager.transition.direction = "left"
-                #root.reset_canvas()
             
         Label:
             id : lb
@@ -491,18 +494,18 @@ WindowManager: # define screens
         size: root.width, root.height  
 
         Label:
-            text: "Rate the Tremor from 0-10 (minor to severe) \n- dominant hand"
+            text: "Rate the Tremor from 0-1 (minor to severe) \n- dominant hand"
             font_size: 34
 
         Label:
-            text: str(int(slider_.value))
+            text: str(round(float(slider_.value), 2))
             font_size: 30
 
         Slider:
             id: slider_
             min: 0
-            max: 10
-            step: 1
+            max: 1
+            step: 0.1
             orientation: "horizontal"
            
         Button:
@@ -513,9 +516,6 @@ WindowManager: # define screens
             background_color: (0,1,1,0.5)
             on_release:
                 app.root.current = "nondom_spiral"
-               # root.manager.transition.direction = "left"
-
-
 
 <NdSpiralScreen>:
     name: "nondom_spiral" # non-dominant hand spiral 
@@ -531,7 +531,7 @@ WindowManager: # define screens
             color: (0,0,0,1)
 
         Label:
-            text: "Start from the inside of the spiral."
+            text: "Start from the outside of the spiral."
             pos_hint: {"center_x": 0.5, "top": 1.36}
             font_size: 30
             color: (0,0,0,1)
@@ -584,18 +584,18 @@ WindowManager: # define screens
         size: root.width, root.height  
 
         Label:
-            text: "Rate the Tremor from 0-10 (minor to severe) \n- nondominant hand"
+            text: "Rate the Tremor from 0-1 (minor to severe) \n- nondominant hand"
             font_size: 34
 
         Label:
-            text: str(int(slide.value))
+            text: str(round(float(slide.value), 2))
             font_size: 30
 
         Slider:
             id: slide
             min: 0
-            max: 10
-            step: 1
+            max: 1
+            step: 0.1
             orientation: "horizontal"
            
         Button:
@@ -606,7 +606,6 @@ WindowManager: # define screens
             background_color: (0,1,1,0.5)
             on_release:
                 app.root.current = "results_1"
-                #root.manager.transition.direction = "left"
 
 
 <ResultScreen1>:
@@ -631,7 +630,9 @@ WindowManager: # define screens
                 bold: True
                 color: (0,0,0,1)
 
-        #To show visual ratings for dominant and non-dominant hand drawings
+        #To show visual ratings for dominant and non-dominant hand drawings        
+            
+
             BoxLayout:
                 orientation: "vertical"        
                 Label: 
@@ -646,7 +647,9 @@ WindowManager: # define screens
                     color: (0,0,0,1)
                     size_hint: 1, 0.2
 
+
         #To show similarity index for dominant and non-dominant drawings      
+                    
                 GridLayout:
                     cols:2
                     size_hint: 1, 0.3
@@ -655,13 +658,15 @@ WindowManager: # define screens
                         font_size: 20
                         color: (0,0,0,1)
                         size_hint: 1, 0.3
+
+ 
+
                     Label:
                         id: sim_label
-                        text: "(not similar: -1, similar: 1)"
+                        text: "(no tremor:0 - severe tremor:1)"
                         font_size: 20
                         color: (0,0,0,1)
                         size_hint: 1, 0.3
-
                 GridLayout:
                     cols:2
                     size_hint: 1, 0.2
@@ -670,24 +675,27 @@ WindowManager: # define screens
                         font_size: 20
                         color: (0,0,0,1)
                         size_hint: 1, 0.3
+                        
                     Label:
                         id: sim_label2
-                        text: "(not similar: -1, similar: 1)"
+                        text: "(no tremor:0 - severe tremor:1)"
                         font_size: 20
-                        color: (0,0,0,1) 
+                        color: (0,0,0,1)
                         size_hint: 1, 0.3  
+                        
                 Button:
                     id: ssim_dh
-                    text: "Similarity" 
-                    font_size: 20
+                    text: "Tremor Index" 
+                    font_size: 20               
                     size_hint: 0.2, 0.1
                     pos_hint: {"x":0.4, "y": 1}
                     background_color: (0,1,1,0.5)
                     on_press: root.simIndex()
 
+  
                 Button:
                     id: save
-                    text: "Save and proceed"
+                    text: "Next"
                     font_size: 20
                     size_hint: 0.3, 0.2
                     pos_hint: {"x":0.7, "y": 0.5}
@@ -731,7 +739,7 @@ WindowManager: # define screens
                 GridLayout:
                     cols:2
                     Label: 
-                        text: "Dominant hand side: "
+                        text: "Dominant hand: "
                         font_size: 20
                         color: (0,0,0,1)
                         size_hint: 0.8, 1
@@ -744,7 +752,7 @@ WindowManager: # define screens
                 GridLayout:
                     cols:2
                     Label: 
-                        text: "Non-dominant hand side: "
+                        text: "Non-dominant hand: "
                         font_size: 20
                         color: (0,0,0,1)
                         size_hint: 1,0.3
@@ -834,8 +842,7 @@ WindowManager: # define screens
                     background_color: (0,1,1,1)
                     on_press: root.capture()
                     on_release:
-                        app.root.current = "end"
-          
+                        app.root.current = "end"         
 
 <SaveScreen>:
     name: "end"
