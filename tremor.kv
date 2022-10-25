@@ -23,9 +23,9 @@ WindowManager: # define screens
         vrs1: slider1.vrs1
         vrs2: slider2.vrs2
     ResultScreen2:
+    ResultScreen3:
     SaveScreen:
-    
-        
+           
 <LoginWindow>:
     name: "login"
 
@@ -726,14 +726,6 @@ WindowManager: # define screens
                     color: (0,0,0,1)
 
         #To show which hand is dominant and non-dominant
-                Button:
-                    id: dom_hand_button
-                    text: "Sides" 
-                    font_size: 20
-                    size_hint: 0.6, 0.5
-                    pos_hint: {"x":0.2, "y": 0}
-                    background_color: (0,1,1,0.5)
-                    on_press: root.side_show()
                 GridLayout:
                     cols:2
                     Label: 
@@ -840,7 +832,16 @@ WindowManager: # define screens
                     background_color: (0,1,1,1)
                     on_press: root.capture()
                     on_release:
-                        app.root.current = "end"         
+                        app.root.current = "result3"         
+
+<ResultScreen3>:
+    name: "result3"
+    FloatLayout:
+        canvas.before:
+            Rectangle:
+                size: self.size
+                pos: self.pos
+                source: "blue.jpeg"
 
 <SaveScreen>:
     name: "end"

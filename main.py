@@ -289,23 +289,21 @@ class ResultScreen2(Screen):
         sur_ = App.get_running_app().root.get_screen("search").ids['surname_input'].text
         results1 = self.ids.export5.export_to_png(f"{name_} {sur_} results part2.png")
         
- #Function to show which hand was used to make drawings (Left/Right)       
- def side_show(self):
-    #retrieve checkbox information from the TickBox screen 
-    screen_manager=App.get_running_app().root
-    window_one = screen_manager.get_screen("tick")
-    side2= window_one.sidee
-    self.ids.side_label.text=side2
-    self.non=""
+ #Function to show which hand was used to make drawings (Left/Right)  
+ def on_enter(self,*args):
+       ok= self.manager.get_screen("tick").sidee
+       print(ok)
+       self.ids.side_label.text=ok
+       self.non=""
     
     #if statement that sets the hand side to left/right
-    if side2=="Left":
+       if ok=="Left":
         self.non="Right"
         self.ids.non_side_label.text=self.non
-    else:
+       else:
         self.non="Left"
         self.ids.non_side_label.text=self.non
-
+       
         
  #Displays the time taken to draw dominant and non-dominant drawings       
  def time_result(self):
@@ -355,7 +353,8 @@ class ResultScreen2(Screen):
         self.ids.time_percentage_results.text=f'{str(perc4) + "% slower than normal" }'
      
     
-
+class ResultScreen3(Screen):
+ pass
 
 
 class SaveScreen(Screen):
