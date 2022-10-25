@@ -754,14 +754,7 @@ WindowManager: # define screens
                         size_hint: 1,0.3
                         color: (0,0,0,1)
         #To show the time it takes to complete drawings       
-                Button:
-                    text:"Time"
-                    font_size: 20
-                    background_color: (0,1,1,0.5)
-                    pos_hint: {"x":0.2, "y": 1}
-                    size_hint: 0.6, 0.5
-                    on_press: root.time_result();
-        
+               
                 GridLayout:
                     cols:2
                     Label:
@@ -789,14 +782,6 @@ WindowManager: # define screens
                         color: (0,0,0,1)
 
         #To show 5 time taken compared to a normal drawing
-                Button:
-                    text:"Time %"
-                    font_size: 20
-                    background_color: (0,1,1,0.5)
-                    pos_hint: {"x":0.2, "y": 1}
-                    size_hint: 0.6, 0.5
-                    on_press: root.time_percentage();
-            
                 GridLayout:
                     cols:2
                     Label:

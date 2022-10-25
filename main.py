@@ -291,13 +291,12 @@ class ResultScreen2(Screen):
         
  #Function to show which hand was used to make drawings (Left/Right)  
  def on_enter(self,*args):
-       ok= self.manager.get_screen("tick").sidee
-       print(ok)
-       self.ids.side_label.text=ok
+       hand_side= self.manager.get_screen("tick").sidee
+       self.ids.side_label.text=hand_side
        self.non=""
     
     #if statement that sets the hand side to left/right
-       if ok=="Left":
+       if hand_side=="Left":
         self.non="Right"
         self.ids.non_side_label.text=self.non
        else:
@@ -305,53 +304,43 @@ class ResultScreen2(Screen):
         self.ids.non_side_label.text=self.non
        
         
- #Displays the time taken to draw dominant and non-dominant drawings       
- def time_result(self):
-    #Obtain time values from doiminant hand spiral drawing 
-    screen_manager=App.get_running_app().root
-    window_one = screen_manager.get_screen("dom_spiral")
-    time3= window_one.finalCount
-    self.ids.time_results1.text=f'{str(time3) + "s" }'
-    
-    #Obtain time values from non-doiminant hand spiral drawing 
-    screen_manager=App.get_running_app().root
-    window_one = screen_manager.get_screen("nondom_spiral")
-    time4= window_one.finalCount
-    self.ids.time_results2.text=f'{str(time4) + "s" }'
-    
+ #Displays the time taken to draw dominant hand drawing
+ 
+       time_result=self.manager.get_screen("dom_spiral").finalCount
+       self.ids.time_results1.text=f'{str(time_result) + "s" }'
+       
+#Obtain time values from non-doiminant hand spiral drawing
+       
+       time_result2=self.manager.get_screen("nondom_spiral").finalCount
+       self.ids.time_results2.text=f'{str(time_result2) + "s" }'
+        
  #Calculations to describe what % time the drawing was drawn faster/slower
  #than the normal drawing   
- def time_percentage(self):
-    #Obtain time values from doiminant hand spiral drawing 
-    screen_manager=App.get_running_app().root
-    window_one = screen_manager.get_screen("dom_spiral")
-    time3= window_one.finalCount
-    normal_time_d=14
-    diff=time3-14
+       
+       #Obtain time values from doiminant hand spiral drawing
+       normal_time_d=14
+       diff=time_result-14
     
-    if diff<=0: #Faster than normal
-        perc1=100-int((time3/normal_time_d)*100)
+       if diff<=0: #Faster than normal
+        perc1=100-int((time_result/normal_time_d)*100)
         self.ids.time_percentage_results.text=f'{str(perc1) + "% faster than normal"}'
     
-    else:      #slower than normal
+       else:      #slower than normal
         perc2=int((diff/normal_time_d)*100)
         self.ids.time_percentage_results.text=f'{str(perc2) + "% slower than normal" }'
         
-    #Obtain time values from non-doiminant hand spiral drawing 
-    screen_manager=App.get_running_app().root
-    window_one = screen_manager.get_screen("nondom_spiral")
-    time4= window_one.finalCount
-    normal_time_nd=16
-    diff2=time4-16
+       #Obtain time values from non-doiminant hand spiral drawing  
+       normal_time_nd=16
+       diff2=time_result2-16
          
-    if diff2<=0: #Faster than normal
-        perc3=100-int((time4/normal_time_nd)*100)
+       if diff2<=0: #Faster than normal
+        perc3=100-int((time_result2/normal_time_nd)*100)
         self.ids.time_percentage_results2.text=f'{str(perc3) + "% faster than normal"}'
     
-    else:       #slower than normal
+       else:       #slower than normal
         perc4=int((diff2/normal_time_nd)*100)
         self.ids.time_percentage_results.text=f'{str(perc4) + "% slower than normal" }'
-     
+      
     
 class ResultScreen3(Screen):
  pass
