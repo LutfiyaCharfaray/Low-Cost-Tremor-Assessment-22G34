@@ -470,11 +470,7 @@ class formTestCase(unittest.TestCase):
                 num_length = 10
 
                 if len(age) <= age_length and len(num) == num_length:
-                    # simulate populating the database 
-                    pname = name
-                    psname = surname
-                    page = age
-                    pnum = num
+                    # populate the database here
                     notif = "Valid"
                 else:
                     notif = "Invalid"
@@ -493,11 +489,7 @@ class formTestCase(unittest.TestCase):
                 num_length = 10
 
                 if len(age) <= age_length and len(num) == num_length:
-                    # simulate populating the database 
-                    pname = name
-                    psname = surname
-                    page = age
-                    pnum = num
+                   # populate the database here
                     notif = "Valid"
                 else:
                     notif = "Invalid"
@@ -516,10 +508,7 @@ class formTestCase(unittest.TestCase):
                 num_length = 10
 
                 if len(age) <= age_length and len(num) == num_length:
-                    pname = name # simulate populating the database 
-                    psname = surname
-                    page = age
-                    pnum = num
+                    # populate the database here
                     notif = "Valid"
                 else:
                     notif = "Invalid"
@@ -538,10 +527,7 @@ class formTestCase(unittest.TestCase):
                 num_length = 10
 
                 if len(age) <= age_length and len(num) == num_length:
-                    pname = name # simulate populating the database 
-                    psname = surname
-                    page = age
-                    pnum = num
+                    # populate the database here
                     notif = "Valid"
                 else:
                     notif = "Invalid"
@@ -560,10 +546,7 @@ class formTestCase(unittest.TestCase):
                 num_length = 10
 
                 if len(age) <= age_length and len(num) == num_length:
-                    pname = name # simulate populating the database 
-                    psname = surname
-                    page = age
-                    pnum = num
+                    # populate the database here
                     notif = "Valid"
                 else:
                     notif = "Invalid"
@@ -574,6 +557,101 @@ class formTestCase(unittest.TestCase):
         ans = "Invalid"
         emptynum = submit("Peter","Parker","24","")
         self.assertEqual(ans,emptynum)
+
+    def test_twoemptyfields(self):
+        def submit(name,surname,age,num):
+            if name != "" and surname != "" and age != "" and num != "":
+                age_length = 3
+                num_length = 10
+
+                if len(age) <= age_length and len(num) == num_length:
+                    # populate the database here
+                    notif = "Valid"
+                else:
+                    notif = "Invalid"
+            else:
+                notif = "Invalid"
+            return notif
+
+        ans = "Invalid"
+        emptyfields = submit("","","24","7854123698")
+        self.assertEqual(ans,emptyfields)
+
+    def test_invalidage(self):
+        def submit(name,surname,age,num):
+            if name != "" and surname != "" and age != "" and num != "":
+                age_length = 3
+                num_length = 10
+
+                if len(age) <= age_length and len(num) == num_length:
+                    # populate the database here
+                    notif = "Valid"
+                else:
+                    notif = "Invalid"
+            else:
+                notif = "Invalid"
+            return notif
+
+        ans = "Invalid"
+        age_ = submit("Peter","Parker","2436","0369852147")
+        self.assertEqual(ans,age_)
+
+    def test_invalidnum(self):
+        def submit(name,surname,age,num):
+            if name != "" and surname != "" and age != "" and num != "":
+                age_length = 3
+                num_length = 10
+
+                if len(age) <= age_length and len(num) == num_length:
+                    # populate the database here
+                    notif = "Valid"
+                else:
+                    notif = "Invalid"
+            else:
+                notif = "Invalid"
+            return notif
+
+        ans = "Invalid"
+        invalnum = submit("Peter","Parker","24","0369852")
+        self.assertEqual(ans,invalnum)
+
+    def test_invalidnum2(self):
+        def submit(name,surname,age,num):
+            if name != "" and surname != "" and age != "" and num != "":
+                age_length = 3
+                num_length = 10
+
+                if len(age) <= age_length and len(num) == num_length:
+                    # populate the database here
+                    notif = "Valid"
+                else:
+                    notif = "Invalid"
+            else:
+                notif = "Invalid"
+            return notif
+
+        ans = "Invalid"
+        invalnum = submit("Peter","Parker","24","03698521569787")
+        self.assertEqual(ans,invalnum)
+
+    def test_validform(self):
+        def submit(name,surname,age,num):
+            if name != "" and surname != "" and age != "" and num != "":
+                age_length = 3
+                num_length = 10
+
+                if len(age) <= age_length and len(num) == num_length:
+                    # populate the database here
+                    notif = "Valid"
+                else:
+                    notif = "Invalid"
+            else:
+                notif = "Invalid"
+            return notif
+
+        ans = "Valid"
+        invalnum = submit("Peter","Parker","24","0369852156")
+        self.assertEqual(ans,invalnum)
 
 if __name__ == '__main__':
     unittest.main()
