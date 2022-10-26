@@ -317,7 +317,7 @@ class ResultScreen2(Screen):
  #Calculations to describe what % time the drawing was drawn faster/slower
  #than the normal drawing   
        
-       #Obtain time values from doiminant hand spiral drawing
+       #Obtain time values from dominant hand spiral drawing
        normal_time_d=14
        diff=time_result-14
     
@@ -329,7 +329,7 @@ class ResultScreen2(Screen):
         perc2=int((diff/normal_time_d)*100)
         self.ids.time_percentage_results.text=f'{str(perc2) + "% slower than normal" }'
         
-       #Obtain time values from non-doiminant hand spiral drawing  
+       #Obtain time values from non-dominant hand spiral drawing  
        normal_time_nd=16
        diff2=time_result2-16
          
