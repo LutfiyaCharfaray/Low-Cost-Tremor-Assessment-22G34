@@ -340,6 +340,9 @@ WindowManager: # define screens
 <PracScreen>:
     name: "prac"
 
+    on_pre_enter:
+        draw.reset_canvas() 
+
     FloatLayout:
         id: export1
         LineWidget:
@@ -351,6 +354,7 @@ WindowManager: # define screens
             color: (1,1,1,1)
 
         DrawLine:
+            id: draw
 
         Button:
             id: 'next'
@@ -431,6 +435,9 @@ WindowManager: # define screens
 <DSpiralScreen>:
     name: "dom_spiral" #dominant hand spiral
 
+    on_pre_enter:
+        draw.reset_canvas() 
+
     FloatLayout:
         id: export2
         SpiralWidget:
@@ -448,6 +455,7 @@ WindowManager: # define screens
             color: (0,0,0,1)
 
         DrawLine:
+            id: draw
 
         Button:
             id: 'next'
@@ -520,6 +528,9 @@ WindowManager: # define screens
 <NdSpiralScreen>:
     name: "nondom_spiral" # non-dominant hand spiral 
 
+    on_pre_enter:
+        draw.reset_canvas() 
+
     FloatLayout:
         id: export3
         SpiralWidget:
@@ -537,6 +548,7 @@ WindowManager: # define screens
             color: (0,0,0,1)
 
         DrawLine:
+            id: draw
 
         Button:
             id: 'next'
@@ -817,16 +829,16 @@ WindowManager: # define screens
                     background_color: (0,1,1,1)
                     on_press: root.capture()
                     on_release:
-                        app.root.current = "result3"         
+                        app.root.current = "end" #"result3"         
 
-<ResultScreen3>:
-    name: "result3"
-    FloatLayout:
-        canvas.before:
-            Rectangle:
-                size: self.size
-                pos: self.pos
-                source: "blue.jpeg"
+# <ResultScreen3>:
+#     name: "result3"
+#     FloatLayout:
+#         canvas.before:
+#             Rectangle:
+#                 size: self.size
+#                 pos: self.pos
+#                 source: "blue.jpeg"
 
 <SaveScreen>:
     name: "end"
