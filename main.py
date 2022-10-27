@@ -138,8 +138,6 @@ class TickBox(Screen):
          self.sidee="Right"
      print(self.sidee)    
 
-
-# Widget Classes
 class LineWidget(Widget):
     pass
 
@@ -302,7 +300,6 @@ class ResultScreen2(Screen):
        else:
         self.non="Left"
         self.ids.non_side_label.text=self.non
-       
         
  #Displays the time taken to draw dominant hand drawing
  
@@ -317,7 +314,7 @@ class ResultScreen2(Screen):
  #Calculations to describe what % time the drawing was drawn faster/slower
  #than the normal drawing   
        
-       #Obtain time values from doiminant hand spiral drawing
+       #Obtain time values from dominant hand spiral drawing
        normal_time_d=14
        diff=time_result-14
     
@@ -329,7 +326,7 @@ class ResultScreen2(Screen):
         perc2=int((diff/normal_time_d)*100)
         self.ids.time_percentage_results.text=f'{str(perc2) + "% slower than normal" }'
         
-       #Obtain time values from non-doiminant hand spiral drawing  
+       #Obtain time values from non-dominant hand spiral drawing  
        normal_time_nd=16
        diff2=time_result2-16
          
@@ -341,10 +338,8 @@ class ResultScreen2(Screen):
         perc4=int((diff2/normal_time_nd)*100)
         self.ids.time_percentage_results.text=f'{str(perc4) + "% slower than normal" }'
       
-    
 class ResultScreen3(Screen):
  pass
-
 
 class SaveScreen(Screen):
     def change_dir(self):

@@ -1,3 +1,4 @@
+from turtle import right
 import unittest
 from kivy.tests.common import GraphicUnitTest, UnitTestTouch
 import os, sys
@@ -242,6 +243,415 @@ class ssimTestCase(unittest.TestCase):
 
         expected = 0.9
         self.assertNotEqual(ssim, expected)  
+
+class whichHandTestCase(unittest.TestCase):   
+    #testing the logic of the code used to obtain and display the dominant and non-dominant hand
+    def test_right(self): #should return left if input is right
+        def get_hand(hand_side):
+            if hand_side == "Left":
+                other_hand ="Right"
+            elif hand_side == "Right":
+                other_hand ="Left"
+            return other_hand
+
+        hand = "Right"
+        other = get_hand(hand)
+        self.assertNotEqual(hand, other)
+
+    def test_left(self): #should return right if input is left
+        def get_hand(hand_side):
+            if hand_side == "Left":
+                other_hand ="Right"
+            elif hand_side == "Right":
+                other_hand ="Left"
+            return other_hand
+
+        hand = "Left"
+        other = get_hand(hand)
+        self.assertNotEqual(hand, other)
+
+class percentageTestCase(unittest.TestCase):
+    # test the percentage of the time taken for a drawing and compare it to a "normal" case
+    def test_slowtime(self): #test slower than normal
+        def comparetonorm(time_result):
+            normal_time_d = 14 #14 sec
+            diff = time_result-normal_time_d
+            
+            if diff<=0: #Faster than normal
+                perc1=100-int((time_result/normal_time_d)*100)
+                res = "faster than normal"
+            
+            else:      #slower than normal
+                perc2=int((diff/normal_time_d)*100)
+                res = "slower than normal" 
+            return res
+
+        time_in_sec = 16
+        percentage = comparetonorm(time_in_sec)
+        result = "slower than normal"
+        self.assertEqual(result, percentage)
+
+    def test_notslowtime(self):
+        def comparetonorm(time_result):
+            normal_time_d = 14 #14 sec
+            diff = time_result-normal_time_d
+            
+            if diff<=0: #Faster than normal
+                perc1=100-int((time_result/normal_time_d)*100)
+                res = "faster than normal"
+            
+            else:      #slower than normal
+                perc2=int((diff/normal_time_d)*100)
+                res = "slower than normal" 
+            return res
+
+        time_in_sec = 10
+        percentage = comparetonorm(time_in_sec)
+        result = "slower than normal"
+        self.assertNotEqual(result, percentage)
+
+    def test_fasttime(self):
+        def comparetonorm(time_result):
+            normal_time_d = 14 #14 sec
+            diff = time_result-normal_time_d
+            
+            if diff<=0: #Faster than normal
+                perc1=100-int((time_result/normal_time_d)*100)
+                res = "faster than normal"
+            
+            else:      #slower than normal
+                perc2=int((diff/normal_time_d)*100)
+                res = "slower than normal" 
+            return res
+
+        time_in_sec = 12
+        percentage = comparetonorm(time_in_sec)
+        result = "faster than normal"
+        self.assertEqual(result, percentage)
+
+    def test_notfasttime(self):
+        def comparetonorm(time_result):
+            normal_time_d = 14 #14 sec
+            diff = time_result-normal_time_d
+            
+            if diff<=0: #Faster than normal
+                perc1=100-int((time_result/normal_time_d)*100)
+                res = "faster than normal"
+            
+            else:      #slower than normal
+                perc2=int((diff/normal_time_d)*100)
+                res = "slower than normal" 
+            return res
+
+        time_in_sec = 20
+        percentage = comparetonorm(time_in_sec)
+        result = "faster than normal"
+        self.assertNotEqual(result, percentage)
+
+    def test_changenormtime(self): #test slower than normal
+        def comparetonorm(time_result):
+            normal_time_d = 20 
+            diff = time_result-normal_time_d
+            
+            if diff<=0: #Faster than normal
+                perc1=100-int((time_result/normal_time_d)*100)
+                res = "faster than normal"
+            
+            else:      #slower than normal
+                perc2=int((diff/normal_time_d)*100)
+                res = "slower than normal" 
+            return res
+
+        time_in_sec = 22
+        percentage = comparetonorm(time_in_sec)
+        result = "slower than normal"
+        self.assertEqual(result, percentage)
+
+    def test_changenormtimef(self): #test faster than normal
+        def comparetonorm(time_result):
+            normal_time_d = 20 
+            diff = time_result-normal_time_d
+            
+            if diff<=0: #Faster than normal
+                perc1=100-int((time_result/normal_time_d)*100)
+                res = "faster than normal"
+            
+            else:      #slower than normal
+                perc2=int((diff/normal_time_d)*100)
+                res = "slower than normal" 
+            return res
+
+        time_in_sec = 18
+        percentage = comparetonorm(time_in_sec)
+        result = "faster than normal"
+        self.assertEqual(result, percentage)
+
+    def test_percentage(self): #test slower than normal
+        def comparetonorm(time_result):
+            normal_time_d = 15
+            diff = time_result-normal_time_d
+            
+            if diff<=0: #Faster than normal
+                perc=100-int((time_result/normal_time_d)*100)
+                res = "faster than normal"
+            
+            else:      #slower than normal
+                perc=int((diff/normal_time_d)*100)
+                res = "slower than normal" 
+            return perc
+
+        time_in_sec = 18
+        percentage = comparetonorm(time_in_sec)
+        result = 20
+        self.assertEqual(result, percentage)
+
+    def test_percentagef(self): #test faster than normal
+        def comparetonorm(time_result):
+            normal_time_d = 15
+            diff = time_result-normal_time_d
+            
+            if diff<=0: #Faster than normal
+                perc=100-int((time_result/normal_time_d)*100)
+                res = "faster than normal"
+            
+            else:      #slower than normal
+                perc=int((diff/normal_time_d)*100)
+                res = "slower than normal" 
+            return perc
+
+        time_in_sec = 10
+        percentage = comparetonorm(time_in_sec)
+        result = 34
+        self.assertEqual(result, percentage)
+
+    def test_notpercentage(self): #test slower than normal
+        def comparetonorm(time_result):
+            normal_time_d = 15
+            diff = time_result-normal_time_d
+            
+            if diff<=0: #Faster than normal
+                perc=100-int((time_result/normal_time_d)*100)
+                res = "faster than normal"
+            
+            else:      #slower than normal
+                perc=int((diff/normal_time_d)*100)
+                res = "slower than normal" 
+            return perc
+
+        time_in_sec = 18
+        percentage = comparetonorm(time_in_sec)
+        result = 50
+        self.assertNotEqual(result, percentage)
+
+    def test_notpercentagef(self): #test faster than normal
+        def comparetonorm(time_result):
+            normal_time_d = 15
+            diff = time_result-normal_time_d
+            
+            if diff<=0: #Faster than normal
+                perc=100-int((time_result/normal_time_d)*100)
+                res = "faster than normal"
+            
+            else:      #slower than normal
+                perc=int((diff/normal_time_d)*100)
+                res = "slower than normal" 
+            return perc
+
+        time_in_sec = 10
+        percentage = comparetonorm(time_in_sec)
+        result = 78
+        self.assertNotEqual(result, percentage)
+
+class formTestCase(unittest.TestCase):
+    def test_emptyform(self):
+        def submit(name,surname,age,num):
+            if name != "" and surname != "" and age != "" and num != "":
+                age_length = 3
+                num_length = 10
+
+                if len(age) <= age_length and len(num) == num_length:
+                    # populate the database here
+                    notif = "Valid"
+                else:
+                    notif = "Invalid"
+            else:
+                notif = "Invalid"
+            return notif
+
+        ans = "Invalid"
+        empty = submit("","","","")
+        self.assertEqual(ans,empty)
+
+    def test_emptyname(self):
+        def submit(name,surname,age,num):
+            if name != "" and surname != "" and age != "" and num != "":
+                age_length = 3
+                num_length = 10
+
+                if len(age) <= age_length and len(num) == num_length:
+                   # populate the database here
+                    notif = "Valid"
+                else:
+                    notif = "Invalid"
+            else:
+                notif = "Invalid"
+            return notif
+
+        ans = "Invalid"
+        emptyname = submit("","Parker","23","0369852147")
+        self.assertEqual(ans,emptyname)
+
+    def test_emptysurname(self):
+        def submit(name,surname,age,num):
+            if name != "" and surname != "" and age != "" and num != "":
+                age_length = 3
+                num_length = 10
+
+                if len(age) <= age_length and len(num) == num_length:
+                    # populate the database here
+                    notif = "Valid"
+                else:
+                    notif = "Invalid"
+            else:
+                notif = "Invalid"
+            return notif
+
+        ans = "Invalid"
+        emptysur = submit("Peter","","63","0741596325")
+        self.assertEqual(ans,emptysur)
+
+    def test_emptyage(self):
+        def submit(name,surname,age,num):
+            if name != "" and surname != "" and age != "" and num != "":
+                age_length = 3
+                num_length = 10
+
+                if len(age) <= age_length and len(num) == num_length:
+                    # populate the database here
+                    notif = "Valid"
+                else:
+                    notif = "Invalid"
+            else:
+                notif = "Invalid"
+            return notif
+
+        ans = "Invalid"
+        emptyage = submit("Peter","Parker","","0741596325")
+        self.assertEqual(ans,emptyage)
+
+    def test_emptynum(self):
+        def submit(name,surname,age,num):
+            if name != "" and surname != "" and age != "" and num != "":
+                age_length = 3
+                num_length = 10
+
+                if len(age) <= age_length and len(num) == num_length:
+                    # populate the database here
+                    notif = "Valid"
+                else:
+                    notif = "Invalid"
+            else:
+                notif = "Invalid"
+            return notif
+
+        ans = "Invalid"
+        emptynum = submit("Peter","Parker","24","")
+        self.assertEqual(ans,emptynum)
+
+    def test_twoemptyfields(self):
+        def submit(name,surname,age,num):
+            if name != "" and surname != "" and age != "" and num != "":
+                age_length = 3
+                num_length = 10
+
+                if len(age) <= age_length and len(num) == num_length:
+                    # populate the database here
+                    notif = "Valid"
+                else:
+                    notif = "Invalid"
+            else:
+                notif = "Invalid"
+            return notif
+
+        ans = "Invalid"
+        emptyfields = submit("","","24","7854123698")
+        self.assertEqual(ans,emptyfields)
+
+    def test_invalidage(self):
+        def submit(name,surname,age,num):
+            if name != "" and surname != "" and age != "" and num != "":
+                age_length = 3
+                num_length = 10
+
+                if len(age) <= age_length and len(num) == num_length:
+                    # populate the database here
+                    notif = "Valid"
+                else:
+                    notif = "Invalid"
+            else:
+                notif = "Invalid"
+            return notif
+
+        ans = "Invalid"
+        age_ = submit("Peter","Parker","2436","0369852147")
+        self.assertEqual(ans,age_)
+
+    def test_invalidnum(self):
+        def submit(name,surname,age,num):
+            if name != "" and surname != "" and age != "" and num != "":
+                age_length = 3
+                num_length = 10
+
+                if len(age) <= age_length and len(num) == num_length:
+                    # populate the database here
+                    notif = "Valid"
+                else:
+                    notif = "Invalid"
+            else:
+                notif = "Invalid"
+            return notif
+
+        ans = "Invalid"
+        invalnum = submit("Peter","Parker","24","0369852")
+        self.assertEqual(ans,invalnum)
+
+    def test_invalidnum2(self):
+        def submit(name,surname,age,num):
+            if name != "" and surname != "" and age != "" and num != "":
+                age_length = 3
+                num_length = 10
+
+                if len(age) <= age_length and len(num) == num_length:
+                    # populate the database here
+                    notif = "Valid"
+                else:
+                    notif = "Invalid"
+            else:
+                notif = "Invalid"
+            return notif
+
+        ans = "Invalid"
+        invalnum = submit("Peter","Parker","24","03698521569787")
+        self.assertEqual(ans,invalnum)
+
+    def test_validform(self):
+        def submit(name,surname,age,num):
+            if name != "" and surname != "" and age != "" and num != "":
+                age_length = 3
+                num_length = 10
+
+                if len(age) <= age_length and len(num) == num_length:
+                    # populate the database here
+                    notif = "Valid"
+                else:
+                    notif = "Invalid"
+            else:
+                notif = "Invalid"
+            return notif
+
+        ans = "Valid"
+        invalnum = submit("Peter","Parker","24","0369852156")
+        self.assertEqual(ans,invalnum)
 
 if __name__ == '__main__':
     unittest.main()
