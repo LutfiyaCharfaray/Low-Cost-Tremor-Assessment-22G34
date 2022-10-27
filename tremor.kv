@@ -497,6 +497,9 @@ WindowManager: # define screens
     name: "rating1"
     vrs1: slider_.value
 
+    on_pre_enter:
+        slider_.value = 0
+
     BoxLayout:
         orientation: "vertical"
         size: root.width, root.height  
@@ -591,6 +594,9 @@ WindowManager: # define screens
     name: "rating2"
     vrs2: slide.value
 
+    on_pre_enter:
+        slide.value = 0
+
     BoxLayout:
         orientation: "vertical"
         size: root.width, root.height  
@@ -644,7 +650,6 @@ WindowManager: # define screens
 
         #To show visual ratings for dominant and non-dominant hand drawings        
             
-
             BoxLayout:
                 orientation: "vertical"        
                 Label: 
@@ -658,7 +663,6 @@ WindowManager: # define screens
                     font_size: 20
                     color: (0,0,0,1)
                     size_hint: 1, 0.2
-
 
         #To show similarity index for dominant and non-dominant drawings      
                     
