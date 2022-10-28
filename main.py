@@ -211,6 +211,7 @@ class DSpiralScreen(Screen):
     def start(self):
        Clock.schedule_interval(self.update_label,1)
 
+
 class VRScreen1(Screen): #Visual Rating Screen 1
     pass
 
@@ -280,11 +281,11 @@ class ResultScreen1(Screen):
         self.ids.sim_label2.text = str(ti_nh)
         return ti_dh, ti_nh
       
-class ResultScreen3(Screen):
+class ResultScreen2(Screen):
     def capture(self, *args):
         name_ = App.get_running_app().root.get_screen("search").ids['word_input'].text
         sur_ = App.get_running_app().root.get_screen("search").ids['surname_input'].text
-        results1 = self.ids.export6.export_to_png(f"{name_} {sur_} results part3.png")
+        results1 = self.ids.export6.export_to_png(f"{name_} {sur_} results part2.png")
         
     def on_enter(self,*args):
         
@@ -351,7 +352,7 @@ class SaveScreen(Screen):
         sur_ = App.get_running_app().root.get_screen("search").ids['surname_input'].text
 
         images = [f"{name_} {sur_} practice round.png", f"{name_} {sur_} dominant hand.png", f"{name_} {sur_} non-dominant hand.png",
-                f"{name_} {sur_} dh_resized_image.png", f"{name_} {sur_} nh_resized_image.png", f"{name_} {sur_} results part1.png",f"{name_} {sur_} results part3.png" ]
+                f"{name_} {sur_} dh_resized_image.png", f"{name_} {sur_} nh_resized_image.png", f"{name_} {sur_} results part1.png",f"{name_} {sur_} results part2.png" ]
 
         # iterate on all files to move them to destination folder
         for i in images:

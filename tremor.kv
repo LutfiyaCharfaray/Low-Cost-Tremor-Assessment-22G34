@@ -22,7 +22,7 @@ WindowManager: # define screens
         manager: 'screen_manager'
         vrs1: slider1.vrs1
         vrs2: slider2.vrs2
-    ResultScreen3:
+    ResultScreen2:
     SaveScreen:
            
 <LoginWindow>:
@@ -699,13 +699,13 @@ WindowManager: # define screens
                     background_color: (0,1,1,1)
                     on_press: root.capture()
                     on_release:
-                        app.root.current = "result3"
+                        app.root.current = "result2"
                         sim_label.text= "(no tremor:0 - severe tremor:1)"   
                         sim_label2.text= "(no tremor:0 - severe tremor:1)"   
      
 
-<ResultScreen3>:
-    name: "result3"
+<ResultScreen2>:
+    name: "result2"
     FloatLayout:
         id:export6
         canvas.before:
