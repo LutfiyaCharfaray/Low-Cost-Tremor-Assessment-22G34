@@ -339,6 +339,9 @@ WindowManager: # define screens
 <PracScreen>:
     name: "prac"
 
+    on_pre_enter:
+        draw.reset_canvas() 
+
     FloatLayout:
         id: export1
         LineWidget:
@@ -350,6 +353,7 @@ WindowManager: # define screens
             color: (1,1,1,1)
 
         DrawLine:
+            id: draw
 
         Button:
             id: 'next'
@@ -430,6 +434,9 @@ WindowManager: # define screens
 <DSpiralScreen>:
     name: "dom_spiral" #dominant hand spiral
 
+    on_pre_enter:
+        draw.reset_canvas() 
+
     FloatLayout:
         id: export2
         SpiralWidget:
@@ -447,6 +454,7 @@ WindowManager: # define screens
             color: (0,0,0,1)
 
         DrawLine:
+            id: draw
 
         Button:
             id: 'next'
@@ -488,6 +496,9 @@ WindowManager: # define screens
     name: "rating1"
     vrs1: slider_.value
 
+    on_pre_enter:
+        slider_.value = 0
+
     BoxLayout:
         orientation: "vertical"
         size: root.width, root.height  
@@ -519,6 +530,9 @@ WindowManager: # define screens
 <NdSpiralScreen>:
     name: "nondom_spiral" # non-dominant hand spiral 
 
+    on_pre_enter:
+        draw.reset_canvas() 
+
     FloatLayout:
         id: export3
         SpiralWidget:
@@ -536,6 +550,7 @@ WindowManager: # define screens
             color: (0,0,0,1)
 
         DrawLine:
+            id: draw
 
         Button:
             id: 'next'
@@ -578,6 +593,9 @@ WindowManager: # define screens
     name: "rating2"
     vrs2: slide.value
 
+    on_pre_enter:
+        slide.value = 0
+
     BoxLayout:
         orientation: "vertical"
         size: root.width, root.height  
@@ -606,7 +624,6 @@ WindowManager: # define screens
             on_release:
                 app.root.current = "results_1"
 
-
 <ResultScreen1>:
     vrs1: 0
     vrs2: 0 
@@ -631,7 +648,6 @@ WindowManager: # define screens
 
         #To show visual ratings for dominant and non-dominant hand drawings        
             
-
             BoxLayout:
                 orientation: "vertical"        
                 Label: 
@@ -645,7 +661,6 @@ WindowManager: # define screens
                     font_size: 20
                     color: (0,0,0,1)
                     size_hint: 1, 0.2
-
 
         #To show similarity index for dominant and non-dominant drawings      
                     
@@ -702,7 +717,6 @@ WindowManager: # define screens
                         app.root.current = "result2"
                         sim_label.text= "(no tremor:0 - severe tremor:1)"   
                         sim_label2.text= "(no tremor:0 - severe tremor:1)"   
-     
 
 <ResultScreen2>:
     name: "result2"
@@ -850,6 +864,30 @@ WindowManager: # define screens
                     Line:
                         width: 1.1
                         rectangle: self.x, self.y, self.width, self.height
+
+                GridLayout:
+                    cols:2
+                    Label:
+                        text:"Time % -Non-dominant hand:"
+                        font_size: 20
+                        color: (0,0,0,1)
+                       
+                    Label:
+                        id:time_percentage_results2
+                        text:"Percentage time"
+                        font_size: 20
+                        color: (0,0,0,1)
+                  
+                Button:
+                    id: save2
+                    text: "Save and proceed"
+                    font_size: 20
+                    size_hint: 0.3, 0.5
+                    pos_hint: {"x":0.7, "y": 0.5}
+                    background_color: (0,1,1,1)
+                    on_press: root.capture()
+                    on_release:
+                        app.root.current = "end" #"result3"         
 
             Label:
                 text: "Completion time(s)"
