@@ -22,7 +22,6 @@ WindowManager: # define screens
         manager: 'screen_manager'
         vrs1: slider1.vrs1
         vrs2: slider2.vrs2
-    ResultScreen2:
     ResultScreen3:
     SaveScreen:
            
@@ -703,123 +702,7 @@ WindowManager: # define screens
                         app.root.current = "result3"
                         sim_label.text= "(no tremor:0 - severe tremor:1)"   
                         sim_label2.text= "(no tremor:0 - severe tremor:1)"   
-
-<ResultScreen2>:
-    name: "results2"
-    FloatLayout:
-        id: export5
-        canvas.before:
-            Rectangle:
-                pos: self.pos
-                size: self.size
-                source: "blue.jpeg"
-        GridLayout:
-            rows:2
-            BoxLayout:
-                orientation: "vertical"
-                Label:
-                    text: "Results" # Part 2
-                    size_hint: 1,0.3
-                    font_size: 25
-                    underline: True
-                    bold: True
-                    color: (0,0,0,1)
-
-        #To show which hand is dominant and non-dominant
-                GridLayout:
-                    cols:2
-                    Label: 
-                        text: "Dominant hand: "
-                        font_size: 20
-                        color: (0,0,0,1)
-                        size_hint: 0.8, 1
-                    Label:
-                        id: side_label
-                        text:"Left/Right"
-                        font_size: 20
-                        valign: "middle"
-                        pos_hint: {"x":0.5, "y": 1}
-                        color: (0,0,0,1)
-                GridLayout:
-                    cols:2
-                    Label: 
-                        text: "Non-dominant hand: "
-                        font_size: 20
-                        color: (0,0,0,1)
-                        size_hint: 1,0.3
-                    Label:
-                        id: non_side_label
-                        text:"Left/Right"
-                        font_size: 20
-                        valign: "middle"
-                        pos_hint: {"x":0.5, "y": 1}
-                        size_hint: 1,0.3
-                        color: (0,0,0,1)
-        #To show the time it takes to complete drawings       
-               
-                GridLayout:
-                    cols:2
-                    Label:
-                        text:"Completion time -Dominant hand: "
-                        font_size: 20
-                        color: (0,0,0,1)
-                       
-                    Label:
-                        id:time_results1
-                        text:"Time in seconds"
-                        font_size: 20
-                        color: (0,0,0,1)
-
-                GridLayout:
-                    cols:2
-                    Label:
-                        text:"Completion time -Non-dominant hand: "
-                        font_size: 20
-                        color: (0,0,0,1)
-                       
-                    Label:
-                        id:time_results2
-                        text:"Time in seconds"
-                        font_size: 20
-                        color: (0,0,0,1)
-
-        #To show 5 time taken compared to a normal drawing
-                GridLayout:
-                    cols:2
-                    Label:
-                        text:"Time % -Dominant hand:"
-                        font_size: 20
-                        color: (0,0,0,1)
-                       
-                    Label:
-                        id:time_percentage_results
-                        text:"Percentage time"
-                        font_size: 20
-                        color: (0,0,0,1)
-
-                GridLayout:
-                    cols:2
-                    Label:
-                        text:"Time % -Non-dominant hand:"
-                        font_size: 20
-                        color: (0,0,0,1)
-                       
-                    Label:
-                        id:time_percentage_results2
-                        text:"Percentage time"
-                        font_size: 20
-                        color: (0,0,0,1)
-                  
-                Button:
-                    id: save2
-                    text: "Save and proceed"
-                    font_size: 20
-                    size_hint: 0.3, 0.5
-                    pos_hint: {"x":0.7, "y": 0.5}
-                    background_color: (0,1,1,1)
-                    on_press: root.capture()
-                    on_release:
-                        app.root.current = "result3"         
+     
 
 <ResultScreen3>:
     name: "result3"
@@ -926,7 +809,7 @@ WindowManager: # define screens
                         width: 1.1
                         rectangle: self.x, self.y, self.width, self.height
             Label:
-                text: ""
+                text: "-"
                 font_size: 16
                 backgorund_colour:(0,1,1,1)
                 color: (0,0,0,1)

@@ -279,64 +279,6 @@ class ResultScreen1(Screen):
         self.ids.sim_label.text = str(ti_dh)
         self.ids.sim_label2.text = str(ti_nh)
         return ti_dh, ti_nh
-    
-class ResultScreen2(Screen):
-    
- def capture(self, *args):
-        name_ = App.get_running_app().root.get_screen("search").ids['word_input'].text
-        sur_ = App.get_running_app().root.get_screen("search").ids['surname_input'].text
-        results1 = self.ids.export5.export_to_png(f"{name_} {sur_} results part2.png")
-        
- #Function to show which hand was used to make drawings (Left/Right)  
- def on_enter(self,*args):
-       hand_side= self.manager.get_screen("tick").sidee
-       self.ids.side_label.text=hand_side
-       self.non=""
-    
-    #if statement that sets the hand side to left/right
-       if hand_side=="Left":
-        self.non="Right"
-        self.ids.non_side_label.text=self.non
-       else:
-        self.non="Left"
-        self.ids.non_side_label.text=self.non
-        
- #Displays the time taken to draw dominant hand drawing
- 
-       time_result=self.manager.get_screen("dom_spiral").finalCount
-       self.ids.time_results1.text=f'{str(time_result) + "s" }'
-       
-#Obtain time values from non-doiminant hand spiral drawing
-       
-       time_result2=self.manager.get_screen("nondom_spiral").finalCount
-       self.ids.time_results2.text=f'{str(time_result2) + "s" }'
-        
- #Calculations to describe what % time the drawing was drawn faster/slower
- #than the normal drawing   
-       
-       #Obtain time values from dominant hand spiral drawing
-       normal_time_d=14
-       diff=time_result-14
-    
-       if diff<=0: #Faster than normal
-        perc1=100-int((time_result/normal_time_d)*100)
-        self.ids.time_percentage_results.text=f'{str(perc1) + "% faster than normal"}'
-    
-       else:      #slower than normal
-        perc2=int((diff/normal_time_d)*100)
-        self.ids.time_percentage_results.text=f'{str(perc2) + "% slower than normal" }'
-        
-       #Obtain time values from non-dominant hand spiral drawing  
-       normal_time_nd=16
-       diff2=time_result2-16
-         
-       if diff2<=0: #Faster than normal
-        perc3=100-int((time_result2/normal_time_nd)*100)
-        self.ids.time_percentage_results2.text=f'{str(perc3) + "% faster than normal"}'
-    
-       else:       #slower than normal
-        perc4=int((diff2/normal_time_nd)*100)
-        self.ids.time_percentage_results.text=f'{str(perc4) + "% slower than normal" }'
       
 class ResultScreen3(Screen):
     def capture(self, *args):
@@ -409,7 +351,7 @@ class SaveScreen(Screen):
         sur_ = App.get_running_app().root.get_screen("search").ids['surname_input'].text
 
         images = [f"{name_} {sur_} practice round.png", f"{name_} {sur_} dominant hand.png", f"{name_} {sur_} non-dominant hand.png",
-                f"{name_} {sur_} dh_resized_image.png", f"{name_} {sur_} nh_resized_image.png", f"{name_} {sur_} results part1.png", f"{name_} {sur_} results part2.png",f"{name_} {sur_} results part3.png" ]
+                f"{name_} {sur_} dh_resized_image.png", f"{name_} {sur_} nh_resized_image.png", f"{name_} {sur_} results part1.png",f"{name_} {sur_} results part3.png" ]
 
         # iterate on all files to move them to destination folder
         for i in images:
