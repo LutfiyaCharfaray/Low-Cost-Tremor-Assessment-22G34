@@ -23,7 +23,6 @@ WindowManager: # define screens
         vrs1: slider1.vrs1
         vrs2: slider2.vrs2
     ResultScreen2:
-    ResultScreen3:
     SaveScreen:
            
 <LoginWindow>:
@@ -625,7 +624,6 @@ WindowManager: # define screens
             on_release:
                 app.root.current = "results_1"
 
-
 <ResultScreen1>:
     vrs1: 0
     vrs2: 0 
@@ -716,100 +714,156 @@ WindowManager: # define screens
                     background_color: (0,1,1,1)
                     on_press: root.capture()
                     on_release:
-                        app.root.current = "results2"
+                        app.root.current = "result2"
                         sim_label.text= "(no tremor:0 - severe tremor:1)"   
                         sim_label2.text= "(no tremor:0 - severe tremor:1)"   
 
 <ResultScreen2>:
-    name: "results2"
+    name: "result2"
     FloatLayout:
-        id: export5
+        id:export6
         canvas.before:
             Rectangle:
-                pos: self.pos
                 size: self.size
+                pos: self.pos
                 source: "blue.jpeg"
+    BoxLayout:
+        orientation:"vertical"
+        padding: [dp(20),0,0,0] 
+         
+        Label:
+            text: "Results Analysis"
+            font_size: 25
+            bold:True
+            backgorund_colour:(0,1,1,1)
+            color: (0,0,0,1)
+            size_hint:0.9,0.05
+            pos_hint: {"x":0.05, "y": 0.5}
+            valign: "middle"
+            padding_top: dp(50)
+            canvas.before:
+                Color:
+                    rgba: (0,0,0,1)
+                Line:
+                    width: 1.1
+                    rectangle: self.x, self.y, self.width, self.height
         GridLayout:
-            rows:2
-            BoxLayout:
-                orientation: "vertical"
-                Label:
-                    text: "Results" # Part 2
-                    size_hint: 1,0.3
-                    font_size: 25
-                    underline: True
-                    bold: True
-                    color: (0,0,0,1)
+            cols:4
+            size_hint:0.9,0.4
+            pos_hint: {"x":0.05, "y": 0.5}
+            Label:
+                text: "Parameter"
+                bold:True
+                font_size: 20
+                backgorund_colour:(0,1,1,1)
+                color: (0,0,0,1)
+                size_hint:0.2,0.05
+                valign: "middle"
+                canvas.before:
+                    Color:
+                        rgba: (0,0,0,1)
+                    Line:
+                        width: 1.1
+                        rectangle: self.x, self.y, self.width, self.height
+            Label:
+                text: "Normal case"
+                font_size: 20
+                bold: True
+                backgorund_colour:(0,1,1,1)
+                color: (0,0,0,1)
+                size_hint:0.3,0.05
+                valign: "middle"
+                canvas.before:
+                    Color:
+                        rgba: (0,0,0,1)
+                    Line:
+                        width: 1.1
+                        rectangle: self.x, self.y, self.width, self.height
 
-        #To show which hand is dominant and non-dominant
-                GridLayout:
-                    cols:2
-                    Label: 
-                        text: "Dominant hand: "
-                        font_size: 20
-                        color: (0,0,0,1)
-                        size_hint: 0.8, 1
-                    Label:
-                        id: side_label
-                        text:"Left/Right"
-                        font_size: 20
-                        pos_hint: {"x":0.5, "y": 1}
-                        color: (0,0,0,1)
-                GridLayout:
-                    cols:2
-                    Label: 
-                        text: "Non-dominant hand: "
-                        font_size: 20
-                        color: (0,0,0,1)
-                        size_hint: 1,0.3
-                    Label:
-                        id: non_side_label
-                        text:"Left/Right"
-                        font_size: 20
-                        pos_hint: {"x":0.5, "y": 1}
-                        size_hint: 1,0.3
-                        color: (0,0,0,1)
-        #To show the time it takes to complete drawings       
-               
-                GridLayout:
-                    cols:2
-                    Label:
-                        text:"Completion time -Dominant hand: "
-                        font_size: 20
-                        color: (0,0,0,1)
-                       
-                    Label:
-                        id:time_results1
-                        text:"Time in seconds"
-                        font_size: 20
-                        color: (0,0,0,1)
+            Label:
+                text: "Dominant hand"
+                font_size: 20
+                bold: True
+                backgorund_colour:(0,1,1,1)
+                color: (0,0,0,1)
+                size_hint:0.3,0.05
+                valign: "middle"
+                canvas.before:
+                    Color:
+                        rgba: (0,0,0,1)
+                    Line:
+                        width: 1.1
+                        rectangle: self.x, self.y, self.width, self.height
+            Label:
+                text: "Non-dominant Hand"
+                font_size: 18
+                bold: True
+                backgorund_colour:(0,1,1,1)
+                color: (0,0,0,1)
+                size_hint:0.3,0.05
+                valign: "middle"
+                canvas.before:
+                    Color:
+                        rgba: (0,0,0,1)
+                    Line:
+                        width: 1.1
+                        rectangle: self.x, self.y, self.width, self.height
 
-                GridLayout:
-                    cols:2
-                    Label:
-                        text:"Completion time -Non-dominant hand: "
-                        font_size: 20
-                        color: (0,0,0,1)
-                       
-                    Label:
-                        id:time_results2
-                        text:"Time in seconds"
-                        font_size: 20
-                        color: (0,0,0,1)
+            Label:
+                text: "Side"
+                font_size: 16
+                backgorund_colour:(0,1,1,1)
+                color: (0,0,0,1)
+                size_hint:0.3,0.1
+                valign: "middle"
+                canvas.before:
+                    Color:
+                        rgba: (0,0,0,1)
+                    Line:
+                        width: 1.1
+                        rectangle: self.x, self.y, self.width, self.height
+            Label:
+                text: "-"
+                font_size: 16
+                backgorund_colour:(0,1,1,1)
+                color: (0,0,0,1)
+                size_hint:0.3,0.1
+                valign: "middle"
+                canvas.before:
+                    Color:
+                        rgba: (0,0,0,1)
+                    Line:
+                        width: 1.1
+                        rectangle: self.x, self.y, self.width, self.height
 
-        #To show 5 time taken compared to a normal drawing
-                GridLayout:
-                    cols:2
-                    Label:
-                        text:"Time % -Dominant hand:"
-                        font_size: 20
-                        color: (0,0,0,1)
-                       
-                    Label:
-                        id:time_percentage_results
-                        text:"Percentage time"
-                        font_size: 20
-                        color: (0,0,0,1)
+            Label:
+                id:dom_side
+                text: "Dominant Hand"
+                font_size: 18
+                backgorund_colour:(0,1,1,1)
+                color: (0,0,0,1)
+                size_hint:0.3,0.1
+                valign: "middle"
+                canvas.before:
+                    Color:
+                        rgba: (0,0,0,1)
+                    Line:
+                        width: 1.1
+                        rectangle: self.x, self.y, self.width, self.height
+            Label:
+                id:non_dom_side
+                text: ""
+                font_size: 18
+                backgorund_colour:(0,1,1,1)
+                color: (0,0,0,1)
+                size_hint:0.3,0.1
+                valign: "middle"
+                canvas.before:
+                    Color:
+                        rgba: (0,0,0,1)
+                    Line:
+                        width: 1.1
+                        rectangle: self.x, self.y, self.width, self.height
 
                 GridLayout:
                     cols:2
@@ -835,14 +889,206 @@ WindowManager: # define screens
                     on_release:
                         app.root.current = "end" #"result3"         
 
-# <ResultScreen3>:
-#     name: "result3"
-#     FloatLayout:
-#         canvas.before:
-#             Rectangle:
-#                 size: self.size
-#                 pos: self.pos
-#                 source: "blue.jpeg"
+            Label:
+                text: "Completion time(s)"
+                font_size: 16
+                backgorund_colour:(0,1,1,1)
+                color: (0,0,0,1)
+                size_hint:0.3,0.1
+                valign: "middle"
+                canvas.before:
+                    Color:
+                        rgba: (0,0,0,1)
+                    Line:
+                        width: 1.1
+                        rectangle: self.x, self.y, self.width, self.height
+            Label:
+                text: "14-16"
+                font_size: 16
+                backgorund_colour:(0,1,1,1)
+                color: (0,0,0,1)
+                size_hint:0.3,0.1
+                valign: "middle"
+                canvas.before:
+                    Color:
+                        rgba: (0,0,0,1)
+                    Line:
+                        width: 1.1
+                        rectangle: self.x, self.y, self.width, self.height
+            Label:
+                id: dom_time_label
+                text: ""
+                font_size: 16
+                backgorund_colour:(0,1,1,1)
+                color: (0,0,0,1)
+                size_hint:0.3,0.1
+                valign: "middle"
+                canvas.before:
+                    Color:
+                        rgba: (0,0,0,1)
+                    Line:
+                        width: 1.1
+                        rectangle: self.x, self.y, self.width, self.height
+
+            Label:
+                id: non_dom_time_label
+                text: ""
+                font_size: 16
+                backgorund_colour:(0,1,1,1)
+                color: (0,0,0,1)
+                size_hint:0.3,0.1
+                valign: "middle"
+                canvas.before:
+                    Color:
+                        rgba: (0,0,0,1)
+                    Line:
+                        width: 1.1
+                        rectangle: self.x, self.y, self.width, self.height
+            Label:
+                text: "Time percentage (%)"
+                font_size: 16
+                backgorund_colour:(0,1,1,1)
+                color: (0,0,0,1)
+                size_hint:0.3,0.1
+                valign: "middle"
+                canvas.before:
+                    Color:
+                        rgba: (0,0,0,1)
+                    Line:
+                        width: 1.1
+                        rectangle: self.x, self.y, self.width, self.height
+            Label:
+                text: "normal"
+                font_size: 16
+                backgorund_colour:(0,1,1,1)
+                color: (0,0,0,1)
+                size_hint:0.3,0.1
+                valign: "middle"
+                canvas.before:
+                    Color:
+                        rgba: (0,0,0,1)
+                    Line:
+                        width: 1.1
+                        rectangle: self.x, self.y, self.width, self.height
+
+            Label:
+                id:dom_perc_label
+                text: "Dominant Hand"
+                font_size: 18
+                backgorund_colour:(0,1,1,1)
+                color: (0,0,0,1)
+                size_hint:0.3,0.1
+                valign: "middle"
+                canvas.before:
+                    Color:
+                        rgba: (0,0,0,1)
+                    Line:
+                        width: 1.1
+                        rectangle: self.x, self.y, self.width, self.height
+            Label:
+                id:non_dom_perc_label
+                text: ""
+                font_size: 18
+                backgorund_colour:(0,1,1,1)
+                color: (0,0,0,1)
+                size_hint:0.3,0.1
+                valign: "middle"
+                canvas.before:
+                    Color:
+                        rgba: (0,0,0,1)
+                    Line:
+                        width: 1.1
+                        rectangle: self.x, self.y, self.width, self.height
+            Label:
+                text: "Average time taken(s)"
+                font_size: 16
+                backgorund_colour:(0,1,1,1)
+                color: (0,0,0,1)
+                size_hint:0.3,0.1
+                valign: "middle"
+                canvas.before:
+                    Color:
+                        rgba: (0,0,0,1)
+                    Line:
+                        width: 1.1
+                        rectangle: self.x, self.y, self.width, self.height
+            Label:
+                text: "15"
+                font_size: 16
+                backgorund_colour:(0,1,1,1)
+                color: (0,0,0,1)
+                size_hint:0.3,0.1
+                valign: "middle"
+                canvas.before:
+                    Color:
+                        rgba: (0,0,0,1)
+                    Line:
+                        width: 1.1
+                        rectangle: self.x, self.y, self.width, self.height
+
+            Label:
+                id:dom_avg_label
+                text: "Dominant Hand"
+                font_size: 18
+                backgorund_colour:(0,1,1,1)
+                color: (0,0,0,1)
+                size_hint:0.3,0.1
+                valign: "middle"
+                canvas.before:
+                    Color:
+                        rgba: (0,0,0,1)
+                    Line:
+                        width: 1.1
+                        rectangle: self.x, self.y, self.width, self.height
+            Label:
+                id:non_dom_avg_label
+                text: ""
+                font_size: 18
+                backgorund_colour:(0,1,1,1)
+                color: (0,0,0,1)
+                size_hint:0.3,0.1
+                valign: "middle"
+                canvas.before:
+                    Color:
+                        rgba: (0,0,0,1)
+                    Line:
+                        width: 1.1
+                        rectangle: self.x, self.y, self.width, self.height
+            Label:
+                text: ""
+                font_size: 16
+                backgorund_colour:(0,1,1,1)
+                color: (0,0,0,1)
+                size_hint:0.2,0.1
+                valign: "middle"
+        
+            Label:
+              
+                text: ""
+                font_size: 16
+                backgorund_colour:(0,1,1,1)
+                color: (0,0,0,1)
+                size_hint:0.2,0.1
+                valign: "middle"
+
+            Label:
+                text: ""
+                font_size: 16
+                backgorund_colour:(0,1,1,1)
+                color: (0,0,0,1)
+                size_hint:0.2,0.1
+                valign: "middle"
+
+            Button:
+                id: save2
+                text: "Save and proceed"
+                font_size: 20
+                size_hint:0.2,0.1
+                valign: "middle"
+                background_color: (0,1,1,1)
+                on_press: root.capture()
+                on_release:
+                    app.root.current = "end" 
 
 <SaveScreen>:
     name: "end"
