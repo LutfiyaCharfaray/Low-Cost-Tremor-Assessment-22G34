@@ -700,7 +700,7 @@ WindowManager: # define screens
                     background_color: (0,1,1,1)
                     on_press: root.capture()
                     on_release:
-                        app.root.current = "results2"
+                        app.root.current = "result3"
                         sim_label.text= "(no tremor:0 - severe tremor:1)"   
                         sim_label2.text= "(no tremor:0 - severe tremor:1)"   
 
@@ -840,7 +840,7 @@ WindowManager: # define screens
             bold:True
             backgorund_colour:(0,1,1,1)
             color: (0,0,0,1)
-            size_hint:0.9,0.1
+            size_hint:0.9,0.05
             pos_hint: {"x":0.05, "y": 0.5}
             valign: "middle"
             padding_top: dp(50)
@@ -904,6 +904,62 @@ WindowManager: # define screens
                 backgorund_colour:(0,1,1,1)
                 color: (0,0,0,1)
                 size_hint:0.3,0.05
+                valign: "middle"
+                canvas.before:
+                    Color:
+                        rgba: (0,0,0,1)
+                    Line:
+                        width: 1.1
+                        rectangle: self.x, self.y, self.width, self.height
+
+            Label:
+                text: "Side"
+                font_size: 16
+                backgorund_colour:(0,1,1,1)
+                color: (0,0,0,1)
+                size_hint:0.3,0.1
+                valign: "middle"
+                canvas.before:
+                    Color:
+                        rgba: (0,0,0,1)
+                    Line:
+                        width: 1.1
+                        rectangle: self.x, self.y, self.width, self.height
+            Label:
+                text: ""
+                font_size: 16
+                backgorund_colour:(0,1,1,1)
+                color: (0,0,0,1)
+                size_hint:0.3,0.1
+                valign: "middle"
+                canvas.before:
+                    Color:
+                        rgba: (0,0,0,1)
+                    Line:
+                        width: 1.1
+                        rectangle: self.x, self.y, self.width, self.height
+
+            Label:
+                id:dom_side
+                text: "Dominant Hand"
+                font_size: 18
+                backgorund_colour:(0,1,1,1)
+                color: (0,0,0,1)
+                size_hint:0.3,0.1
+                valign: "middle"
+                canvas.before:
+                    Color:
+                        rgba: (0,0,0,1)
+                    Line:
+                        width: 1.1
+                        rectangle: self.x, self.y, self.width, self.height
+            Label:
+                id:non_dom_side
+                text: ""
+                font_size: 18
+                backgorund_colour:(0,1,1,1)
+                color: (0,0,0,1)
+                size_hint:0.3,0.1
                 valign: "middle"
                 canvas.before:
                     Color:
@@ -1010,7 +1066,62 @@ WindowManager: # define screens
                         rectangle: self.x, self.y, self.width, self.height
             Label:
                 id:non_dom_perc_label
+                text: ""
+                font_size: 18
+                backgorund_colour:(0,1,1,1)
+                color: (0,0,0,1)
+                size_hint:0.3,0.1
+                valign: "middle"
+                canvas.before:
+                    Color:
+                        rgba: (0,0,0,1)
+                    Line:
+                        width: 1.1
+                        rectangle: self.x, self.y, self.width, self.height
+            Label:
+                text: "Average time taken(s)"
+                font_size: 16
+                backgorund_colour:(0,1,1,1)
+                color: (0,0,0,1)
+                size_hint:0.3,0.1
+                valign: "middle"
+                canvas.before:
+                    Color:
+                        rgba: (0,0,0,1)
+                    Line:
+                        width: 1.1
+                        rectangle: self.x, self.y, self.width, self.height
+            Label:
+                text: "15"
+                font_size: 16
+                backgorund_colour:(0,1,1,1)
+                color: (0,0,0,1)
+                size_hint:0.3,0.1
+                valign: "middle"
+                canvas.before:
+                    Color:
+                        rgba: (0,0,0,1)
+                    Line:
+                        width: 1.1
+                        rectangle: self.x, self.y, self.width, self.height
+
+            Label:
+                id:dom_avg_label
                 text: "Dominant Hand"
+                font_size: 18
+                backgorund_colour:(0,1,1,1)
+                color: (0,0,0,1)
+                size_hint:0.3,0.1
+                valign: "middle"
+                canvas.before:
+                    Color:
+                        rgba: (0,0,0,1)
+                    Line:
+                        width: 1.1
+                        rectangle: self.x, self.y, self.width, self.height
+            Label:
+                id:non_dom_avg_label
+                text: ""
                 font_size: 18
                 backgorund_colour:(0,1,1,1)
                 color: (0,0,0,1)

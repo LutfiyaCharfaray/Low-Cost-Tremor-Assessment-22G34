@@ -379,6 +379,24 @@ class ResultScreen3(Screen):
         perc4=int((diff2/normal_time_nd)*100)
         self.ids.non_dom_perc_label.text=f'{str(perc4) + "% slower" }'
         
+       avg=(time_result+time_result2)/2
+       self.ids.dom_avg_label.text=f'{str(avg)}'
+       self.ids.non_dom_avg_label.text=f'{str(avg)}'
+       
+    #Hand sides   
+       hand_side= self.manager.get_screen("tick").sidee
+       self.ids.dom_side.text=hand_side
+       self.non=""
+    
+    #if statement that sets the hand side to left/right
+       if hand_side=="Left":
+        self.non="Right"
+        self.ids.non_dom_side.text=self.non
+       else:
+        self.non="Left"
+        self.ids.non_dom_side.text=self.non
+       
+        
     
 
 class SaveScreen(Screen):
