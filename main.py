@@ -290,7 +290,7 @@ class ResultScreen2(Screen):
     def capture(self, *args):
         name_ = App.get_running_app().root.get_screen("search").ids['word_input'].text
         sur_ = App.get_running_app().root.get_screen("search").ids['surname_input'].text
-        self.ids.export6.export_to_png(f"{name_} {sur_} results part2.png")
+        self.ids.export5.export_to_png(f"{name_} {sur_} results part2.png")
         
     def on_enter(self,*args):
        #Displays the time taken to draw dominant hand drawing
