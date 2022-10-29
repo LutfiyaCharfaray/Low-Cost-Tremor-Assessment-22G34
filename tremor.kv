@@ -319,7 +319,7 @@ WindowManager: # define screens
 <LineWidget>:
     canvas.before:
         Rectangle:
-            size: self.size #size: root.width, root.height 
+            size: self.size  
             pos: self.pos
             source: "linetemp.png"
 
@@ -427,7 +427,7 @@ WindowManager: # define screens
 <SpiralWidget>:
     canvas.before:
         Rectangle:
-            size: self.size #root.width, root.height 
+            size: self.size  
             pos: self.pos
             source: "spiraltemp.png"
 
@@ -504,18 +504,18 @@ WindowManager: # define screens
         size: root.width, root.height  
 
         Label:
-            text: "Rate the Tremor from 0-1 (minor to severe) \n- dominant hand"
+            text: "Rate the Tremor from 0-10 (minor to severe) \n- dominant hand"
             font_size: 34
 
         Label:
-            text: str(round(float(slider_.value), 2))
+            text: str(int(slider_.value))
             font_size: 30
 
         Slider:
             id: slider_
             min: 0
-            max: 1
-            step: 0.1
+            max: 10
+            step: 1
             orientation: "horizontal"
            
         Button:
@@ -563,7 +563,6 @@ WindowManager: # define screens
             on_release:
                 app.root.current = "rating2"
                 root.manager.transition.direction = "left"
-                #root.reset_canvas()
 
         Label:
             id : lb
@@ -601,18 +600,18 @@ WindowManager: # define screens
         size: root.width, root.height  
 
         Label:
-            text: "Rate the Tremor from 0-1 (minor to severe) \n- nondominant hand"
+            text: "Rate the Tremor from 0-10 (minor to severe) \n- nondominant hand"
             font_size: 34
 
         Label:
-            text: str(round(float(slide.value), 2))
+            text: str(int(slide.value))
             font_size: 30
 
         Slider:
             id: slide
             min: 0
-            max: 1
-            step: 0.1
+            max: 10
+            step: 1
             orientation: "horizontal"
            
         Button:
@@ -625,6 +624,7 @@ WindowManager: # define screens
                 app.root.current = "results_1"
 
 <ResultScreen1>:
+    name: "res1"
     vrs1: 0
     vrs2: 0 
 
@@ -638,7 +638,7 @@ WindowManager: # define screens
 
         GridLayout:
             rows:2
-            Label : 
+            Label: 
                 text: "Results" # Part 1
                 size_hint: 1,0.05
                 font_size: 25
@@ -646,8 +646,7 @@ WindowManager: # define screens
                 bold: True
                 color: (0,0,0,1)
 
-        #To show visual ratings for dominant and non-dominant hand drawings        
-            
+            #To show visual ratings for dominant and non-dominant hand drawings        
             BoxLayout:
                 orientation: "vertical"        
                 Label: 
@@ -662,8 +661,7 @@ WindowManager: # define screens
                     color: (0,0,0,1)
                     size_hint: 1, 0.2
 
-        #To show similarity index for dominant and non-dominant drawings      
-                    
+                #To show tremor index for dominant and non-dominant drawings (1-structural similarity index)   
                 GridLayout:
                     cols:2
                     size_hint: 1, 0.3
@@ -675,7 +673,7 @@ WindowManager: # define screens
 
                     Label:
                         id: sim_label
-                        text: "(no tremor:0 - severe tremor:1)"
+                        text: "(no tremor:0 - severe tremor:10)"
                         font_size: 20
                         color: (0,0,0,1)
                         size_hint: 1, 0.3
@@ -691,7 +689,7 @@ WindowManager: # define screens
                         
                     Label:
                         id: sim_label2
-                        text: "(no tremor:0 - severe tremor:1)"
+                        text: "(no tremor:0 - severe tremor:10)"
                         font_size: 20
                         color: (0,0,0,1)
                         size_hint: 1, 0.3  
@@ -715,8 +713,8 @@ WindowManager: # define screens
                     on_press: root.capture()
                     on_release:
                         app.root.current = "result2"
-                        sim_label.text= "(no tremor:0 - severe tremor:1)"   
-                        sim_label2.text= "(no tremor:0 - severe tremor:1)"   
+                        sim_label.text= "(no tremor:0 - severe tremor:10)"   
+                        sim_label2.text= "(no tremor:0 - severe tremor:10)"   
 
 <ResultScreen2>:
     name: "result2"
@@ -735,7 +733,7 @@ WindowManager: # define screens
             text: "Results Analysis"
             font_size: 25
             bold:True
-            backgorund_colour:(0,1,1,1)
+            background_color:(0,1,1,1)
             color: (0,0,0,1)
             size_hint:0.9,0.05
             pos_hint: {"x":0.05, "y": 0.5}
@@ -755,7 +753,7 @@ WindowManager: # define screens
                 text: "Parameter"
                 bold:True
                 font_size: 20
-                backgorund_colour:(0,1,1,1)
+                background_color:(0,1,1,1)
                 color: (0,0,0,1)
                 size_hint:0.2,0.05
                 valign: "middle"
@@ -769,7 +767,7 @@ WindowManager: # define screens
                 text: "Normal case"
                 font_size: 20
                 bold: True
-                backgorund_colour:(0,1,1,1)
+                background_color:(0,1,1,1)
                 color: (0,0,0,1)
                 size_hint:0.3,0.05
                 valign: "middle"
@@ -784,7 +782,7 @@ WindowManager: # define screens
                 text: "Dominant hand"
                 font_size: 20
                 bold: True
-                backgorund_colour:(0,1,1,1)
+                background_color:(0,1,1,1)
                 color: (0,0,0,1)
                 size_hint:0.3,0.05
                 valign: "middle"
@@ -798,7 +796,7 @@ WindowManager: # define screens
                 text: "Non-dominant Hand"
                 font_size: 18
                 bold: True
-                backgorund_colour:(0,1,1,1)
+                background_color:(0,1,1,1)
                 color: (0,0,0,1)
                 size_hint:0.3,0.05
                 valign: "middle"
@@ -812,7 +810,7 @@ WindowManager: # define screens
             Label:
                 text: "Side"
                 font_size: 16
-                backgorund_colour:(0,1,1,1)
+                background_color:(0,1,1,1)
                 color: (0,0,0,1)
                 size_hint:0.3,0.1
                 valign: "middle"
@@ -825,7 +823,7 @@ WindowManager: # define screens
             Label:
                 text: "-"
                 font_size: 16
-                backgorund_colour:(0,1,1,1)
+                background_color:(0,1,1,1)
                 color: (0,0,0,1)
                 size_hint:0.3,0.1
                 valign: "middle"
@@ -840,7 +838,7 @@ WindowManager: # define screens
                 id:dom_side
                 text: "Dominant Hand"
                 font_size: 18
-                backgorund_colour:(0,1,1,1)
+                background_color:(0,1,1,1)
                 color: (0,0,0,1)
                 size_hint:0.3,0.1
                 valign: "middle"
@@ -854,7 +852,7 @@ WindowManager: # define screens
                 id:non_dom_side
                 text: ""
                 font_size: 18
-                backgorund_colour:(0,1,1,1)
+                background_color:(0,1,1,1)
                 color: (0,0,0,1)
                 size_hint:0.3,0.1
                 valign: "middle"
@@ -863,36 +861,12 @@ WindowManager: # define screens
                         rgba: (0,0,0,1)
                     Line:
                         width: 1.1
-                        rectangle: self.x, self.y, self.width, self.height
-
-                GridLayout:
-                    cols:2
-                    Label:
-                        text:"Time % -Non-dominant hand:"
-                        font_size: 20
-                        color: (0,0,0,1)
-                       
-                    Label:
-                        id:time_percentage_results2
-                        text:"Percentage time"
-                        font_size: 20
-                        color: (0,0,0,1)
-                  
-                Button:
-                    id: save2
-                    text: "Save and proceed"
-                    font_size: 20
-                    size_hint: 0.3, 0.5
-                    pos_hint: {"x":0.7, "y": 0.5}
-                    background_color: (0,1,1,1)
-                    on_press: root.capture()
-                    on_release:
-                        app.root.current = "end" #"result3"         
+                        rectangle: self.x, self.y, self.width, self.height      
 
             Label:
                 text: "Completion time(s)"
                 font_size: 16
-                backgorund_colour:(0,1,1,1)
+                background_color:(0,1,1,1)
                 color: (0,0,0,1)
                 size_hint:0.3,0.1
                 valign: "middle"
@@ -905,7 +879,7 @@ WindowManager: # define screens
             Label:
                 text: "14-16"
                 font_size: 16
-                backgorund_colour:(0,1,1,1)
+                background_color:(0,1,1,1)
                 color: (0,0,0,1)
                 size_hint:0.3,0.1
                 valign: "middle"
@@ -919,7 +893,7 @@ WindowManager: # define screens
                 id: dom_time_label
                 text: ""
                 font_size: 16
-                backgorund_colour:(0,1,1,1)
+                background_color:(0,1,1,1)
                 color: (0,0,0,1)
                 size_hint:0.3,0.1
                 valign: "middle"
@@ -934,7 +908,7 @@ WindowManager: # define screens
                 id: non_dom_time_label
                 text: ""
                 font_size: 16
-                backgorund_colour:(0,1,1,1)
+                background_color:(0,1,1,1)
                 color: (0,0,0,1)
                 size_hint:0.3,0.1
                 valign: "middle"
@@ -947,7 +921,7 @@ WindowManager: # define screens
             Label:
                 text: "Time percentage (%)"
                 font_size: 16
-                backgorund_colour:(0,1,1,1)
+                background_color:(0,1,1,1)
                 color: (0,0,0,1)
                 size_hint:0.3,0.1
                 valign: "middle"
@@ -960,7 +934,7 @@ WindowManager: # define screens
             Label:
                 text: "normal"
                 font_size: 16
-                backgorund_colour:(0,1,1,1)
+                background_color:(0,1,1,1)
                 color: (0,0,0,1)
                 size_hint:0.3,0.1
                 valign: "middle"
@@ -975,7 +949,7 @@ WindowManager: # define screens
                 id:dom_perc_label
                 text: "Dominant Hand"
                 font_size: 18
-                backgorund_colour:(0,1,1,1)
+                background_color:(0,1,1,1)
                 color: (0,0,0,1)
                 size_hint:0.3,0.1
                 valign: "middle"
@@ -989,7 +963,7 @@ WindowManager: # define screens
                 id:non_dom_perc_label
                 text: ""
                 font_size: 18
-                backgorund_colour:(0,1,1,1)
+                background_color:(0,1,1,1)
                 color: (0,0,0,1)
                 size_hint:0.3,0.1
                 valign: "middle"
@@ -1002,7 +976,7 @@ WindowManager: # define screens
             Label:
                 text: "Average time taken(s)"
                 font_size: 16
-                backgorund_colour:(0,1,1,1)
+                background_color:(0,1,1,1)
                 color: (0,0,0,1)
                 size_hint:0.3,0.1
                 valign: "middle"
@@ -1015,7 +989,7 @@ WindowManager: # define screens
             Label:
                 text: "15"
                 font_size: 16
-                backgorund_colour:(0,1,1,1)
+                background_color:(0,1,1,1)
                 color: (0,0,0,1)
                 size_hint:0.3,0.1
                 valign: "middle"
@@ -1030,7 +1004,7 @@ WindowManager: # define screens
                 id:dom_avg_label
                 text: "Dominant Hand"
                 font_size: 18
-                backgorund_colour:(0,1,1,1)
+                background_color:(0,1,1,1)
                 color: (0,0,0,1)
                 size_hint:0.3,0.1
                 valign: "middle"
@@ -1044,7 +1018,7 @@ WindowManager: # define screens
                 id:non_dom_avg_label
                 text: ""
                 font_size: 18
-                backgorund_colour:(0,1,1,1)
+                background_color:(0,1,1,1)
                 color: (0,0,0,1)
                 size_hint:0.3,0.1
                 valign: "middle"
@@ -1057,16 +1031,15 @@ WindowManager: # define screens
             Label:
                 text: ""
                 font_size: 16
-                backgorund_colour:(0,1,1,1)
+                background_color:(0,1,1,1)
                 color: (0,0,0,1)
                 size_hint:0.2,0.1
                 valign: "middle"
         
             Label:
-              
                 text: ""
                 font_size: 16
-                backgorund_colour:(0,1,1,1)
+                background_color:(0,1,1,1)
                 color: (0,0,0,1)
                 size_hint:0.2,0.1
                 valign: "middle"
@@ -1074,7 +1047,7 @@ WindowManager: # define screens
             Label:
                 text: ""
                 font_size: 16
-                backgorund_colour:(0,1,1,1)
+                background_color:(0,1,1,1)
                 color: (0,0,0,1)
                 size_hint:0.2,0.1
                 valign: "middle"
