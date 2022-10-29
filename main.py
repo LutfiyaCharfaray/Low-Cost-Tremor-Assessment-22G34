@@ -350,6 +350,7 @@ def Notif(diff1, diff2): #sends an alert if tremor is detected
         notif = Popup(title = 'Tremor Alert', content = Label(text='Possible Tremor!'), 
                             size_hint=(None, None), size=(300,200))
         notif.open()
+        return True
        
 class SaveScreen(Screen):
     def change_dir(self):
