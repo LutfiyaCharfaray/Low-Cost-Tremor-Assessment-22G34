@@ -718,350 +718,353 @@ WindowManager: # define screens
 
 <ResultScreen2>:
     name: "result2"
+    
     FloatLayout:
+        id:export5
         canvas.before:
             Rectangle:
                 size: self.size
                 pos: self.pos
                 source: "blue.jpeg"
-    BoxLayout:
-        id:export5
-        orientation:"vertical"
-        padding: [dp(20),0,0,0] 
-         
-        Label:
-            text: "Results Analysis"
-            font_size: 25
-            bold:True
-            background_color:(0,1,1,1)
-            color: (0,0,0,1)
-            size_hint:0.9,0.05
-            pos_hint: {"x":0.05, "y": 0.5}
-            valign: "middle"
-            padding_top: dp(50)
-            canvas.before:
-                Color:
-                    rgba: (0,0,0,1)
-                Line:
-                    width: 1.1
-                    rectangle: self.x, self.y, self.width, self.height
-        GridLayout:
-            cols:4
-            size_hint:0.9,0.4
-            pos_hint: {"x":0.05, "y": 0.5}
+        BoxLayout:
+            orientation:"vertical"
+            padding: [dp(20),0,0,0] 
+            
             Label:
-                text: "Parameter"
+                text: "Results Analysis"
+                font_size: 25
                 bold:True
-                font_size: 20
                 background_color:(0,1,1,1)
                 color: (0,0,0,1)
-                size_hint:0.2,0.05
+                size_hint:0.9,0.05
+                pos_hint: {"x":0.05, "y": 0.5}
                 valign: "middle"
+                padding_top: dp(50)
                 canvas.before:
                     Color:
                         rgba: (0,0,0,1)
                     Line:
                         width: 1.1
                         rectangle: self.x, self.y, self.width, self.height
-            Label:
-                text: "Normal case"
-                font_size: 20
-                bold: True
-                background_color:(0,1,1,1)
-                color: (0,0,0,1)
-                size_hint:0.3,0.05
-                valign: "middle"
-                canvas.before:
-                    Color:
-                        rgba: (0,0,0,1)
-                    Line:
-                        width: 1.1
-                        rectangle: self.x, self.y, self.width, self.height
+            GridLayout:
+                cols:4
+                size_hint:0.9,0.4
+                pos_hint: {"x":0.05, "y": 0.5}
+                Label:
+                    text: "Parameter"
+                    bold:True
+                    font_size: 20
+                    background_color:(0,1,1,1)
+                    color: (0,0,0,1)
+                    size_hint:0.2,0.05
+                    valign: "middle"
+                    canvas.before:
+                        Color:
+                            rgba: (0,0,0,1)
+                        Line:
+                            width: 1.1
+                            rectangle: self.x, self.y, self.width, self.height
+                Label:
+                    text: "Normal case"
+                    font_size: 20
+                    bold: True
+                    background_color:(0,1,1,1)
+                    color: (0,0,0,1)
+                    size_hint:0.3,0.05
+                    valign: "middle"
+                    canvas.before:
+                        Color:
+                            rgba: (0,0,0,1)
+                        Line:
+                            width: 1.1
+                            rectangle: self.x, self.y, self.width, self.height
 
-            Label:
-                text: "Dominant hand"
-                font_size: 20
-                bold: True
-                background_color:(0,1,1,1)
-                color: (0,0,0,1)
-                size_hint:0.3,0.05
-                valign: "middle"
-                canvas.before:
-                    Color:
-                        rgba: (0,0,0,1)
-                    Line:
-                        width: 1.1
-                        rectangle: self.x, self.y, self.width, self.height
-            Label:
-                text: "Non-dominant Hand"
-                font_size: 18
-                bold: True
-                background_color:(0,1,1,1)
-                color: (0,0,0,1)
-                size_hint:0.3,0.05
-                valign: "middle"
-                canvas.before:
-                    Color:
-                        rgba: (0,0,0,1)
-                    Line:
-                        width: 1.1
-                        rectangle: self.x, self.y, self.width, self.height
+                Label:
+                    text: "Dominant hand"
+                    font_size: 20
+                    bold: True
+                    background_color:(0,1,1,1)
+                    color: (0,0,0,1)
+                    size_hint:0.3,0.05
+                    valign: "middle"
+                    canvas.before:
+                        Color:
+                            rgba: (0,0,0,1)
+                        Line:
+                            width: 1.1
+                            rectangle: self.x, self.y, self.width, self.height
+                Label:
+                    text: "Non-dominant Hand"
+                    font_size: 18
+                    bold: True
+                    background_color:(0,1,1,1)
+                    color: (0,0,0,1)
+                    size_hint:0.3,0.05
+                    valign: "middle"
+                    canvas.before:
+                        Color:
+                            rgba: (0,0,0,1)
+                        Line:
+                            width: 1.1
+                            rectangle: self.x, self.y, self.width, self.height
 
-            Label:
-                text: "Side"
-                font_size: 16
-                background_color:(0,1,1,1)
-                color: (0,0,0,1)
-                size_hint:0.3,0.1
-                valign: "middle"
-                canvas.before:
-                    Color:
-                        rgba: (0,0,0,1)
-                    Line:
-                        width: 1.1
-                        rectangle: self.x, self.y, self.width, self.height
-            Label:
-                text: "-"
-                font_size: 16
-                background_color:(0,1,1,1)
-                color: (0,0,0,1)
-                size_hint:0.3,0.1
-                valign: "middle"
-                canvas.before:
-                    Color:
-                        rgba: (0,0,0,1)
-                    Line:
-                        width: 1.1
-                        rectangle: self.x, self.y, self.width, self.height
+                Label:
+                    text: "Side"
+                    font_size: 16
+                    background_color:(0,1,1,1)
+                    color: (0,0,0,1)
+                    size_hint:0.3,0.1
+                    valign: "middle"
+                    canvas.before:
+                        Color:
+                            rgba: (0,0,0,1)
+                        Line:
+                            width: 1.1
+                            rectangle: self.x, self.y, self.width, self.height
+                Label:
+                    text: "-"
+                    font_size: 16
+                    background_color:(0,1,1,1)
+                    color: (0,0,0,1)
+                    size_hint:0.3,0.1
+                    valign: "middle"
+                    canvas.before:
+                        Color:
+                            rgba: (0,0,0,1)
+                        Line:
+                            width: 1.1
+                            rectangle: self.x, self.y, self.width, self.height
 
-            Label:
-                id:dom_side
-                text: "Dominant Hand"
-                font_size: 18
-                background_color:(0,1,1,1)
-                color: (0,0,0,1)
-                size_hint:0.3,0.1
-                valign: "middle"
-                canvas.before:
-                    Color:
-                        rgba: (0,0,0,1)
-                    Line:
-                        width: 1.1
-                        rectangle: self.x, self.y, self.width, self.height
-            Label:
-                id:non_dom_side
-                text: ""
-                font_size: 18
-                background_color:(0,1,1,1)
-                color: (0,0,0,1)
-                size_hint:0.3,0.1
-                valign: "middle"
-                canvas.before:
-                    Color:
-                        rgba: (0,0,0,1)
-                    Line:
-                        width: 1.1
-                        rectangle: self.x, self.y, self.width, self.height      
+                Label:
+                    id:dom_side
+                    text: "Dominant Hand"
+                    font_size: 18
+                    background_color:(0,1,1,1)
+                    color: (0,0,0,1)
+                    size_hint:0.3,0.1
+                    valign: "middle"
+                    canvas.before:
+                        Color:
+                            rgba: (0,0,0,1)
+                        Line:
+                            width: 1.1
+                            rectangle: self.x, self.y, self.width, self.height
+                Label:
+                    id:non_dom_side
+                    text: ""
+                    font_size: 18
+                    background_color:(0,1,1,1)
+                    color: (0,0,0,1)
+                    size_hint:0.3,0.1
+                    valign: "middle"
+                    canvas.before:
+                        Color:
+                            rgba: (0,0,0,1)
+                        Line:
+                            width: 1.1
+                            rectangle: self.x, self.y, self.width, self.height      
 
-            Label:
-                text: "Completion time(s)"
-                font_size: 16
-                background_color:(0,1,1,1)
-                color: (0,0,0,1)
-                size_hint:0.3,0.1
-                valign: "middle"
-                canvas.before:
-                    Color:
-                        rgba: (0,0,0,1)
-                    Line:
-                        width: 1.1
-                        rectangle: self.x, self.y, self.width, self.height
-            Label:
-                text: "14-16"
-                font_size: 16
-                background_color:(0,1,1,1)
-                color: (0,0,0,1)
-                size_hint:0.3,0.1
-                valign: "middle"
-                canvas.before:
-                    Color:
-                        rgba: (0,0,0,1)
-                    Line:
-                        width: 1.1
-                        rectangle: self.x, self.y, self.width, self.height
-            Label:
-                id: dom_time_label
-                text: ""
-                font_size: 16
-                background_color:(0,1,1,1)
-                color: (0,0,0,1)
-                size_hint:0.3,0.1
-                valign: "middle"
-                canvas.before:
-                    Color:
-                        rgba: (0,0,0,1)
-                    Line:
-                        width: 1.1
-                        rectangle: self.x, self.y, self.width, self.height
+                Label:
+                    text: "Completion time(s)"
+                    font_size: 16
+                    background_color:(0,1,1,1)
+                    color: (0,0,0,1)
+                    size_hint:0.3,0.1
+                    valign: "middle"
+                    canvas.before:
+                        Color:
+                            rgba: (0,0,0,1)
+                        Line:
+                            width: 1.1
+                            rectangle: self.x, self.y, self.width, self.height
+                Label:
+                    text: "14-16"
+                    font_size: 16
+                    background_color:(0,1,1,1)
+                    color: (0,0,0,1)
+                    size_hint:0.3,0.1
+                    valign: "middle"
+                    canvas.before:
+                        Color:
+                            rgba: (0,0,0,1)
+                        Line:
+                            width: 1.1
+                            rectangle: self.x, self.y, self.width, self.height
+                Label:
+                    id: dom_time_label
+                    text: ""
+                    font_size: 16
+                    background_color:(0,1,1,1)
+                    color: (0,0,0,1)
+                    size_hint:0.3,0.1
+                    valign: "middle"
+                    canvas.before:
+                        Color:
+                            rgba: (0,0,0,1)
+                        Line:
+                            width: 1.1
+                            rectangle: self.x, self.y, self.width, self.height
 
-            Label:
-                id: non_dom_time_label
-                text: ""
-                font_size: 16
-                background_color:(0,1,1,1)
-                color: (0,0,0,1)
-                size_hint:0.3,0.1
-                valign: "middle"
-                canvas.before:
-                    Color:
-                        rgba: (0,0,0,1)
-                    Line:
-                        width: 1.1
-                        rectangle: self.x, self.y, self.width, self.height
-            Label:
-                text: "Time percentage (%)"
-                font_size: 16
-                background_color:(0,1,1,1)
-                color: (0,0,0,1)
-                size_hint:0.3,0.1
-                valign: "middle"
-                canvas.before:
-                    Color:
-                        rgba: (0,0,0,1)
-                    Line:
-                        width: 1.1
-                        rectangle: self.x, self.y, self.width, self.height
-            Label:
-                text: "normal"
-                font_size: 16
-                background_color:(0,1,1,1)
-                color: (0,0,0,1)
-                size_hint:0.3,0.1
-                valign: "middle"
-                canvas.before:
-                    Color:
-                        rgba: (0,0,0,1)
-                    Line:
-                        width: 1.1
-                        rectangle: self.x, self.y, self.width, self.height
+                Label:
+                    id: non_dom_time_label
+                    text: ""
+                    font_size: 16
+                    background_color:(0,1,1,1)
+                    color: (0,0,0,1)
+                    size_hint:0.3,0.1
+                    valign: "middle"
+                    canvas.before:
+                        Color:
+                            rgba: (0,0,0,1)
+                        Line:
+                            width: 1.1
+                            rectangle: self.x, self.y, self.width, self.height
+                Label:
+                    text: "Time percentage (%)"
+                    font_size: 16
+                    background_color:(0,1,1,1)
+                    color: (0,0,0,1)
+                    size_hint:0.3,0.1
+                    valign: "middle"
+                    canvas.before:
+                        Color:
+                            rgba: (0,0,0,1)
+                        Line:
+                            width: 1.1
+                            rectangle: self.x, self.y, self.width, self.height
+                Label:
+                    text: "normal"
+                    font_size: 16
+                    background_color:(0,1,1,1)
+                    color: (0,0,0,1)
+                    size_hint:0.3,0.1
+                    valign: "middle"
+                    canvas.before:
+                        Color:
+                            rgba: (0,0,0,1)
+                        Line:
+                            width: 1.1
+                            rectangle: self.x, self.y, self.width, self.height
 
-            Label:
-                id:dom_perc_label
-                text: "Dominant Hand"
-                font_size: 18
-                background_color:(0,1,1,1)
-                color: (0,0,0,1)
-                size_hint:0.3,0.1
-                valign: "middle"
-                canvas.before:
-                    Color:
-                        rgba: (0,0,0,1)
-                    Line:
-                        width: 1.1
-                        rectangle: self.x, self.y, self.width, self.height
-            Label:
-                id:non_dom_perc_label
-                text: ""
-                font_size: 18
-                background_color:(0,1,1,1)
-                color: (0,0,0,1)
-                size_hint:0.3,0.1
-                valign: "middle"
-                canvas.before:
-                    Color:
-                        rgba: (0,0,0,1)
-                    Line:
-                        width: 1.1
-                        rectangle: self.x, self.y, self.width, self.height
-            Label:
-                text: "Average time taken(s)"
-                font_size: 16
-                background_color:(0,1,1,1)
-                color: (0,0,0,1)
-                size_hint:0.3,0.1
-                valign: "middle"
-                canvas.before:
-                    Color:
-                        rgba: (0,0,0,1)
-                    Line:
-                        width: 1.1
-                        rectangle: self.x, self.y, self.width, self.height
-            Label:
-                text: "15"
-                font_size: 16
-                background_color:(0,1,1,1)
-                color: (0,0,0,1)
-                size_hint:0.3,0.1
-                valign: "middle"
-                canvas.before:
-                    Color:
-                        rgba: (0,0,0,1)
-                    Line:
-                        width: 1.1
-                        rectangle: self.x, self.y, self.width, self.height
+                Label:
+                    id:dom_perc_label
+                    text: "Dominant Hand"
+                    font_size: 18
+                    background_color:(0,1,1,1)
+                    color: (0,0,0,1)
+                    size_hint:0.3,0.1
+                    valign: "middle"
+                    canvas.before:
+                        Color:
+                            rgba: (0,0,0,1)
+                        Line:
+                            width: 1.1
+                            rectangle: self.x, self.y, self.width, self.height
+                Label:
+                    id:non_dom_perc_label
+                    text: ""
+                    font_size: 18
+                    background_color:(0,1,1,1)
+                    color: (0,0,0,1)
+                    size_hint:0.3,0.1
+                    valign: "middle"
+                    canvas.before:
+                        Color:
+                            rgba: (0,0,0,1)
+                        Line:
+                            width: 1.1
+                            rectangle: self.x, self.y, self.width, self.height
+                Label:
+                    text: "Average time taken(s)"
+                    font_size: 16
+                    background_color:(0,1,1,1)
+                    color: (0,0,0,1)
+                    size_hint:0.3,0.1
+                    valign: "middle"
+                    canvas.before:
+                        Color:
+                            rgba: (0,0,0,1)
+                        Line:
+                            width: 1.1
+                            rectangle: self.x, self.y, self.width, self.height
+                Label:
+                    text: "15"
+                    font_size: 16
+                    background_color:(0,1,1,1)
+                    color: (0,0,0,1)
+                    size_hint:0.3,0.1
+                    valign: "middle"
+                    canvas.before:
+                        Color:
+                            rgba: (0,0,0,1)
+                        Line:
+                            width: 1.1
+                            rectangle: self.x, self.y, self.width, self.height
 
-            Label:
-                id:dom_avg_label
-                text: "Dominant Hand"
-                font_size: 18
-                background_color:(0,1,1,1)
-                color: (0,0,0,1)
-                size_hint:0.3,0.1
-                valign: "middle"
-                canvas.before:
-                    Color:
-                        rgba: (0,0,0,1)
-                    Line:
-                        width: 1.1
-                        rectangle: self.x, self.y, self.width, self.height
-            Label:
-                id:non_dom_avg_label
-                text: ""
-                font_size: 18
-                background_color:(0,1,1,1)
-                color: (0,0,0,1)
-                size_hint:0.3,0.1
-                valign: "middle"
-                canvas.before:
-                    Color:
-                        rgba: (0,0,0,1)
-                    Line:
-                        width: 1.1
-                        rectangle: self.x, self.y, self.width, self.height
-            Label:
-                text: ""
-                font_size: 16
-                background_color:(0,1,1,1)
-                color: (0,0,0,1)
-                size_hint:0.2,0.1
-                valign: "middle"
-        
-            Label:
-                text: ""
-                font_size: 16
-                background_color:(0,1,1,1)
-                color: (0,0,0,1)
-                size_hint:0.2,0.1
-                valign: "middle"
+                Label:
+                    id:dom_avg_label
+                    text: "Dominant Hand"
+                    font_size: 18
+                    background_color:(0,1,1,1)
+                    color: (0,0,0,1)
+                    size_hint:0.3,0.1
+                    valign: "middle"
+                    canvas.before:
+                        Color:
+                            rgba: (0,0,0,1)
+                        Line:
+                            width: 1.1
+                            rectangle: self.x, self.y, self.width, self.height
+                Label:
+                    id:non_dom_avg_label
+                    text: ""
+                    font_size: 18
+                    background_color:(0,1,1,1)
+                    color: (0,0,0,1)
+                    size_hint:0.3,0.1
+                    valign: "middle"
+                    canvas.before:
+                        Color:
+                            rgba: (0,0,0,1)
+                        Line:
+                            width: 1.1
+                            rectangle: self.x, self.y, self.width, self.height
+                Label:
+                    text: ""
+                    font_size: 16
+                    background_color:(0,1,1,1)
+                    color: (0,0,0,1)
+                    size_hint:0.2,0.1
+                    valign: "middle"
+            
+                Label:
+                    text: ""
+                    font_size: 16
+                    background_color:(0,1,1,1)
+                    color: (0,0,0,1)
+                    size_hint:0.2,0.1
+                    valign: "middle"
 
-            Label:
-                text: ""
-                font_size: 16
-                background_color:(0,1,1,1)
-                color: (0,0,0,1)
-                size_hint:0.2,0.1
-                valign: "middle"
+                Label:
+                    text: ""
+                    font_size: 16
+                    background_color:(0,1,1,1)
+                    color: (0,0,0,1)
+                    size_hint:0.2,0.1
+                    valign: "middle"
 
-            Button:
-                id: save2
-                text: "Save and proceed"
-                font_size: 20
-                size_hint:0.2,0.1
-                valign: "middle"
-                background_color: (0,1,1,1)
-                on_press: root.capture()
-                on_release:
-                    app.root.current = "end" 
+                Button:
+                    id: save2
+                    text: "Save and proceed"
+                    font_size: 20
+                    size_hint:0.2,0.1
+                    valign: "middle"
+                    background_color: (0,1,1,1)
+                    on_press: 
+                        root.capture()
+                        root.Notif()
+                    on_release:
+                        app.root.current = "end" 
 
 <SaveScreen>:
     name: "end"

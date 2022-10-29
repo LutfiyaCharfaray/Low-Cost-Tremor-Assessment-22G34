@@ -285,13 +285,13 @@ class ResultScreen1(Screen):
             notif.open()
 
         return ti_dh, ti_nh
-      
+
 class ResultScreen2(Screen):
     def capture(self, *args):
         name_ = App.get_running_app().root.get_screen("search").ids['word_input'].text
         sur_ = App.get_running_app().root.get_screen("search").ids['surname_input'].text
         self.ids.export5.export_to_png(f"{name_} {sur_} results part2.png")
-        
+
     def on_enter(self,*args):
        #Displays the time taken to draw dominant hand drawing
        time_result=self.manager.get_screen("dom_spiral").finalCount
@@ -340,6 +340,16 @@ class ResultScreen2(Screen):
        else:
         self.non="Left"
         self.ids.non_dom_side.text=self.non
+
+    def Notif(self): #sends an alert if tremor is detected
+        time_result=self.manager.get_screen("dom_spiral").finalCount
+        time_result2=self.manager.get_screen("nondom_spiral").finalCount
+        atypical_time = 4 # 4 seconds longer than average "normal" time 
+
+        if time_result > atypical_time and time_result2 > atypical_time:
+            notif = Popup(title = 'Tremor Alert', content = Label(text='Possible Tremor!'), 
+                            size_hint=(None, None), size=(300,200))
+            notif.open()
        
 class SaveScreen(Screen):
     def change_dir(self):
