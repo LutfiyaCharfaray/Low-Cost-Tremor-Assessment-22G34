@@ -341,15 +341,15 @@ class ResultScreen2(Screen):
         self.non="Left"
         self.ids.non_dom_side.text=self.non
 
-    def Notif(self): #sends an alert if tremor is detected
-        time_result=self.manager.get_screen("dom_spiral").finalCount
-        time_result2=self.manager.get_screen("nondom_spiral").finalCount
-        atypical_time = 4 # 4 seconds longer than average "normal" time 
+        Notif(diff,diff2)        
 
-        if time_result > atypical_time and time_result2 > atypical_time:
-            notif = Popup(title = 'Tremor Alert', content = Label(text='Possible Tremor!'), 
+def Notif(diff1, diff2): #sends an alert if tremor is detected
+    atypical_time = 4 # 4 seconds longer than average "normal" time 
+
+    if diff1 > atypical_time and diff2 > atypical_time:
+        notif = Popup(title = 'Tremor Alert', content = Label(text='Possible Tremor!'), 
                             size_hint=(None, None), size=(300,200))
-            notif.open()
+        notif.open()
        
 class SaveScreen(Screen):
     def change_dir(self):
