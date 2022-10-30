@@ -153,19 +153,19 @@ class DrawLine(Widget):
         
         x_co = touch.x #get coordinates
         y_co = touch.y
-        print("Touch Start:", "X = ", x_co, "Y = ",  y_co)
+        #print("Touch Start:", "X = ", x_co, "Y = ",  y_co)
 
     def on_touch_move(self, touch):
         if 'line' in touch.ud:
             touch.ud['line'].points += [touch.x, touch.y]
             x_co = touch.x 
             y_co = touch.y
-            print("X  = ", x_co, "Y = ", y_co)
+            #print("X  = ", x_co, "Y = ", y_co)
         
     def on_touch_up(self, touch):
         x_co = touch.x 
         y_co = touch.y
-        print("Touch End: ", "X = ", x_co, "Y = ", y_co)
+        #print("Touch End: ", "X = ", x_co, "Y = ", y_co)
 
     def reset_canvas(self):
         keep = self.children[:]
@@ -210,7 +210,6 @@ class DSpiralScreen(Screen):
        
     def start(self):
        Clock.schedule_interval(self.update_label,1)
-
 
 class VRScreen1(Screen): #Visual Rating Screen 1
     pass
@@ -271,31 +270,34 @@ class ResultScreen1(Screen):
         ssim_dh = sp.get_sim(original, resized_dh) #perform ssim
         ssim_nh = sp.get_sim(original, resized_nh) 
         
-        ti_dh = 1 - ssim_dh # tremor index
-        ti_nh = 1 - ssim_nh
-        ti_dh = float(round(ti_dh, 2)) #round off to 2 decimal places
-        ti_nh = float(round(ti_nh, 2))
+        ti_dh = (1 - ssim_dh)*10 # tremor index = (1-ssim)*10 to make scale 0-10
+        ti_nh = (1 - ssim_nh)*10
+        TI_dh = int(ti_dh) 
+        TI_nh = int(ti_nh)
 
         #send to kv to create label
-        self.ids.sim_label.text = str(ti_dh)
-        self.ids.sim_label2.text = str(ti_nh)
+        self.ids.sim_label.text = str(TI_dh)
+        self.ids.sim_label2.text = str(TI_nh)
+       
+        if TI_dh >= 2 and TI_nh >= 2:
+            notif = Popup(title = 'Tremor Alert', content = Label(text='Possible Tremor!'), 
+                            size_hint=(None, None), size=(300,200))
+            notif.open()
+
         return ti_dh, ti_nh
-      
+
 class ResultScreen2(Screen):
     def capture(self, *args):
         name_ = App.get_running_app().root.get_screen("search").ids['word_input'].text
         sur_ = App.get_running_app().root.get_screen("search").ids['surname_input'].text
-        results1 = self.ids.export6.export_to_png(f"{name_} {sur_} results part2.png")
-        
+        self.ids.export5.export_to_png(f"{name_} {sur_} results part2.png")
+
     def on_enter(self,*args):
-        
-        #Displays the time taken to draw dominant hand drawing
- 
+       #Displays the time taken to draw dominant hand drawing
        time_result=self.manager.get_screen("dom_spiral").finalCount
        self.ids.dom_time_label.text=f'{str(time_result)}'
        
-#Obtain time values from non-doiminant hand spiral drawing
-       
+       #Obtain time values from non-dominant hand spiral drawing
        time_result2=self.manager.get_screen("nondom_spiral").finalCount
        self.ids.non_dom_time_label.text=f'{str(time_result2)}'
        
@@ -338,10 +340,18 @@ class ResultScreen2(Screen):
        else:
         self.non="Left"
         self.ids.non_dom_side.text=self.non
-       
-        
-    
 
+        Notif(diff,diff2)        
+
+def Notif(diff1, diff2): #sends an alert if tremor is detected
+    atypical_time = 4 # 4 seconds longer than average "normal" time 
+
+    if diff1 > atypical_time and diff2 > atypical_time:
+        notif = Popup(title = 'Tremor Alert', content = Label(text='Possible Tremor!'), 
+                            size_hint=(None, None), size=(300,200))
+        notif.open()
+        return True
+       
 class SaveScreen(Screen):
     def change_dir(self):
         # save images in directory
@@ -352,7 +362,7 @@ class SaveScreen(Screen):
         sur_ = App.get_running_app().root.get_screen("search").ids['surname_input'].text
 
         images = [f"{name_} {sur_} practice round.png", f"{name_} {sur_} dominant hand.png", f"{name_} {sur_} non-dominant hand.png",
-                f"{name_} {sur_} dh_resized_image.png", f"{name_} {sur_} nh_resized_image.png", f"{name_} {sur_} results part1.png",f"{name_} {sur_} results part2.png" ]
+                f"{name_} {sur_} dh_resized_image.png", f"{name_} {sur_} nh_resized_image.png", f"{name_} {sur_} results part1.png",f"{name_} {sur_} results part2.png"]
 
         # iterate on all files to move them to destination folder
         for i in images:

@@ -653,5 +653,14 @@ class formTestCase(unittest.TestCase):
         invalnum = submit("Peter","Parker","24","0369852156")
         self.assertEqual(ans,invalnum)
 
+class NotifTestCase(unittest.TestCase):
+    def test_correctNotif(self):
+        pop = main.Notif(6,10)
+        self.assertTrue(pop, "popup does not open")
+
+    def test_noNotif(self):
+        pop = main.Notif(2,3)
+        self.assertFalse(pop, "popup opens")
+
 if __name__ == '__main__':
     unittest.main()
