@@ -661,6 +661,10 @@ WindowManager: # define screens
                     color: (0,0,0,1)
                     size_hint: 1, 0.2
 
+                Image:
+                    id: imageView
+                    source: "blue.jpeg"
+
                 #To show tremor index for dominant and non-dominant drawings (1-structural similarity index)   
                 GridLayout:
                     cols:2
@@ -1063,7 +1067,7 @@ WindowManager: # define screens
                     on_press: 
                         root.capture()
                     on_release:
-                        app.root.current = "end" 
+                        app.root.current = "end"        
 
 <SaveScreen>:
     name: "end"

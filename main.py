@@ -249,42 +249,46 @@ class ResultScreen1(Screen):
         name_ = App.get_running_app().root.get_screen("search").ids['word_input'].text
         sur_ = App.get_running_app().root.get_screen("search").ids['surname_input'].text
 
-        results1 = self.ids.export4.export_to_png(f"{name_} {sur_} results part1.png")
+        self.ids.export4.export_to_png(f"{name_} {sur_} results part1.png")
         
     def simIndex(self): 
         original = cv2.imread("normal case.png") #load images "normal case.png" = 0.9 "spiraltemp.png"
 
         name_ = App.get_running_app().root.get_screen("search").ids['word_input'].text
         sur_ = App.get_running_app().root.get_screen("search").ids['surname_input'].text
+
         compare_dh = cv2.imread(f"{name_} {sur_} dominant hand.png")
-        compare_nh = cv2.imread(f"{name_} {sur_} non-dominant hand.png")
+        comp_nh = cv2.imread(f"{name_} {sur_} non-dominant hand.png")
 
         # resize image by specifying width and height
         resized_dh = cv2.resize(compare_dh, (original.shape[1], original.shape[0]))
-        resized_nh = cv2.resize(compare_nh, (original.shape[1], original.shape[0]))
+        resize_nh = cv2.resize(comp_nh, (original.shape[1], original.shape[0]))
     
         #print(f"Resized Dimensions : {resized.shape}")
         cv2.imwrite(f"{name_} {sur_} dh_resized_image.png", resized_dh)
-        cv2.imwrite(f"{name_} {sur_} nh_resized_image.png", resized_nh)
+        cv2.imwrite(f"{name_} {sur_} nh_resized_image.png", resize_nh)
 
         ssim_dh = sp.get_sim(original, resized_dh) #perform ssim
-        ssim_nh = sp.get_sim(original, resized_nh) 
+        sim_nh = sp.get_sim(original, resize_nh) 
         
         ti_dh = (1 - ssim_dh)*10 # tremor index = (1-ssim)*10 to make scale 0-10
-        ti_nh = (1 - ssim_nh)*10
+        ti_nd = (1 - sim_nh)*10
         TI_dh = int(ti_dh) 
-        TI_nh = int(ti_nh)
+        TI_nd = int(ti_nd)
 
         #send to kv to create label
         self.ids.sim_label.text = str(TI_dh)
-        self.ids.sim_label2.text = str(TI_nh)
+        self.ids.sim_label2.text = str(TI_nd)
        
-        if TI_dh >= 2 and TI_nh >= 2:
+        if TI_dh >= 2 and TI_nd >= 2:
             notif = Popup(title = 'Tremor Alert', content = Label(text='Possible Tremor!'), 
                             size_hint=(None, None), size=(300,200))
             notif.open()
 
-        return ti_dh, ti_nh
+        graph, graph_name = sp.Histo(name_,sur_, f"{name_} {sur_} dominant hand.png",f"{name_} {sur_} non-dominant hand.png") #histogram saves automatically
+        self.ids.imageView.source = graph_name 
+
+        return ti_dh, ti_nd
 
 class ResultScreen2(Screen):
     def capture(self, *args):
@@ -351,6 +355,12 @@ def Notif(diff1, diff2): #sends an alert if tremor is detected
                             size_hint=(None, None), size=(300,200))
         notif.open()
         return True
+
+# class ResultScreen3(Screen):
+#     def display_graph(self):
+#         name_ = App.get_running_app().root.get_screen("search").ids['word_input'].text
+#         sur_ = App.get_running_app().root.get_screen("search").ids['surname_input'].text
+#         self.ids.imageView.source = f"{name_}, {sur_} graph.png"
        
 class SaveScreen(Screen):
     def change_dir(self):
