@@ -285,9 +285,6 @@ class ResultScreen1(Screen):
                             size_hint=(None, None), size=(300,200))
             notif.open()
 
-        graph, graph_name = sp.Histo(name_,sur_, f"{name_} {sur_} dominant hand.png",f"{name_} {sur_} non-dominant hand.png") #histogram saves automatically
-        self.ids.imageView.source = graph_name 
-
         return ti_dh, ti_nd
 
 class ResultScreen2(Screen):
@@ -356,12 +353,6 @@ def Notif(diff1, diff2): #sends an alert if tremor is detected
         notif.open()
         return True
 
-# class ResultScreen3(Screen):
-#     def display_graph(self):
-#         name_ = App.get_running_app().root.get_screen("search").ids['word_input'].text
-#         sur_ = App.get_running_app().root.get_screen("search").ids['surname_input'].text
-#         self.ids.imageView.source = f"{name_}, {sur_} graph.png"
-       
 class SaveScreen(Screen):
     def change_dir(self):
         # save images in directory
@@ -371,8 +362,11 @@ class SaveScreen(Screen):
         name_ = App.get_running_app().root.get_screen("search").ids['word_input'].text
         sur_ = App.get_running_app().root.get_screen("search").ids['surname_input'].text
 
+        graph,graph_name = sp.Histo(name_,sur_, f"{name_} {sur_} dominant hand.png", f"{name_} {sur_} non-dominant hand.png")
+
         images = [f"{name_} {sur_} practice round.png", f"{name_} {sur_} dominant hand.png", f"{name_} {sur_} non-dominant hand.png",
-                f"{name_} {sur_} dh_resized_image.png", f"{name_} {sur_} nh_resized_image.png", f"{name_} {sur_} results part1.png",f"{name_} {sur_} results part2.png"]
+                f"{name_} {sur_} dh_resized_image.png", f"{name_} {sur_} nh_resized_image.png", f"{name_} {sur_} results part1.png",
+                f"{name_} {sur_} results part2.png", graph_name]
 
         # iterate on all files to move them to destination folder
         for i in images:
