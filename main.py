@@ -307,12 +307,12 @@ class ResultScreen1(Screen):
         nondom_error = round(((speed_n - norm_v2)/norm_v2)*100 , 1)
 
         if dom_error >= 0 and nondom_error >= 0: # (positive)
-            self.ids.perc_dom.text = "{}%. slower than normal".format(str(dom_error))
-            self.ids.perc_non.text = "{}%. slower than normal".format(str(nondom_error))
+            self.ids.perc_dom.text = "{}%. slower than normal".format(str(abs(dom_error)))
+            self.ids.perc_non.text = "{}%. slower than normal".format(str(abs(nondom_error)))
 
         else: # negative
-            self.ids.perc_dom.text = "{}%. faster than normal".format(str(dom_error))
-            self.ids.perc_non.text = "{}%. faster than normal".format(str(nondom_error))
+            self.ids.perc_dom.text = "{}%. faster than normal".format(str(abs(dom_error)))
+            self.ids.perc_non.text = "{}%. faster than normal".format(str(abs(nondom_error)))
 
         return speed_d, speed_n
 
