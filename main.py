@@ -281,10 +281,40 @@ class ResultScreen1(Screen):
        
         if TI_dh >= 2 and TI_nh >= 2:
             notif = Popup(title = 'Tremor Alert', content = Label(text='Possible Tremor!'), 
-                            size_hint=(None, None), size=(300,200))
+                            size_hint=(None, None), size=(300,300))
             notif.open()
 
         return ti_dh, ti_nh
+
+    def quantify(self):
+        name_ = App.get_running_app().root.get_screen("search").ids['word_input'].text
+        sur_ = App.get_running_app().root.get_screen("search").ids['surname_input'].text
+
+        px_d = abs(sp.get_pixels1(name_, sur_))
+        dt_d = App.get_running_app().root.get_screen("dom_spiral").finalCount
+        speed_d = round((px_d/dt_d), 2)
+
+        px_n = abs(sp.get_pixels2(name_, sur_))
+        dt_n = App.get_running_app().root.get_screen("nondom_spiral").finalCount
+        speed_n = round((px_n/dt_n), 2)
+
+        self.ids.speed_d.text = "DH Drawing Speed: {} px/s".format(str(speed_d)) #px = pixels, s = sec
+        self.ids.speed_n.text = "NH Drawing Speed: {} px/s".format(str(speed_n))
+
+        norm_v = 9000
+        norm_v2 = 9000
+        dom_error = round(((speed_d - norm_v)/norm_v)*100 , 1) # relative error
+        nondom_error = round(((speed_n - norm_v2)/norm_v2)*100 , 1)
+
+        if dom_error >= 0 and nondom_error >= 0: # (positive)
+            self.ids.perc_dom.text = "{}%. slower than normal".format(str(dom_error))
+            self.ids.perc_non.text = "{}%. slower than normal".format(str(nondom_error))
+
+        else: # negative
+            self.ids.perc_dom.text = "{}%. faster than normal".format(str(dom_error))
+            self.ids.perc_non.text = "{}%. faster than normal".format(str(nondom_error))
+
+        return speed_d, speed_n
 
 class ResultScreen2(Screen):
     def capture(self, *args):

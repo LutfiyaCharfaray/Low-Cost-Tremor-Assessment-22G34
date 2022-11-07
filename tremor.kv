@@ -628,6 +628,10 @@ WindowManager: # define screens
     vrs1: 0
     vrs2: 0 
 
+    on_enter: 
+        root.simIndex()
+        root.quantify()
+
     FloatLayout:
         id: export4
         canvas.before:
@@ -636,85 +640,94 @@ WindowManager: # define screens
                 size: self.size
                 source: "blue.jpeg"
 
-        GridLayout:
-            rows:2
+        BoxLayout:
+            orientation: "vertical" 
             Label: 
                 text: "Results" # Part 1
-                size_hint: 1,0.05
+                pos_hint: {"center_x": 0.5, "top": 1}
                 font_size: 25
                 underline: True
                 bold: True
                 color: (0,0,0,1)
 
-            #To show visual ratings for dominant and non-dominant hand drawings        
-            BoxLayout:
-                orientation: "vertical"        
-                Label: 
-                    text: "Dominant Hand Tremor Visual Rating: {}".format(root.vrs1)
-                    font_size: 20
-                    color: (0,0,0,1)
-                    size_hint: 1, 0.3
-                  
-                Label: 
-                    text: "Non-Dominant Hand Tremor Visual Rating: {}".format(root.vrs2)
-                    font_size: 20
-                    color: (0,0,0,1)
-                    size_hint: 1, 0.2
+            GridLayout:
+                rows:1
 
-                #To show tremor index for dominant and non-dominant drawings (1-structural similarity index)   
                 GridLayout:
                     cols:2
-                    size_hint: 1, 0.3
+                    size_hint: 0.6, 0.4
+                      
+                    Label: #To show visual ratings for dominant and non-dominant hand drawings  
+                        text: "DH Tremor Visual Rating: {}".format(root.vrs1)
+                        font_size: 20
+                        color: (0,0,0,1)
+                        size_hint: 1, 0.3
+                        
                     Label: 
-                        text: "Tremor Index (dominant hand) = " 
+                        text: "NH Tremor Visual Rating: {}".format(root.vrs2)
+                        font_size: 20
+                        color: (0,0,0,1)
+                        size_hint: 1, 0.2
+
+                    #To show tremor index for dominant and non-dominant drawings (1-structural similarity index) 
+                    Label: 
+                        text: "Tremor Index (dominant hand) = "
                         font_size: 20
                         color: (0,0,0,1)
                         size_hint: 1, 0.3
 
                     Label:
                         id: sim_label
-                        text: "(no tremor:0 - severe tremor:10)"
                         font_size: 20
                         color: (0,0,0,1)
                         size_hint: 1, 0.3
 
-                GridLayout:
-                    cols:2
-                    size_hint: 1, 0.2
                     Label: 
-                        text: "Tremor Index (non-dominant hand) = " 
+                        text: "Tremor Index (non-dominant hand) = "
                         font_size: 20
                         color: (0,0,0,1)
                         size_hint: 1, 0.3
-                        
+                            
                     Label:
                         id: sim_label2
-                        text: "(no tremor:0 - severe tremor:10)"
                         font_size: 20
                         color: (0,0,0,1)
                         size_hint: 1, 0.3  
-                        
-                Button:
-                    id: ssim_dh
-                    text: "Tremor Index" 
-                    font_size: 20               
-                    size_hint: 0.2, 0.1
-                    pos_hint: {"x":0.4, "y": 1}
-                    background_color: (0,1,1,0.5)
-                    on_press: root.simIndex()
-  
+
+                    Label:
+                        id: speed_d
+                        font_size: 20
+                        color: (0,0,0,1)
+                        size_hint: 1, 0.3  
+
+                    Label:
+                        id: speed_n
+                        font_size: 20
+                        color: (0,0,0,1)
+                        size_hint: 1, 0.3  
+
+                    Label:
+                        id: perc_dom
+                        font_size: 20
+                        color: (0,0,0,1)
+                        size_hint: 1, 0.3  
+
+                    Label:
+                        id: perc_non
+                        font_size: 20
+                        color: (0,0,0,1)
+                        size_hint: 1, 0.3
+    
                 Button:
                     id: save
                     text: "Next"
                     font_size: 20
-                    size_hint: 0.3, 0.2
-                    pos_hint: {"x":0.7, "y": 0.5}
+                    size_hint: (None, None)
+                    size: (150, 80)
+                    pos_hint: {"right": 1, "bottom": 1} 
                     background_color: (0,1,1,1)
                     on_press: root.capture()
-                    on_release:
-                        app.root.current = "result2"
-                        sim_label.text= "(no tremor:0 - severe tremor:10)"   
-                        sim_label2.text= "(no tremor:0 - severe tremor:10)"   
+                    on_release: app.root.current = "result2" 
 
 <ResultScreen2>:
     name: "result2"
