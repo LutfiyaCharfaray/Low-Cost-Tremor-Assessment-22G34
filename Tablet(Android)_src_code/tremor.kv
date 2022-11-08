@@ -1,0 +1,1069 @@
+WindowManager: # define screens
+    LoginWindow:
+    MenuWindow:
+    RegWindow:
+    SearchWindow:
+    StartScreen:
+    PracScreen:
+    TickBox:
+    DSpiralScreen:
+    VRScreen1:
+        id: slider1
+        name: 'rating1'
+        manager: 'screen_manager'
+    NdSpiralScreen:
+    VRScreen2:
+        id: slider2
+        name: 'rating2'
+        manager: 'screen_manager'
+    ResultScreen1:
+        id: result1
+        name: 'results_1'
+        manager: 'screen_manager'
+        vrs1: slider1.vrs1
+        vrs2: slider2.vrs2
+    ResultScreen2:
+    SaveScreen:
+           
+<LoginWindow>:
+    name: "login"
+
+    canvas.before:
+        Rectangle:
+            pos: self.pos
+            size: self.size
+            source: "blue.jpeg" 
+
+    FloatLayout:
+
+        Label:
+            text: "Login with Password"
+            bold: True
+            pos_hint: {'center_x': 0.5, 'y':0.8} 
+            size_hint: (None, None)
+            width: 400
+            color: (0,0,0,1) 
+            font_size: 40
+
+        TextInput:
+            id: pw
+            multiline: False
+            hint_text: 'Please Enter Password:'
+            pos_hint: {'center_x': 0.5, 'center_y':0.7} 
+            size_hint: (None, None)
+            width: 600
+            height: 100
+            password: True
+            padding: [30,30,20,20]
+
+        Button:
+            text: "Submit"
+            pos_hint: {'center_x': 0.5, 'y':0.55}
+            size_hint: (None, None)
+            font_size: 28
+            width: 250
+            height: 100
+            background_color: (0,1,1,1) 
+            color: (1,1,1,1) 
+            on_release: 
+                app.root.current = "menu" if pw.text == "tremordr" else "login"
+                pw.text = "" 
+
+<MenuWindow>:
+    name: "menu"
+    FloatLayout:
+        canvas.before:
+            Rectangle:
+                size: self.size
+                pos: self.pos
+                source: "blue.jpeg"
+        FloatLayout: 
+
+            Button:
+                background_color: 0,1,1,1
+                text: "New Patient"
+                font_size: "30dp"
+                size_hint: 0.3, 0.2
+                pos_hint: {'x': .1, 'y': 0.3}
+                on_release:
+                    app.root.current = "form"
+
+            Button:
+                background_color: 0,1,1,1
+                text: "Existing Patient"
+                font_size: "30dp"
+                size_hint: 0.3, 0.2
+                pos_hint: {'x': .6, 'y': .3} 
+                on_release:
+                    app.root.current = "search"
+
+<RegWindow>:
+    name: "form"
+
+    ptname: ptname
+    ptsname: ptsname
+    ptage: ptage
+    ptnum: ptnum
+    
+    canvas.before:
+        Rectangle:
+            pos: self.pos
+            size: self.size
+            source: "blue.jpeg"
+
+    FloatLayout:
+
+        Label:
+            text: "Please Enter Patient Details"
+            font_size: 40
+            bold: True
+            color: (0,0,0,1) 
+            pos_hint: {'right': 0.7, 'y':0.45} 
+
+        BoxLayout:
+            orientation: 'vertical'
+            size: root.width, root.height
+
+            padding: 20
+            spacing: 20 
+
+            GridLayout:
+                cols: 2
+                padding: [20,20,20,20]
+                spacing: 20
+
+                Label:
+                    text: "Name: "
+                    color: (0,0,0,1) 
+                    font_size: 35
+                    halign: 'left'
+
+                TextInput:
+                    id: ptname
+                    multiline: False
+                    hint_text: 'Enter patient name'
+                    padding: 20 
+
+                Label:
+                    text: "Surname: "
+                    color: (0,0,0,1) 
+                    font_size: 35
+                    halign: 'left'
+                    
+                TextInput:
+                    id: ptsname
+                    multiline: False
+                    hint_text: 'Enter patient surname'
+                    padding: 20 
+
+                Label:
+                    text: "Age: "
+                    color: (0,0,0,1) 
+                    font_size: 35
+                    halign: 'left'
+
+                TextInput:
+                    id: ptage
+                    multiline: False
+                    min_value: 1
+                    max_value: 100
+                    hint_text: 'Enter an age between {} and {}'.format(self.min_value, self.max_value)
+                    padding: 20
+
+                Label:
+                    text: "Contact Number: "
+                    color: (0,0,0,1) 
+                    font_size: 35
+                    halign: 'left'
+
+                TextInput:
+                    id: ptnum
+                    multiline: False
+                    hint_text: 'Enter a 10 digit phone number'
+                    padding: 20 
+
+            Button:
+                text: "Submit"
+                background_color: (0,1,1,1)
+                color: (1,1,1,1)
+                pos_hint: {'x': 0.6}
+                size_hint: (None, None)
+                width: 400
+                height: 100
+                on_press: root.submit()
+
+            Button:
+                text: "Next"
+                background_color: (0,1,1,1)
+                color: (1,1,1,1)
+                pos_hint: {'x': 0.6}
+                size_hint: (None, None)
+                width: 400
+                height: 100
+                on_release:
+                    app.root.current = "search" 
+
+            Button:
+                text: "Return to menu"
+                pos_hint: {'left': 1, 'bottom' : 1} 
+                size_hint: (None, None)
+                width: 300
+                height: 75
+                font_size: 35
+                background_color: (0,1,1,1)
+                color: (1,1,1,1) 
+                on_release:
+                    app.root.current="menu"
+                    
+<SearchWindow>:
+    name: "search"
+    word_input:word_input
+    surname_input:surname_input
+    
+    FloatLayout:
+        canvas.before:
+            Rectangle:
+                size: self.size
+                pos: self.pos
+                source: "blue.jpeg"
+
+        Label:
+            text: "Please Enter Patient Name and Surname"
+            font_size: 40
+            bold: True
+            color: (0,0,0,1) 
+            pos_hint: {'center_x': 0.5, 'y':0.45} 
+        
+        FloatLayout:
+            Label:
+                id : word_label
+                text: "Enter patient name :"
+                pos_hint: {'x': 0.2, 'y' : 0.7}
+                size_hint: (0.2, 0.1)
+                color: (0,0,0,1)
+                font_size: 30
+                
+            TextInput:
+                id: word_input
+                multiline: False
+                pos_hint: {'x': 0.5 , 'y' : 0.7}
+                size_hint: (0.3, 0.1)
+
+            Label:
+                id : surname_label
+                text: "Enter patient surname :"
+                pos_hint: {'x': 0.2, 'y' : 0.5}
+                size_hint: (0.2, 0.1)
+                color: (0,0,0,1)
+                font_size: 30
+
+            TextInput:
+                id: surname_input
+                multiline: False
+                pos_hint: {'x': 0.5 , 'y' : 0.5}
+                size_hint: (0.3, 0.1)
+
+            Button:
+                text: "Show patient details"
+                pos_hint: {'x': 0.2 , 'y' : 0.3}
+                size_hint: (0.2, 0.1)
+                background_color: (0,1,1,1)
+                on_press: root.show_id()
+                font_size: 30
+            
+            Label:
+                id : id_label
+                text: "Patient ID"
+                pos_hint: {'x': 0.5, 'y' : 0.3}
+                size_hint: (0.3, 0.1)
+                font_size: 35
+                color: (0,0,0,1)
+
+            Button:
+                text: "Go to Assessment" 
+                pos_hint: {'x': 0.6, 'y' : 0.05}
+                size_hint: (0.3, 0.1)
+                font_size: 30
+                background_color: (0,1,1,1)
+                on_release:
+                    app.root.current="start"
+
+            Button:
+                text: "Return to menu"
+                pos_hint: {'x': 0.1, 'y' : 0.05}
+                size_hint: (0.3, 0.1)
+                font_size: 30
+                background_color: (0,1,1,1)
+                on_release:
+                    app.root.current="menu"
+
+<StartScreen>:
+    name: "start"
+    Button: 
+        text: "Start Assessment"
+        color: (1,1,1,1)
+        background_color: (0,1,1,1)
+        font_size: 60
+        on_release:
+            app.root.current = "prac"
+
+<LineWidget>:
+    canvas.before:
+        Rectangle:
+            size: self.size  
+            pos: self.pos
+            source: "linetemp.jpeg"
+
+<DrawLine>:
+    Button: 
+        id: 'clearbutton'
+        text: "Clear"
+        right: root.right
+        top: root.top
+        font_size: 20
+        width: 140
+        height: 100
+        color: (1,1,1,1)
+        background_color: (0,1,1,1)
+        on_release: root.reset_canvas()
+        
+<PracScreen>:
+    name: "prac"
+
+    on_pre_enter:
+        draw.reset_canvas() 
+
+    FloatLayout:
+        id: export1
+        LineWidget:
+
+        Label:
+            text: "Draw a line within the box without lifting your finger"
+            pos_hint: {"center_x": 0.5, "top": 1.3}
+            font_size: 50
+            color: (1,1,1,1)
+
+        DrawLine:
+            id: draw
+
+        Button:
+            id: 'next'
+            text: "Next"
+            font_size: 20
+            size_hint: 0.2, 0.1
+            pos_hint: {"right": 1, "bottom": 1}
+            background_color: (0,1,1,1)
+            on_press: root.capture()
+            on_release:
+                app.root.current = "tick"
+
+<TickBox>:
+    name: "tick"
+    canvas.before:
+        Rectangle:
+            pos: self.pos
+            size: self.size
+            Color:
+                rgb:1,1,1
+    FloatLayout:
+
+        Label:
+            text: "Dominant Hand"
+            font_size: 50
+            bold: True
+            color: (0,0,0,1)
+            pos_hint: {'center_x': 0.5, 'y':0.45}
+        FloatLayout:
+            cols: 4   
+            Label:
+                text: "Left"
+                font_size: 40
+                color: (0,0,0,1)
+                bold: True
+                pos_hint: {'x': 0.1 , 'y' : 0.5}
+                size_hint: (0.2, 0.1)
+            CheckBox:
+                on_active: root.checkbox_click1(self,self.active,"Left")
+                pos_hint: {'x': 0.17 , 'y' : 0.5}
+                size_hint: (0.3, 0.1)
+                bold: True
+                color: (0,0,0,1)
+                width: 0.9
+                font_size: 40 
+            Label:
+                text: "Right"
+                font_size: 40
+                bold: True
+                color: (0,0,0,1)
+                pos_hint: {'x': 0.6 , 'y' : 0.5}
+                size_hint: (0.2, 0.1)
+            CheckBox:
+                on_active: root.checkbox_click2(self,self.active,"Right")
+                pos_hint: {'x': 0.67 , 'y' : 0.5}
+                size_hint: (0.3, 0.1)
+                bold: True
+                color: (0,0,0,1)
+                width: 0.9
+                font_size: 40
+        Button:
+            text: "Next"
+            pos_hint: {'x': 0.75 , 'y' : 0.03}
+            size_hint: (0.2, 0.1)
+            background_color: (0,1,1,1)
+            on_release:
+                app.root.current = "dom_spiral"
+
+<SpiralWidget>:
+    canvas.before:
+        Rectangle:
+            size: self.size  
+            pos: self.pos
+            source: "spiraltemp.jpeg"
+
+<DSpiralScreen>:
+    name: "dom_spiral" #dominant hand spiral
+
+    on_pre_enter:
+        draw.reset_canvas() 
+
+    FloatLayout:
+        id: export2
+        SpiralWidget:
+
+        Label:
+            text: "Trace the spiral using your dominant hand."
+            pos_hint: {"center_x": 0.5, "top": 1.45}
+            font_size: 50
+            color: (0,0,0,1)
+
+        Label:
+            text: "Start from the outside of the spiral."
+            pos_hint: {"center_x": 0.5, "top": 1.38}
+            font_size: 40
+            color: (0,0,0,1)
+
+        DrawLine:
+            id: draw
+
+        Button:
+            id: 'next'
+            text: "Next"
+            font_size: 20
+            size_hint: 0.2, 0.1
+            pos_hint: {"right": 1, "bottom": 1}
+            background_color: (0,1,1,1)
+            on_press: root.capture()
+            on_release:
+                app.root.current = "rating1"
+            
+        Label:
+            id : lb
+            text: ''
+            color: 0,0,0,1
+            font_size:30
+            pos_hint: {'x': 0.1 , 'y' : 0.8}
+            size_hint: (0.2, 0.1)
+
+        Button:
+            text: "Stop"
+            font_size: 20
+            pos_hint: {'x': 0 , 'y' : 0}
+            size_hint: (0.2, 0.1)
+            background_color: (1,0,0,1)
+            on_press: root.stop()
+
+        Button:
+            text: "Start"
+            font_size: 20
+            pos_hint: {'x': 0 , 'y' : 0.1}
+            size_hint: (0.2, 0.1)
+            background_color: (0,1,0,1)
+            on_press: root.start()
+
+<VRScreen1>:
+    name: "rating1"
+    vrs1: slider_.value
+
+    on_pre_enter:
+        slider_.value = 0
+
+    BoxLayout:
+        orientation: "vertical"
+        size: root.width, root.height  
+
+        Label:
+            text: "Rate the Tremor from 0-10 (minor to severe) \n- dominant hand"
+            font_size: 40
+
+        Label:
+            text: str(int(slider_.value))
+            font_size: 30
+
+        Slider:
+            id: slider_
+            min: 0
+            max: 10
+            step: 1
+            orientation: "horizontal"
+           
+        Button:
+            text: "Next"
+            font_size: 20
+            size_hint: 0.2, 0.4
+            pos_hint: {"right": 1, "bottom": 1}
+            background_color: (0,1,1,0.5)
+            on_release:
+                app.root.current = "nondom_spiral"
+
+<NdSpiralScreen>:
+    name: "nondom_spiral" # non-dominant hand spiral 
+
+    on_pre_enter:
+        draw.reset_canvas() 
+
+    FloatLayout:
+        id: export3
+        SpiralWidget:
+
+        Label:
+            text: "Trace the spiral using your non-dominant hand."
+            pos_hint: {"center_x": 0.5, "top": 1.45}
+            font_size: 50
+            color: (0,0,0,1)
+
+        Label:
+            text: "Start from the outside of the spiral."
+            pos_hint: {"center_x": 0.5, "top": 1.38}
+            font_size: 40
+            color: (0,0,0,1)
+
+        DrawLine:
+            id: draw
+
+        Button:
+            id: 'next'
+            text: "Next"
+            font_size: 20
+            size_hint: 0.2, 0.1
+            pos_hint: {"right": 1, "bottom": 1}
+            background_color: (0,1,1,1)
+            on_press: root.capture()
+            on_release:
+                app.root.current = "rating2"
+
+        Label:
+            id : lb
+            text: ''
+            color: 0,0,0,1
+            font_size:30
+            pos_hint: {'x': 0.1 , 'y' : 0.8}
+            size_hint: (0.2, 0.1)
+
+        Button:
+            text: "Stop"
+            font_size: 20
+            pos_hint: {'x': 0 , 'y' : 0}
+            size_hint: (0.2, 0.1)
+            background_color: (1,0,0,1)
+            on_press: root.stop()
+
+        Button:
+            text: "Start"
+            font_size: 20
+            pos_hint: {'x': 0 , 'y' : 0.1}
+            size_hint: (0.2, 0.1)
+            background_color: (0,1,0,1)
+            on_press: root.start()
+
+<VRScreen2>:
+    name: "rating2"
+    vrs2: slide.value
+
+    on_pre_enter:
+        slide.value = 0
+
+    BoxLayout:
+        orientation: "vertical"
+        size: root.width, root.height  
+
+        Label:
+            text: "Rate the Tremor from 0-10 (minor to severe) \n- nondominant hand"
+            font_size: 40
+
+        Label:
+            text: str(int(slide.value))
+            font_size: 30
+
+        Slider:
+            id: slide
+            min: 0
+            max: 10
+            step: 1
+            orientation: "horizontal"
+           
+        Button:
+            text: "Next"
+            font_size: 20
+            size_hint: 0.2, 0.4
+            pos_hint: {"right": 1, "bottom": 1}
+            background_color: (0,1,1,0.5)
+            on_release: app.root.current = "results_1"
+
+<ResultScreen1>:
+    name: "res1"
+    vrs1: 0
+    vrs2: 0 
+
+    on_enter: root.quantify()
+
+    FloatLayout:
+        id: export4
+        canvas.before:
+            Rectangle:
+                pos: self.pos
+                size: self.size
+                source: "blue.jpeg"
+        
+        BoxLayout:
+            orientation: "vertical"
+
+            GridLayout:
+                cols: 1 
+                size_hint: 1, 0.8
+                Label: 
+                    text: "Results" # Part 1
+                    font_size: 40
+                    underline: True
+                    bold: True
+                    color: (0,0,0,1)  
+
+                GridLayout:
+                    cols:2
+                    size_hint: 0.8, 0.8
+                    Label: 
+                        text: "DH Tremor Visual Rating: {}".format(root.vrs1)
+                        font_size: 35
+                        color: (0,0,0,1)
+                        size_hint: 1, 0.3
+                    
+                    Label: 
+                        text: "NH Tremor Visual Rating: {}".format(root.vrs2)
+                        font_size: 35
+                        color: (0,0,0,1)
+                        size_hint: 1, 0.3
+
+                GridLayout:
+                    cols:2
+                    size_hint: 0.8, 0.8
+                    Label:
+                        id: speed_d
+                        font_size: 35
+                        color: (0,0,0,1)
+                        size_hint: 1, 0.3  
+
+                    Label:
+                        id: speed_n
+                        font_size: 35
+                        color: (0,0,0,1)
+                        size_hint: 1, 0.3  
+
+                GridLayout:
+                    cols:2
+                    size_hint: 0.8, 0.8 #0.2
+                    Label:
+                        id: perc_dom
+                        font_size: 35
+                        color: (0,0,0,1)
+                        size_hint: 1, 0.3  
+
+                    Label:
+                        id: perc_non
+                        font_size: 35
+                        color: (0,0,0,1)
+                        size_hint: 1, 0.3  
+  
+            Button:
+                id: save
+                text: "Next"
+                font_size: 30
+                size_hint: (None, None)
+                size: (300, 100)
+                pos_hint: {"right": 1, "bottom": 1} 
+                background_color: (0,1,1,1)
+                on_press: root.capture()
+                on_release: app.root.current = "result2"
+
+<ResultScreen2>:
+    name: "result2"
+    
+    FloatLayout:
+        id:export5
+        canvas.before:
+            Rectangle:
+                size: self.size
+                pos: self.pos
+                source: "blue.jpeg"
+        BoxLayout:
+            orientation:"vertical"
+            padding: [dp(20),0,0,0] 
+            
+            Label:
+                text: "Results Analysis"
+                font_size: 45
+                bold:True
+                background_color:(0,1,1,1)
+                color: (0,0,0,1)
+                size_hint:0.9,0.05
+                pos_hint: {"x":0.05, "y": 0.5}
+                valign: "middle"
+                padding_top: dp(50)
+                canvas.before:
+                    Color:
+                        rgba: (0,0,0,1)
+                    Line:
+                        width: 1.1
+                        rectangle: self.x, self.y, self.width, self.height
+            GridLayout:
+                cols:4
+                size_hint:0.9,0.4
+                pos_hint: {"x":0.05, "y": 0.5}
+                Label:
+                    text: "Parameter"
+                    bold:True
+                    font_size: 40
+                    background_color:(0,1,1,1)
+                    color: (0,0,0,1)
+                    size_hint:0.2,0.05
+                    valign: "middle"
+                    canvas.before:
+                        Color:
+                            rgba: (0,0,0,1)
+                        Line:
+                            width: 1.1
+                            rectangle: self.x, self.y, self.width, self.height
+                Label:
+                    text: "Normal case"
+                    font_size: 40
+                    bold: True
+                    background_color:(0,1,1,1)
+                    color: (0,0,0,1)
+                    size_hint:0.3,0.05
+                    valign: "middle"
+                    canvas.before:
+                        Color:
+                            rgba: (0,0,0,1)
+                        Line:
+                            width: 1.1
+                            rectangle: self.x, self.y, self.width, self.height
+
+                Label:
+                    text: "Dominant hand"
+                    font_size: 40
+                    bold: True
+                    background_color:(0,1,1,1)
+                    color: (0,0,0,1)
+                    size_hint:0.3,0.05
+                    valign: "middle"
+                    canvas.before:
+                        Color:
+                            rgba: (0,0,0,1)
+                        Line:
+                            width: 1.1
+                            rectangle: self.x, self.y, self.width, self.height
+                Label:
+                    text: "Non-dominant Hand"
+                    font_size: 38
+                    bold: True
+                    background_color:(0,1,1,1)
+                    color: (0,0,0,1)
+                    size_hint:0.3,0.05
+                    valign: "middle"
+                    canvas.before:
+                        Color:
+                            rgba: (0,0,0,1)
+                        Line:
+                            width: 1.1
+                            rectangle: self.x, self.y, self.width, self.height
+
+                Label:
+                    text: "Side"
+                    font_size: 35
+                    background_color:(0,1,1,1)
+                    color: (0,0,0,1)
+                    size_hint:0.3,0.1
+                    valign: "middle"
+                    canvas.before:
+                        Color:
+                            rgba: (0,0,0,1)
+                        Line:
+                            width: 1.1
+                            rectangle: self.x, self.y, self.width, self.height
+                Label:
+                    text: "-"
+                    font_size: 35
+                    background_color:(0,1,1,1)
+                    color: (0,0,0,1)
+                    size_hint:0.3,0.1
+                    valign: "middle"
+                    canvas.before:
+                        Color:
+                            rgba: (0,0,0,1)
+                        Line:
+                            width: 1.1
+                            rectangle: self.x, self.y, self.width, self.height
+
+                Label:
+                    id:dom_side
+                    text: "Dominant Hand"
+                    font_size: 35
+                    background_color:(0,1,1,1)
+                    color: (0,0,0,1)
+                    size_hint:0.3,0.1
+                    valign: "middle"
+                    canvas.before:
+                        Color:
+                            rgba: (0,0,0,1)
+                        Line:
+                            width: 1.1
+                            rectangle: self.x, self.y, self.width, self.height
+                Label:
+                    id:non_dom_side
+                    text: ""
+                    font_size: 35
+                    background_color:(0,1,1,1)
+                    color: (0,0,0,1)
+                    size_hint:0.3,0.1
+                    valign: "middle"
+                    canvas.before:
+                        Color:
+                            rgba: (0,0,0,1)
+                        Line:
+                            width: 1.1
+                            rectangle: self.x, self.y, self.width, self.height      
+
+                Label:
+                    text: "Completion time(s)"
+                    font_size: 35
+                    background_color:(0,1,1,1)
+                    color: (0,0,0,1)
+                    size_hint:0.3,0.1
+                    valign: "middle"
+                    canvas.before:
+                        Color:
+                            rgba: (0,0,0,1)
+                        Line:
+                            width: 1.1
+                            rectangle: self.x, self.y, self.width, self.height
+                Label:
+                    text: "14-16"
+                    font_size: 35
+                    background_color:(0,1,1,1)
+                    color: (0,0,0,1)
+                    size_hint:0.3,0.1
+                    valign: "middle"
+                    canvas.before:
+                        Color:
+                            rgba: (0,0,0,1)
+                        Line:
+                            width: 1.1
+                            rectangle: self.x, self.y, self.width, self.height
+                Label:
+                    id: dom_time_label
+                    text: ""
+                    font_size: 35
+                    background_color:(0,1,1,1)
+                    color: (0,0,0,1)
+                    size_hint:0.3,0.1
+                    valign: "middle"
+                    canvas.before:
+                        Color:
+                            rgba: (0,0,0,1)
+                        Line:
+                            width: 1.1
+                            rectangle: self.x, self.y, self.width, self.height
+
+                Label:
+                    id: non_dom_time_label
+                    text: ""
+                    font_size: 35
+                    background_color:(0,1,1,1)
+                    color: (0,0,0,1)
+                    size_hint:0.3,0.1
+                    valign: "middle"
+                    canvas.before:
+                        Color:
+                            rgba: (0,0,0,1)
+                        Line:
+                            width: 1.1
+                            rectangle: self.x, self.y, self.width, self.height
+                Label:
+                    text: "Time percentage (%)"
+                    font_size: 35
+                    background_color:(0,1,1,1)
+                    color: (0,0,0,1)
+                    size_hint:0.3,0.1
+                    valign: "middle"
+                    canvas.before:
+                        Color:
+                            rgba: (0,0,0,1)
+                        Line:
+                            width: 1.1
+                            rectangle: self.x, self.y, self.width, self.height
+                Label:
+                    text: "normal"
+                    font_size: 35
+                    background_color:(0,1,1,1)
+                    color: (0,0,0,1)
+                    size_hint:0.3,0.1
+                    valign: "middle"
+                    canvas.before:
+                        Color:
+                            rgba: (0,0,0,1)
+                        Line:
+                            width: 1.1
+                            rectangle: self.x, self.y, self.width, self.height
+
+                Label:
+                    id:dom_perc_label
+                    text: "Dominant Hand"
+                    font_size: 35
+                    background_color:(0,1,1,1)
+                    color: (0,0,0,1)
+                    size_hint:0.3,0.1
+                    valign: "middle"
+                    canvas.before:
+                        Color:
+                            rgba: (0,0,0,1)
+                        Line:
+                            width: 1.1
+                            rectangle: self.x, self.y, self.width, self.height
+                Label:
+                    id:non_dom_perc_label
+                    text: ""
+                    font_size: 35
+                    background_color:(0,1,1,1)
+                    color: (0,0,0,1)
+                    size_hint:0.3,0.1
+                    valign: "middle"
+                    canvas.before:
+                        Color:
+                            rgba: (0,0,0,1)
+                        Line:
+                            width: 1.1
+                            rectangle: self.x, self.y, self.width, self.height
+                Label:
+                    text: "Average time taken(s)"
+                    font_size: 33
+                    background_color:(0,1,1,1)
+                    color: (0,0,0,1)
+                    size_hint:0.3,0.1
+                    valign: "middle"
+                    canvas.before:
+                        Color:
+                            rgba: (0,0,0,1)
+                        Line:
+                            width: 1.1
+                            rectangle: self.x, self.y, self.width, self.height
+                Label:
+                    text: "15"
+                    font_size: 35
+                    background_color:(0,1,1,1)
+                    color: (0,0,0,1)
+                    size_hint:0.3,0.1
+                    valign: "middle"
+                    canvas.before:
+                        Color:
+                            rgba: (0,0,0,1)
+                        Line:
+                            width: 1.1
+                            rectangle: self.x, self.y, self.width, self.height
+
+                Label:
+                    id:dom_avg_label
+                    text: "Dominant Hand"
+                    font_size: 35
+                    background_color:(0,1,1,1)
+                    color: (0,0,0,1)
+                    size_hint:0.3,0.1
+                    valign: "middle"
+                    canvas.before:
+                        Color:
+                            rgba: (0,0,0,1)
+                        Line:
+                            width: 1.1
+                            rectangle: self.x, self.y, self.width, self.height
+                Label:
+                    id:non_dom_avg_label
+                    text: ""
+                    font_size: 35
+                    background_color:(0,1,1,1)
+                    color: (0,0,0,1)
+                    size_hint:0.3,0.1
+                    valign: "middle"
+                    canvas.before:
+                        Color:
+                            rgba: (0,0,0,1)
+                        Line:
+                            width: 1.1
+                            rectangle: self.x, self.y, self.width, self.height
+                Label:
+                    text: ""
+                    font_size: 35
+                    background_color:(0,1,1,1)
+                    color: (0,0,0,1)
+                    size_hint:0.2,0.1
+                    valign: "middle"
+            
+                Label:
+                    text: ""
+                    font_size: 35
+                    background_color:(0,1,1,1)
+                    color: (0,0,0,1)
+                    size_hint:0.2,0.1
+                    valign: "middle"
+
+                Label:
+                    text: ""
+                    font_size: 35
+                    background_color:(0,1,1,1)
+                    color: (0,0,0,1)
+                    size_hint:0.2,0.1
+                    valign: "middle"
+
+                Button:
+                    id: save2
+                    text: "Save and proceed"
+                    font_size: 20
+                    size_hint:0.2,0.1
+                    valign: "middle"
+                    background_color: (0,1,1,1)
+                    on_press: root.capture()
+                    on_release:
+                        app.root.current = "end" 
+
+<SaveScreen>:
+    name: "end"
+    FloatLayout:
+        canvas.before:
+            Rectangle:
+                size: self.size
+                pos: self.pos
+                source: "blue.jpeg"
+
+        Button:
+            text: "Return to Menu"
+            font_size: 35
+            size_hint: 0.3, 0.2
+            pos_hint: {'x': .1, 'y': 0.3}
+            background_color: (0,1,1,1)
+            on_release:
+                app.root.current = "menu"
+
+        Button:
+            text: "Return to Login"
+            font_size: 35
+            size_hint: 0.3, 0.2
+            pos_hint: {'x': .6, 'y': .3} 
+            background_color: (0,1,1,1)
+            on_release:
+                app.root.current = "login"
