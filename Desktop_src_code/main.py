@@ -14,7 +14,7 @@ from kivy.uix.button import Button
 from kivy.clock import Clock
 
 import sqlite3
-import sp, cv2, os, shutil
+import sp as sp, cv2, os, shutil
 
 # Screen Classes
 class LoginWindow(Screen):

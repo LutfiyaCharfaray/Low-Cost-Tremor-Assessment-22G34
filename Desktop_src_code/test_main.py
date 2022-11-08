@@ -11,7 +11,7 @@ from unittest.mock import patch
 main_path = op.dirname(op.dirname(op.abspath(__file__)))
 sys.path.append(main_path)
 
-import main, sp, cv2
+import main as main, Desktop_src_code.sp as sp, cv2
 
 class ButtonTestCase(GraphicUnitTest):
     # Test case obtained from Kivy documentation
