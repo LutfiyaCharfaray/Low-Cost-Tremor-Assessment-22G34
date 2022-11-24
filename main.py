@@ -292,28 +292,33 @@ class ResultScreen1(Screen):
 
         px_d = abs(sp.get_pixels1(name_, sur_))
         dt_d = App.get_running_app().root.get_screen("dom_spiral").finalCount
-        speed_d = round((px_d/dt_d), 2)
+        speed_d = round((px_d/(dt_d*1000)), 2)
 
         px_n = abs(sp.get_pixels2(name_, sur_))
         dt_n = App.get_running_app().root.get_screen("nondom_spiral").finalCount
-        speed_n = round((px_n/dt_n), 2)
+        speed_n = round((px_n/(dt_n*1000)), 2)
 
         self.ids.speed_d.text = "DH Drawing Speed: {} px/s".format(str(speed_d)) #px = pixels, s = sec
         self.ids.speed_n.text = "NH Drawing Speed: {} px/s".format(str(speed_n))
 
-        norm_v = 9000
-        norm_v2 = 9000
+        norm_v = 6 # px/ms
+        norm_v2 = 6
         dom_error = round(((speed_d - norm_v)/norm_v)*100 , 1) # relative error
         nondom_error = round(((speed_n - norm_v2)/norm_v2)*100 , 1)
 
         if dom_error >= 0 and nondom_error >= 0: # (positive)
-            self.ids.perc_dom.text = "{}%. slower than normal".format(str(abs(dom_error)))
-            self.ids.perc_non.text = "{}%. slower than normal".format(str(abs(nondom_error)))
+            self.ids.perc_dom.text = "{}%. faster than normal".format(str(dom_error))
+            self.ids.perc_non.text = "{}%. faster than normal".format(str(nondom_error))
 
         else: # negative
-            self.ids.perc_dom.text = "{}%. faster than normal".format(str(abs(dom_error)))
-            self.ids.perc_non.text = "{}%. faster than normal".format(str(abs(nondom_error)))
+            self.ids.perc_dom.text = "{}%. slower than normal".format(str(dom_error))
+            self.ids.perc_non.text = "{}%. slower than normal".format(str(nondom_error))
 
+        if speed_d <= 3.5 or speed_d >= 6:
+            if speed_n <= 3.5 or speed_n >= 6:
+                notif = Popup(title = 'Tremor Alert', content = Label(text='Possible Tremor!'), size_hint=(None, None), size=(300,300))
+                notif.open()
+        
         return speed_d, speed_n
 
 class ResultScreen2(Screen):
