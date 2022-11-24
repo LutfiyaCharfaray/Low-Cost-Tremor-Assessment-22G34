@@ -16,6 +16,9 @@ Low Cost Tremor Assessment App
 - The Tablet code can be packaged for android using Google Colab and Buildozer. Follow these
   guidelines for using Google Colab to package the app
    https://towardsdatascience.com/3-ways-to-convert-python-app-into-apk-77f4c9cd55af
+- The code used to package the app using Google Colab can be found under Tablet code/Packaging1.
+- An example of the buildozer.spec file that is generated during packaging is included in the Packaging1 folder 
+  (to refer to the requirements needed to package the app).
 
 ## How to use the app
 - Enter the password to log into the app. 
